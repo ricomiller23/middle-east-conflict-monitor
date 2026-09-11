@@ -76,74 +76,74 @@ export const TacticalMapView: React.FC<TacticalMapViewProps> = ({ events, onSele
   return (
     <div className="relative rounded-xl border border-slate-800 bg-[#070b14] overflow-hidden shadow-2xl">
       {/* Top Map Control Bar */}
-      <div className="flex flex-wrap items-center justify-between border-b border-slate-800/80 bg-[#0c1322]/90 px-4 py-2.5 backdrop-blur z-10 relative">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800/80 bg-[#0c1322]/95 px-3 py-2 sm:px-4 sm:py-2.5 backdrop-blur z-10 relative gap-2">
         <div className="flex items-center space-x-2">
-          <Crosshair className="h-4 w-4 text-cyan-400" />
-          <span className="font-mono text-xs font-bold text-slate-200">
-            TACTICAL THEATER & ENERGY INFRASTRUCTURE RADAR
+          <Crosshair className="h-4 w-4 text-cyan-400 flex-shrink-0" />
+          <span className="font-mono text-xs font-bold text-slate-200 truncate">
+            THEATER & ENERGY RADAR
           </span>
-          <span className="rounded bg-cyan-950/60 px-2 py-0.5 font-mono text-[10px] text-cyan-400 border border-cyan-500/30">
-            {filteredEvents.length} INCIDENT PINS
+          <span className="rounded bg-cyan-950/60 px-2 py-0.5 font-mono text-[10px] text-cyan-400 border border-cyan-500/30 flex-shrink-0">
+            {filteredEvents.length} PINS
           </span>
         </div>
 
-        {/* Quick Theater Selectors */}
-        <div className="flex flex-wrap items-center gap-1.5 font-mono text-xs">
+        {/* Quick Theater Selectors (Swipeable on Mobile) */}
+        <div className="flex items-center overflow-x-auto whitespace-nowrap scrollbar-none gap-1.5 font-mono text-xs -mx-3 px-3 sm:mx-0 sm:px-0 py-0.5">
           <button
             onClick={() => setActiveTheater('all')}
-            className={`rounded px-2 py-1 transition ${
+            className={`flex-shrink-0 min-h-[32px] rounded-lg px-2.5 py-1 transition active:scale-95 ${
               activeTheater === 'all'
-                ? 'bg-cyan-600 text-white font-semibold'
-                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                ? 'bg-cyan-600 text-white font-semibold shadow'
+                : 'bg-slate-800/90 text-slate-300 hover:bg-slate-700'
             }`}
           >
             All Theaters
           </button>
           <button
             onClick={() => setActiveTheater('energy')}
-            className={`rounded px-2 py-1 transition ${
+            className={`flex-shrink-0 min-h-[32px] rounded-lg px-2.5 py-1 transition active:scale-95 ${
               activeTheater === 'energy'
-                ? 'bg-amber-600 text-white font-semibold'
-                : 'bg-slate-800 text-amber-400 hover:bg-slate-700'
+                ? 'bg-amber-600 text-white font-semibold shadow'
+                : 'bg-slate-800/90 text-amber-400 hover:bg-slate-700'
             }`}
           >
-            🛢️ Energy & Tankers Only
+            🛢️ Energy & Tankers
           </button>
           <button
             onClick={() => setActiveTheater('yemen')}
-            className={`rounded px-2 py-1 transition ${
+            className={`flex-shrink-0 min-h-[32px] rounded-lg px-2.5 py-1 transition active:scale-95 ${
               activeTheater === 'yemen'
-                ? 'bg-amber-700 text-white font-semibold'
-                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                ? 'bg-amber-700 text-white font-semibold shadow'
+                : 'bg-slate-800/90 text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🇾🇪 Yemen & Red Sea
+            🇾🇪 Yemen
           </button>
           <button
             onClick={() => setActiveTheater('saudi')}
-            className={`rounded px-2 py-1 transition ${
+            className={`flex-shrink-0 min-h-[32px] rounded-lg px-2.5 py-1 transition active:scale-95 ${
               activeTheater === 'saudi'
-                ? 'bg-emerald-600 text-white font-semibold'
-                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                ? 'bg-emerald-600 text-white font-semibold shadow'
+                : 'bg-slate-800/90 text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🇸🇦 Saudi Arabia
+            🇸🇦 Saudi
           </button>
           <button
             onClick={() => setActiveTheater('iran')}
-            className={`rounded px-2 py-1 transition ${
+            className={`flex-shrink-0 min-h-[32px] rounded-lg px-2.5 py-1 transition active:scale-95 ${
               activeTheater === 'iran'
-                ? 'bg-rose-600 text-white font-semibold'
-                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                ? 'bg-rose-600 text-white font-semibold shadow'
+                : 'bg-slate-800/90 text-slate-300 hover:bg-slate-700'
             }`}
           >
-            🇮🇷 Iran & Hormuz
+            🇮🇷 Iran
           </button>
         </div>
       </div>
 
       {/* SVG Tactical Map Surface */}
-      <div className="relative w-full h-[540px] bg-[#070b14] select-none">
+      <div className="relative w-full h-[360px] sm:h-[480px] md:h-[540px] bg-[#070b14] select-none touch-pan-x touch-pan-y">
         <svg
           viewBox="0 0 1000 650"
           className="w-full h-full object-cover"
@@ -273,7 +273,7 @@ export const TacticalMapView: React.FC<TacticalMapViewProps> = ({ events, onSele
           <text x="648" y="169" fill="#64748b" fontSize="10" fontFamily="monospace">Tehran</text>
         </svg>
 
-        {/* Dynamic Incident Pins */}
+        {/* Dynamic Incident Pins with Mobile Touch Targets */}
         {filteredEvents.map((ev) => {
           const pos = projectToMap(ev.lat, ev.lng);
           const color = getPinColor(ev.category);
@@ -292,12 +292,12 @@ export const TacticalMapView: React.FC<TacticalMapViewProps> = ({ events, onSele
                 left: `${pos.x}%`,
                 top: `${pos.y}%`,
               }}
-              className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer group z-20"
+              className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer group z-20 min-w-[38px] min-h-[38px] flex items-center justify-center active:scale-110 transition-transform"
             >
               {/* Pulsing ring for strikes/tanker attacks */}
               <div
                 style={{ borderColor: color }}
-                className={`absolute -inset-2 rounded-full border opacity-70 pointer-events-none ${
+                className={`absolute inset-1 rounded-full border opacity-75 pointer-events-none ${
                   isTanker ? 'animate-ping' : 'animate-pulse_slow'
                 }`}
               />
@@ -305,7 +305,7 @@ export const TacticalMapView: React.FC<TacticalMapViewProps> = ({ events, onSele
               {/* Pin Head */}
               <div
                 style={{ backgroundColor: color }}
-                className={`flex h-6 w-6 items-center justify-center rounded-full border-2 border-[#080c14] shadow-lg transition-transform group-hover:scale-125 text-xs ${
+                className={`flex h-6 w-6 sm:h-6 sm:w-6 items-center justify-center rounded-full border-2 border-[#080c14] shadow-lg transition-transform group-hover:scale-125 text-xs ${
                   isSelected ? 'ring-4 ring-cyan-400 scale-125' : ''
                 }`}
               >
@@ -316,8 +316,8 @@ export const TacticalMapView: React.FC<TacticalMapViewProps> = ({ events, onSele
                 )}
               </div>
 
-              {/* Tooltip on hover */}
-              <div className="pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-slate-950/95 px-2.5 py-1.5 text-[11px] text-slate-100 opacity-0 border border-slate-700 shadow-xl transition-opacity group-hover:opacity-100 z-30 font-mono">
+              {/* Tooltip on hover (Desktop) */}
+              <div className="hidden sm:block pointer-events-none absolute bottom-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-slate-950/95 px-2.5 py-1.5 text-[11px] text-slate-100 opacity-0 border border-slate-700 shadow-xl transition-opacity group-hover:opacity-100 z-30 font-mono">
                 <div className="font-bold text-cyan-400">
                   {ev.category.toUpperCase().replace('_', ' ')} • {ev.country}
                 </div>
@@ -338,33 +338,56 @@ export const TacticalMapView: React.FC<TacticalMapViewProps> = ({ events, onSele
         })}
       </div>
 
-      {/* Map Legend */}
-      <div className="flex flex-wrap items-center justify-between border-t border-slate-800/80 bg-[#0b1220] px-4 py-2 text-[11px] font-mono text-slate-300">
-        <div className="flex flex-wrap items-center gap-4">
-          <div className="flex items-center space-x-1.5">
+      {/* Selected Incident Mobile Preview Card */}
+      {selectedPin && (
+        <div className="border-t border-slate-800 bg-[#0c1424] p-3 flex items-center justify-between gap-3 text-xs font-mono">
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center space-x-1.5 text-cyan-400 font-bold text-[11px]">
+              <span>📍 {selectedPin.country}</span>
+              <span>•</span>
+              <span className="uppercase text-amber-300">{selectedPin.category.replace('_', ' ')}</span>
+            </div>
+            <p className="truncate text-slate-200 text-xs font-sans mt-0.5">{selectedPin.title}</p>
+            {selectedPin.vessel_name && (
+              <span className="text-rose-300 text-[10px] font-bold block">🚢 {selectedPin.vessel_name}</span>
+            )}
+          </div>
+          <button
+            onClick={() => onSelect(selectedPin)}
+            className="flex-shrink-0 min-h-[36px] rounded-lg bg-cyan-600 px-3 py-1.5 font-sans text-xs font-semibold text-white hover:bg-cyan-500 active:scale-95 transition"
+          >
+            Dossier →
+          </button>
+        </div>
+      )}
+
+      {/* Map Legend (Horizontally Swipeable on Mobile) */}
+      <div className="flex items-center justify-between border-t border-slate-800/80 bg-[#0b1220] px-3 py-2 text-[11px] font-mono text-slate-300 overflow-x-auto whitespace-nowrap scrollbar-none">
+        <div className="flex items-center gap-4">
+          <div className="flex items-center space-x-1.5 flex-shrink-0">
             <span className="text-xs">🚢</span>
             <span className="text-rose-400 font-semibold">Tanker Attacks</span>
           </div>
-          <div className="flex items-center space-x-1.5">
+          <div className="flex items-center space-x-1.5 flex-shrink-0">
             <span className="h-1.5 w-4 bg-emerald-500 rounded" />
-            <span className="text-emerald-400">Petroline Route</span>
+            <span className="text-emerald-400">Petroline</span>
           </div>
-          <div className="flex items-center space-x-1.5">
+          <div className="flex items-center space-x-1.5 flex-shrink-0">
             <span className="h-1.5 w-4 bg-amber-500 rounded" />
-            <span className="text-amber-400">Goureh-Jask Pipeline</span>
+            <span className="text-amber-400">Goureh-Jask</span>
           </div>
-          <div className="flex items-center space-x-1.5">
+          <div className="flex items-center space-x-1.5 flex-shrink-0">
             <span className="text-xs">⛽</span>
-            <span>Refineries & Terminals</span>
+            <span>Refineries/Terminals</span>
           </div>
-          <div className="flex items-center space-x-1.5">
+          <div className="flex items-center space-x-1.5 flex-shrink-0">
             <span className="h-2.5 w-2.5 rounded-full bg-sky-400" />
-            <span>Military/Naval Drills</span>
+            <span>Military/Naval</span>
           </div>
         </div>
 
-        <span className="text-slate-500 hidden lg:inline">
-          Click any incident or pipeline terminal to open tactical dossier
+        <span className="text-slate-500 hidden lg:inline flex-shrink-0 pl-4">
+          Tap any incident pin to open tactical dossier
         </span>
       </div>
     </div>

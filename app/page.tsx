@@ -131,61 +131,61 @@ export default function DashboardPage() {
 
       {/* Main Content Area */}
       <main className="flex-1 mx-auto w-full max-w-7xl px-4 sm:px-6 py-6 space-y-6">
-        {/* Threat & Energy Situation Bar */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 font-mono text-xs">
-          <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-3 flex items-center justify-between">
-            <div className="flex items-center space-x-2.5">
-              <span className="text-xl">🇾🇪</span>
+        {/* Threat & Energy Situation Bar (2x2 Grid on Mobile, 4-col on Desktop) */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3.5 font-mono text-xs">
+          <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-2.5 sm:p-3 flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <span className="text-lg sm:text-xl">🇾🇪</span>
               <div>
-                <div className="font-bold text-amber-400">YEMEN THEATER</div>
-                <div className="text-[10px] text-slate-400">Red Sea & Bab al-Mandab</div>
+                <div className="font-bold text-amber-400 text-[11px] sm:text-xs">YEMEN</div>
+                <div className="text-[9px] sm:text-[10px] text-slate-400 truncate max-w-[85px] sm:max-w-none">Red Sea Lane</div>
               </div>
             </div>
             <div className="text-right">
-              <div className="text-base font-bold text-amber-300">{countryCounts.yemen}</div>
-              <div className="text-[9px] text-amber-500/80">INCIDENTS</div>
+              <div className="text-sm sm:text-base font-bold text-amber-300">{countryCounts.yemen}</div>
+              <div className="text-[8px] sm:text-[9px] text-amber-500/80">INCIDENTS</div>
             </div>
           </div>
 
-          <div className="rounded-lg border border-emerald-500/30 bg-emerald-950/20 p-3 flex items-center justify-between">
-            <div className="flex items-center space-x-2.5">
-              <span className="text-xl">🇸🇦</span>
+          <div className="rounded-lg border border-emerald-500/30 bg-emerald-950/20 p-2.5 sm:p-3 flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <span className="text-lg sm:text-xl">🇸🇦</span>
               <div>
-                <div className="font-bold text-emerald-400">SAUDI ARABIA</div>
-                <div className="text-[10px] text-slate-400">Petroline & Air Defense</div>
+                <div className="font-bold text-emerald-400 text-[11px] sm:text-xs">SAUDI</div>
+                <div className="text-[9px] sm:text-[10px] text-slate-400 truncate max-w-[85px] sm:max-w-none">Petroline</div>
               </div>
             </div>
             <div className="text-right">
-              <div className="text-base font-bold text-emerald-300">{countryCounts.saudi}</div>
-              <div className="text-[9px] text-emerald-500/80">INCIDENTS</div>
+              <div className="text-sm sm:text-base font-bold text-emerald-300">{countryCounts.saudi}</div>
+              <div className="text-[8px] sm:text-[9px] text-emerald-500/80">INCIDENTS</div>
             </div>
           </div>
 
-          <div className="rounded-lg border border-rose-500/30 bg-rose-950/20 p-3 flex items-center justify-between">
-            <div className="flex items-center space-x-2.5">
-              <span className="text-xl">🇮🇷</span>
+          <div className="rounded-lg border border-rose-500/30 bg-rose-950/20 p-2.5 sm:p-3 flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <span className="text-lg sm:text-xl">🇮🇷</span>
               <div>
-                <div className="font-bold text-rose-400">IRAN THEATER</div>
-                <div className="text-[10px] text-slate-400">Strait of Hormuz & Kharg</div>
+                <div className="font-bold text-rose-400 text-[11px] sm:text-xs">IRAN</div>
+                <div className="text-[9px] sm:text-[10px] text-slate-400 truncate max-w-[85px] sm:max-w-none">Hormuz & Kharg</div>
               </div>
             </div>
             <div className="text-right">
-              <div className="text-base font-bold text-rose-300">{countryCounts.iran}</div>
-              <div className="text-[9px] text-rose-500/80">INCIDENTS</div>
+              <div className="text-sm sm:text-base font-bold text-rose-300">{countryCounts.iran}</div>
+              <div className="text-[8px] sm:text-[9px] text-rose-500/80">INCIDENTS</div>
             </div>
           </div>
 
-          <div className="rounded-lg border border-red-500/40 bg-red-950/30 p-3 flex items-center justify-between">
-            <div className="flex items-center space-x-2.5">
-              <span className="text-xl">🚢</span>
+          <div className="rounded-lg border border-red-500/40 bg-red-950/30 p-2.5 sm:p-3 flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <span className="text-lg sm:text-xl">🚢</span>
               <div>
-                <div className="font-bold text-rose-400">TANKERS & ENERGY</div>
-                <div className="text-[10px] text-slate-400">Attacks & Pipelines</div>
+                <div className="font-bold text-rose-400 text-[11px] sm:text-xs">TANKERS</div>
+                <div className="text-[9px] sm:text-[10px] text-slate-400 truncate max-w-[85px] sm:max-w-none">Attacks & Pipe</div>
               </div>
             </div>
             <div className="text-right">
-              <div className="text-base font-bold text-rose-300">{countryCounts.energy}</div>
-              <div className="text-[9px] text-rose-400">EVENTS</div>
+              <div className="text-sm sm:text-base font-bold text-rose-300">{countryCounts.energy}</div>
+              <div className="text-[8px] sm:text-[9px] text-rose-400">EVENTS</div>
             </div>
           </div>
         </div>

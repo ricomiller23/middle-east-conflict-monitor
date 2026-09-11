@@ -21,34 +21,35 @@ export const EventDetailDrawer: React.FC<EventDetailDrawerProps> = ({ event, onC
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/60 backdrop-blur-sm transition-opacity">
-      <div className="relative flex h-full w-full max-w-xl flex-col border-l border-slate-800 bg-[#0c1322] shadow-2xl overflow-y-auto">
-        {/* Drawer Header */}
-        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-slate-800/90 bg-[#0f172a]/95 px-5 py-4 backdrop-blur">
-          <div className="flex items-center space-x-2">
-            <span className="rounded bg-cyan-950/80 px-2 py-0.5 font-mono text-[11px] font-bold text-cyan-400 border border-cyan-500/40">
-              INCIDENT DOSSIER
+    <div className="fixed inset-0 z-50 flex justify-end bg-black/70 backdrop-blur-sm transition-opacity">
+      <div className="relative flex h-full w-full sm:max-w-xl flex-col border-l border-slate-800 bg-[#0c1322] shadow-2xl overflow-y-auto overscroll-contain">
+        {/* Drawer Header with Large Touch Close Target */}
+        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-slate-800/90 bg-[#0f172a]/95 px-4 py-3 sm:px-5 sm:py-4 backdrop-blur">
+          <div className="flex items-center space-x-2 truncate">
+            <span className="rounded bg-cyan-950/80 px-2 py-0.5 font-mono text-[11px] font-bold text-cyan-400 border border-cyan-500/40 flex-shrink-0">
+              DOSSIER
             </span>
-            <span className="font-mono text-xs text-slate-400">{event.id}</span>
+            <span className="font-mono text-xs text-slate-400 truncate">{event.id}</span>
           </div>
 
           <button
             onClick={onClose}
-            className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-800 hover:text-white transition"
+            aria-label="Close dossier"
+            className="min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white active:scale-90 transition -mr-2"
           >
             <X className="h-5 w-5" />
           </button>
         </div>
 
         {/* Drawer Content */}
-        <div className="p-6 space-y-6">
+        <div className="p-4 sm:p-6 space-y-5 sm:space-y-6">
           {/* Status & Categorization Badges */}
           <div className="flex flex-wrap items-center gap-2">
             <span className="rounded bg-slate-800 px-2.5 py-1 text-xs font-semibold text-slate-200 border border-slate-700">
               {event.country}
             </span>
             <span className="rounded bg-blue-950/70 px-2.5 py-1 font-mono text-xs font-bold text-blue-300 border border-blue-500/40 uppercase">
-              {event.category}
+              {event.category.replace('_', ' ')}
             </span>
             {event.credibility_tier === 'tier_1' ? (
               <span className="flex items-center space-x-1 rounded bg-emerald-950/60 px-2 py-1 font-mono text-xs font-semibold text-emerald-400 border border-emerald-500/40">
@@ -64,24 +65,24 @@ export const EventDetailDrawer: React.FC<EventDetailDrawerProps> = ({ event, onC
           </div>
 
           {/* Incident Title */}
-          <h2 className="text-xl font-bold text-slate-100 leading-snug">
+          <h2 className="text-lg sm:text-xl font-bold text-slate-100 leading-snug">
             {event.title}
           </h2>
 
-          {/* Time & Location Metadata */}
-          <div className="grid grid-cols-2 gap-3 rounded-lg border border-slate-800 bg-[#080d1a] p-3.5 font-mono text-xs">
+          {/* Time & Location Metadata (Single column on mobile) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 rounded-lg border border-slate-800 bg-[#080d1a] p-3 sm:p-3.5 font-mono text-xs">
             <div>
               <span className="text-[10px] uppercase text-slate-500 block mb-0.5">Published Time</span>
               <div className="flex items-center space-x-1 text-slate-300">
-                <Clock className="h-3.5 w-3.5 text-cyan-400" />
-                <span>{new Date(event.published_at).toUTCString()}</span>
+                <Clock className="h-3.5 w-3.5 text-cyan-400 flex-shrink-0" />
+                <span className="truncate">{new Date(event.published_at).toUTCString()}</span>
               </div>
             </div>
             <div>
               <span className="text-[10px] uppercase text-slate-500 block mb-0.5">Geotag Anchor</span>
               <div className="flex items-center space-x-1 text-slate-300">
-                <MapPin className="h-3.5 w-3.5 text-cyan-400" />
-                <span>{event.location_name || 'Theater Wide'}</span>
+                <MapPin className="h-3.5 w-3.5 text-cyan-400 flex-shrink-0" />
+                <span className="truncate">{event.location_name || 'Theater Wide'}</span>
               </div>
               {event.lat && event.lng && (
                 <span className="text-[11px] text-slate-500 block mt-0.5">
@@ -93,10 +94,10 @@ export const EventDetailDrawer: React.FC<EventDetailDrawerProps> = ({ event, onC
 
           {/* Energy & Maritime Strategic Assessment */}
           {(event.vessel_name || event.barrel_risk_estimate || (event.affected_infrastructure && event.affected_infrastructure.length > 0) || (event.oil_market_impact && event.oil_market_impact !== 'neutral')) && (
-            <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-4 space-y-3 font-mono text-xs">
+            <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-3.5 sm:p-4 space-y-3 font-mono text-xs">
               <div className="flex items-center justify-between border-b border-amber-500/20 pb-2">
                 <span className="font-bold text-amber-400 flex items-center space-x-1.5">
-                  <span>🛢️ CRUDE & MARITIME RISK ASSESSMENT</span>
+                  <span>🛢️ CRUDE & MARITIME RISK</span>
                 </span>
                 {event.oil_market_impact && (
                   <span className={`rounded px-2 py-0.5 font-bold uppercase text-[10px] ${
@@ -124,7 +125,7 @@ export const EventDetailDrawer: React.FC<EventDetailDrawerProps> = ({ event, onC
 
               {event.affected_infrastructure && event.affected_infrastructure.length > 0 && (
                 <div className="pt-2 border-t border-amber-500/10">
-                  <span className="text-slate-400 block text-[10px] uppercase mb-1">Affected Infrastructure & Corridors:</span>
+                  <span className="text-slate-400 block text-[10px] uppercase mb-1">Affected Infrastructure:</span>
                   <div className="flex flex-wrap gap-1.5">
                     {event.affected_infrastructure.map((inf, idx) => (
                       <span key={idx} className="rounded bg-slate-800/90 px-2 py-0.5 text-[10px] text-slate-200 border border-slate-700">
@@ -142,7 +143,7 @@ export const EventDetailDrawer: React.FC<EventDetailDrawerProps> = ({ event, onC
             <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mb-2">
               Intelligence Briefing & Excerpt
             </h3>
-            <div className="rounded-lg border border-slate-800/80 bg-[#090e1c] p-4 text-sm text-slate-200 leading-relaxed">
+            <div className="rounded-lg border border-slate-800/80 bg-[#090e1c] p-3.5 sm:p-4 text-xs sm:text-sm text-slate-200 leading-relaxed">
               {event.summary}
             </div>
           </div>
@@ -177,10 +178,10 @@ export const EventDetailDrawer: React.FC<EventDetailDrawerProps> = ({ event, onC
                     href={src.source_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-1 text-xs text-cyan-400 hover:underline"
+                    className="inline-flex min-h-[32px] items-center space-x-1 text-xs text-cyan-400 hover:underline"
                   >
                     <span>Read Original Article</span>
-                    <ExternalLink className="h-3 w-3" />
+                    <ExternalLink className="h-3 w-3 ml-1" />
                   </a>
                 </div>
               ))}
@@ -204,7 +205,7 @@ export const EventDetailDrawer: React.FC<EventDetailDrawerProps> = ({ event, onC
                       href={url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="ml-2 flex-shrink-0 flex items-center space-x-1 rounded bg-slate-800 px-2 py-1 text-[11px] font-medium text-cyan-400 hover:bg-slate-700"
+                      className="ml-2 flex-shrink-0 flex min-h-[32px] items-center space-x-1 rounded bg-slate-800 px-2.5 py-1 text-[11px] font-medium text-cyan-400 hover:bg-slate-700 active:scale-95"
                     >
                       <span>View Tweet</span>
                       <ExternalLink className="h-3 w-3" />
@@ -215,13 +216,13 @@ export const EventDetailDrawer: React.FC<EventDetailDrawerProps> = ({ event, onC
             </div>
           )}
 
-          {/* Analyst Actions */}
-          <div className="flex items-center space-x-3 pt-4 border-t border-slate-800">
+          {/* Analyst Actions (Thumb-friendly Stacked Buttons on Mobile) */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 pt-4 border-t border-slate-800 pb-4">
             <button
               onClick={copyJson}
-              className="flex items-center space-x-1.5 rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-xs font-medium text-slate-200 hover:bg-slate-700 transition"
+              className="flex min-h-[44px] items-center justify-center space-x-2 rounded-lg border border-slate-700 bg-slate-800 px-4 py-2.5 text-xs font-medium text-slate-200 hover:bg-slate-700 active:scale-98 transition w-full sm:w-auto"
             >
-              {copied ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
+              {copied ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4" />}
               <span>{copied ? 'JSON Copied!' : 'Copy Event JSON'}</span>
             </button>
 
@@ -229,10 +230,10 @@ export const EventDetailDrawer: React.FC<EventDetailDrawerProps> = ({ event, onC
               href={event.primary_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-1.5 rounded-lg bg-cyan-600 px-4 py-2 text-xs font-medium text-white hover:bg-cyan-500 transition"
+              className="flex min-h-[44px] items-center justify-center space-x-2 rounded-lg bg-cyan-600 px-4 py-2.5 text-xs font-semibold text-white hover:bg-cyan-500 active:scale-98 transition w-full sm:w-auto"
             >
               <span>Open Primary Coverage</span>
-              <ExternalLink className="h-3.5 w-3.5" />
+              <ExternalLink className="h-4 w-4" />
             </a>
           </div>
         </div>

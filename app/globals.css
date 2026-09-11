@@ -31,6 +31,22 @@ body {
   background: #334155;
 }
 
+/* Hide scrollbar for clean mobile swipeable chips */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Touch optimization */
+html {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
 /* Grid overlay pattern */
 .bg-grid-pattern {
   background-size: 32px 32px;

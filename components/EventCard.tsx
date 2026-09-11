@@ -63,10 +63,10 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
   };
 
   return (
-    <div className="group relative rounded-lg border border-slate-800 bg-[#0d1424] p-4 hover:border-slate-700 hover:bg-[#111a2f] transition-all shadow-sm">
+    <div className="group relative rounded-lg border border-slate-800 bg-[#0d1424] p-3.5 sm:p-4 hover:border-slate-700 hover:bg-[#111a2f] transition-all shadow-sm active:scale-[0.995]">
       {/* Top Header Row */}
-      <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-        <div className="flex items-center space-x-2">
+      <div className="flex flex-wrap items-center justify-between gap-1.5 sm:gap-2 mb-2">
+        <div className="flex flex-wrap items-center gap-1.5 sm:space-x-2">
           {/* Country Pill */}
           <span className="flex items-center space-x-1 rounded bg-slate-800/90 px-2 py-0.5 text-xs font-semibold text-slate-200 border border-slate-700">
             <span>{getCountryFlag(event.country)}</span>
@@ -75,29 +75,29 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
 
           {/* Category Tag */}
           <span
-            className={`rounded px-2 py-0.5 text-[11px] font-mono font-bold uppercase tracking-wider border ${getCategoryColor(
+            className={`rounded px-2 py-0.5 text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider border ${getCategoryColor(
               event.category
             )}`}
           >
-            {event.category}
+            {event.category.replace('_', ' ')}
           </span>
 
           {/* Credibility Tier Badge */}
           {event.credibility_tier === 'tier_1' ? (
             <span className="flex items-center space-x-1 rounded bg-emerald-950/40 px-1.5 py-0.5 text-[10px] font-mono font-semibold text-emerald-400 border border-emerald-500/30">
               <ShieldCheck className="h-3 w-3" />
-              <span>TIER 1 VERIFIED</span>
+              <span>TIER 1</span>
             </span>
           ) : (
             <span className="flex items-center space-x-1 rounded bg-amber-950/40 px-1.5 py-0.5 text-[10px] font-mono font-semibold text-amber-400 border border-amber-500/30">
               <AlertTriangle className="h-3 w-3" />
-              <span>TIER 2 ANALYST</span>
+              <span>TIER 2</span>
             </span>
           )}
         </div>
 
         {/* Timestamp */}
-        <span className="font-mono text-xs text-slate-400">
+        <span className="font-mono text-[11px] sm:text-xs text-slate-400">
           {formatTimeAgo(event.published_at)}
         </span>
       </div>
@@ -112,13 +112,13 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
             </span>
           )}
           {event.oil_market_impact && event.oil_market_impact === 'critical' && (
-            <span className="rounded bg-red-950/90 text-red-400 px-2 py-0.5 border border-red-500/50 font-bold uppercase animate-pulse_slow">
-              ⚡ CRITICAL OIL IMPACT
+            <span className="rounded bg-red-950/90 text-red-400 px-2 py-0.5 border border-red-500/50 font-bold uppercase">
+              ⚡ CRITICAL IMPACT
             </span>
           )}
           {event.oil_market_impact && event.oil_market_impact === 'high' && (
             <span className="rounded bg-amber-950/80 text-amber-400 px-2 py-0.5 border border-amber-500/40 font-bold uppercase">
-              ⚠️ HIGH MARKET RISK
+              ⚠️ HIGH RISK
             </span>
           )}
           {event.barrel_risk_estimate && (
@@ -132,23 +132,23 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
       {/* Title */}
       <h2
         onClick={() => onSelect(event)}
-        className="text-base font-semibold text-slate-100 hover:text-cyan-400 cursor-pointer transition line-clamp-2 leading-snug mb-1.5"
+        className="text-sm sm:text-base font-semibold text-slate-100 hover:text-cyan-400 cursor-pointer transition line-clamp-2 leading-snug mb-1.5"
       >
         {event.title}
       </h2>
 
       {/* Summary Excerpt */}
-      <p className="text-xs text-slate-300 line-clamp-2 leading-relaxed mb-3">
+      <p className="text-xs text-slate-300 line-clamp-2 leading-relaxed mb-2.5">
         {event.summary}
       </p>
 
       {/* Geolocation Tag */}
       {event.location_name && (
-        <div className="flex items-center space-x-1 text-[11px] font-mono text-slate-400 mb-3">
+        <div className="flex items-center space-x-1 text-[11px] font-mono text-slate-400 mb-2.5">
           <MapPin className="h-3 w-3 text-cyan-400 flex-shrink-0" />
           <span className="truncate">{event.location_name}</span>
           {event.lat && event.lng && (
-            <span className="text-slate-500 text-[10px]">
+            <span className="text-slate-500 text-[10px] hidden sm:inline">
               ({event.lat.toFixed(2)}, {event.lng.toFixed(2)})
             </span>
           )}
@@ -156,7 +156,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
       )}
 
       {/* Bottom Bar: Collapsed Multi-Source Reporting & Citations */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-slate-800/80 pt-2.5 mt-2">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-slate-800/80 pt-2 mt-1">
         <div className="flex flex-wrap items-center gap-1.5 text-xs">
           <span className="font-mono text-[10px] uppercase text-slate-400">Sources:</span>
           {event.sources.slice(0, 2).map((s, idx) => (
@@ -166,17 +166,17 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="flex items-center space-x-1 rounded bg-slate-800/80 px-2 py-0.5 text-[11px] text-cyan-400 hover:bg-slate-700 border border-slate-700/60 transition"
+              className="inline-flex min-h-[28px] items-center space-x-1 rounded bg-slate-800/80 px-2 py-1 text-[11px] text-cyan-400 hover:bg-slate-700 border border-slate-700/60 transition active:scale-95"
             >
               <span>{s.source_name}</span>
-              <ExternalLink className="h-2.5 w-2.5 opacity-70" />
+              <ExternalLink className="h-2.5 w-2.5 opacity-70 ml-0.5" />
             </a>
           ))}
 
           {event.sources.length > 2 && (
             <button
               onClick={() => onSelect(event)}
-              className="flex items-center space-x-1 rounded bg-slate-800/50 px-1.5 py-0.5 text-[10px] font-mono text-slate-400 hover:text-slate-200"
+              className="inline-flex min-h-[28px] items-center space-x-1 rounded bg-slate-800/50 px-2 py-1 text-[10px] font-mono text-slate-400 hover:text-slate-200 active:scale-95"
             >
               <Layers className="h-2.5 w-2.5" />
               <span>+{event.sources.length - 2} merged</span>
@@ -185,7 +185,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
 
           {/* X / Twitter Citations */}
           {event.x_citations && event.x_citations.length > 0 && (
-            <div className="flex items-center space-x-1 ml-1">
+            <div className="flex items-center space-x-1">
               {event.x_citations.slice(0, 1).map((xUrl, i) => (
                 <a
                   key={i}
@@ -193,12 +193,12 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center space-x-1 rounded bg-[#1d283a] px-2 py-0.5 text-[11px] font-mono text-slate-300 hover:text-white border border-slate-700"
+                  className="inline-flex min-h-[28px] items-center space-x-1 rounded bg-[#1d283a] px-2 py-1 text-[11px] font-mono text-slate-300 hover:text-white border border-slate-700 active:scale-95"
                   title="Verified OSINT Citation on X"
                 >
                   <span className="font-bold text-[10px]">𝕏</span>
                   <span>Citation</span>
-                  <ExternalLink className="h-2.5 w-2.5" />
+                  <ExternalLink className="h-2.5 w-2.5 ml-0.5" />
                 </a>
               ))}
             </div>
@@ -208,9 +208,9 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
         {/* Inspect Dossier Action */}
         <button
           onClick={() => onSelect(event)}
-          className="flex items-center space-x-1 rounded px-2 py-1 text-[11px] font-medium text-cyan-400 hover:bg-cyan-950/40 border border-transparent hover:border-cyan-500/30 transition"
+          className="flex min-h-[32px] items-center space-x-1 rounded-lg px-2.5 py-1 text-xs font-medium text-cyan-400 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-500/30 transition active:scale-95"
         >
-          <Compass className="h-3 w-3" />
+          <Compass className="h-3.5 w-3.5" />
           <span>Dossier</span>
         </button>
       </div>

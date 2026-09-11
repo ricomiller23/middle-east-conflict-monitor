@@ -51,80 +51,81 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   ];
 
   return (
-    <div className="border-b border-slate-800 bg-[#090e1a]/95 py-3">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-3">
+    <div className="border-b border-slate-800 bg-[#090e1a]/95 py-2.5 sm:py-3">
+      <div className="mx-auto max-w-7xl px-3 sm:px-6 space-y-2.5 sm:space-y-3">
         {/* Top row: Search Bar & View Mode Toggle */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          {/* Search Input */}
-          <div className="relative flex-1 max-w-xl">
-            <Search className="pointer-events-none absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3">
+          {/* Search Input with Touch Clear Button */}
+          <div className="relative flex-1 w-full max-w-xl">
+            <Search className="pointer-events-none absolute left-3 top-3 h-4 w-4 text-slate-400" />
             <input
               type="text"
               value={search}
               onChange={(e) => onSearchChange(e.target.value)}
-              placeholder="Full-text search (tsvector: 'Houthi', 'Red Sea', 'IRGC', 'drone', 'Jizan')..."
-              className="w-full rounded-md border border-slate-700/80 bg-[#0c1424] py-2 pl-9 pr-8 text-xs font-mono text-slate-200 placeholder-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 transition"
+              placeholder="Search incidents, vessels, or assets..."
+              className="w-full min-h-[40px] rounded-lg border border-slate-700/80 bg-[#0c1424] py-2 pl-9 pr-9 text-xs font-mono text-slate-200 placeholder-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 transition"
             />
             {search && (
               <button
                 onClick={() => onSearchChange('')}
-                className="absolute right-2.5 top-2.5 text-slate-400 hover:text-white"
+                aria-label="Clear search"
+                className="absolute right-2.5 top-2.5 min-h-[28px] min-w-[28px] flex items-center justify-center text-slate-400 hover:text-white active:scale-90 transition"
               >
-                <X className="h-3.5 w-3.5" />
+                <X className="h-4 w-4" />
               </button>
             )}
           </div>
 
-          {/* View Mode Toggle Buttons */}
-          <div className="flex items-center rounded-lg border border-slate-700/80 bg-[#0c1424] p-0.5">
+          {/* View Mode Segmented Controls */}
+          <div className="grid grid-cols-3 sm:flex items-center rounded-lg border border-slate-700/80 bg-[#0c1424] p-1 w-full sm:w-auto">
             <button
               onClick={() => onViewChange('feed')}
-              className={`flex items-center space-x-1.5 rounded px-3 py-1.5 text-xs font-medium transition ${
+              className={`flex min-h-[38px] items-center justify-center space-x-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition active:scale-95 ${
                 currentView === 'feed'
-                  ? 'bg-cyan-600 text-white shadow-sm'
+                  ? 'bg-cyan-600 text-white shadow-sm font-semibold'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
-              <LayoutGrid className="h-3.5 w-3.5" />
+              <LayoutGrid className="h-3.5 w-3.5 flex-shrink-0" />
               <span>Feed</span>
             </button>
             <button
               onClick={() => onViewChange('timeline')}
-              className={`flex items-center space-x-1.5 rounded px-3 py-1.5 text-xs font-medium transition ${
+              className={`flex min-h-[38px] items-center justify-center space-x-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition active:scale-95 ${
                 currentView === 'timeline'
-                  ? 'bg-cyan-600 text-white shadow-sm'
+                  ? 'bg-cyan-600 text-white shadow-sm font-semibold'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
-              <Clock className="h-3.5 w-3.5" />
+              <Clock className="h-3.5 w-3.5 flex-shrink-0" />
               <span>Timeline</span>
             </button>
             <button
               onClick={() => onViewChange('map')}
-              className={`flex items-center space-x-1.5 rounded px-3 py-1.5 text-xs font-medium transition ${
+              className={`flex min-h-[38px] items-center justify-center space-x-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition active:scale-95 ${
                 currentView === 'map'
-                  ? 'bg-cyan-600 text-white shadow-sm'
+                  ? 'bg-cyan-600 text-white shadow-sm font-semibold'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
-              <MapPin className="h-3.5 w-3.5" />
-              <span>Tactical Map</span>
+              <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
+              <span>Radar Map</span>
             </button>
           </div>
         </div>
 
-        {/* Second row: Filter Pills & Dropdowns */}
-        <div className="flex flex-wrap items-center justify-between gap-2 pt-1 text-xs">
-          {/* Country Pills */}
-          <div className="flex flex-wrap items-center gap-1.5">
+        {/* Second row: Swipeable Country Pills & Filter Dropdowns */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2.5 pt-0.5 text-xs">
+          {/* Country Pills (Horizontally Swipeable on Mobile) */}
+          <div className="flex items-center overflow-x-auto whitespace-nowrap scrollbar-none gap-1.5 pb-1 -mx-3 px-3 sm:mx-0 sm:px-0">
             {countries.map((c) => (
               <button
                 key={c.id}
                 onClick={() => onCountryChange(c.id)}
-                className={`rounded-full px-3 py-1 text-xs font-medium transition ${
+                className={`flex-shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition min-h-[34px] active:scale-95 ${
                   selectedCountry === c.id
                     ? 'bg-slate-200 text-slate-900 font-semibold shadow'
-                    : 'bg-slate-800/80 text-slate-300 hover:bg-slate-700'
+                    : 'bg-slate-800/90 text-slate-300 hover:bg-slate-700'
                 }`}
               >
                 {c.label}
@@ -133,12 +134,12 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           </div>
 
           {/* Category & Credibility Tier Selectors */}
-          <div className="flex items-center space-x-2">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
             <select
               value={selectedCategory}
               onChange={(e) => onCategoryChange(e.target.value)}
               aria-label="Filter by category"
-              className="rounded-md border border-slate-700/80 bg-[#0c1424] px-2.5 py-1 text-xs text-slate-300 focus:border-cyan-500 focus:outline-none"
+              className="min-h-[38px] rounded-lg border border-slate-700/80 bg-[#0c1424] px-3 py-1.5 text-xs text-slate-300 focus:border-cyan-500 focus:outline-none"
             >
               {categories.map((cat) => (
                 <option key={cat.id} value={cat.id} className="bg-slate-900 text-slate-200">
@@ -151,22 +152,35 @@ export const FilterBar: React.FC<FilterBarProps> = ({
               value={selectedTier}
               onChange={(e) => onTierChange(e.target.value)}
               aria-label="Filter by credibility tier"
-              className="rounded-md border border-slate-700/80 bg-[#0c1424] px-2.5 py-1 text-xs text-slate-300 focus:border-cyan-500 focus:outline-none"
+              className="min-h-[38px] rounded-lg border border-slate-700/80 bg-[#0c1424] px-3 py-1.5 text-xs text-slate-300 focus:border-cyan-500 focus:outline-none"
             >
               <option value="all" className="bg-slate-900 text-slate-200">
                 All Credibility Tiers
               </option>
               <option value="tier_1" className="bg-slate-900 text-slate-200">
-                🟢 Tier 1: Verified Outlets & Official MoD
+                🟢 Tier 1: Verified Outlets & MoD
               </option>
               <option value="tier_2" className="bg-slate-900 text-slate-200">
-                🟡 Tier 2: Regional Trackers & Analysts
+                🟡 Tier 2: Analysts & Trackers
               </option>
             </select>
 
-            <span className="font-mono text-[11px] text-slate-400 pl-1">
-              ({totalFiltered} results)
-            </span>
+            <div className="flex items-center justify-between sm:justify-start font-mono text-[11px] text-slate-400 sm:pl-1">
+              <span>{totalFiltered} incidents</span>
+              {(selectedCountry !== 'all' || selectedCategory !== 'all' || selectedTier !== 'all' || search) && (
+                <button
+                  onClick={() => {
+                    onSearchChange('');
+                    onCountryChange('all');
+                    onCategoryChange('all');
+                    onTierChange('all');
+                  }}
+                  className="sm:ml-2 text-cyan-400 hover:underline"
+                >
+                  Reset
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>

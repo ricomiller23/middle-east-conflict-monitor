@@ -67,7 +67,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ events, onSelect }) 
           </div>
 
           {/* Timeline Vertical Rail */}
-          <div className="relative border-l-2 border-slate-800 ml-4 space-y-6 pl-6">
+          <div className="relative border-l-2 border-slate-800 ml-2.5 sm:ml-4 space-y-4 sm:space-y-6 pl-4 sm:pl-6">
             {dayEvents.map((ev) => {
               const timeStr = new Date(ev.published_at).toLocaleTimeString('en-US', {
                 hour: '2-digit',
@@ -78,28 +78,44 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ events, onSelect }) 
               return (
                 <div key={ev.id} className="relative group">
                   {/* Timeline Dot */}
-                  <div className="absolute -left-[31px] top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#080c14] border-2 border-cyan-500 group-hover:scale-125 transition-transform" />
+                  <div className="absolute -left-[23px] sm:-left-[31px] top-2 flex h-3.5 w-3.5 sm:h-4 sm:w-4 items-center justify-center rounded-full bg-[#080c14] border-2 border-cyan-500 group-hover:scale-125 transition-transform" />
 
                   {/* Timeline Card */}
                   <div
                     onClick={() => onSelect(ev)}
-                    className="rounded-lg border border-slate-800 bg-[#0d1424] p-4 hover:border-slate-700 hover:bg-[#111a2f] cursor-pointer transition shadow-sm"
+                    className="rounded-lg border border-slate-800 bg-[#0d1424] p-3 sm:p-4 hover:border-slate-700 hover:bg-[#111a2f] cursor-pointer transition shadow-sm active:scale-[0.99]"
                   >
-                    <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5 font-mono text-xs">
-                      <div className="flex items-center space-x-2">
-                        <span className="font-bold text-cyan-400">{timeStr} UTC</span>
+                    <div className="flex flex-wrap items-center justify-between gap-1.5 mb-1.5 font-mono text-xs">
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <span className="font-bold text-cyan-400 text-[11px] sm:text-xs">{timeStr} UTC</span>
                         <span className="text-slate-600">•</span>
                         <span>{getCountryFlag(ev.country)} {ev.country}</span>
                         <span className={`rounded px-1.5 py-0.2 text-[10px] uppercase font-bold border ${getCategoryColor(ev.category)}`}>
-                          {ev.category}
+                          {ev.category.replace('_', ' ')}
                         </span>
                       </div>
-                      <span className="text-[11px] text-slate-500">
-                        {ev.sources.length} report{ev.sources.length > 1 ? 's' : ''} merged
+                      <span className="text-[10px] sm:text-[11px] text-slate-500">
+                        {ev.sources.length} merged
                       </span>
                     </div>
 
-                    <h4 className="text-sm font-semibold text-slate-100 group-hover:text-cyan-400 transition mb-1">
+                    {/* Oil & Vessel Indicator if applicable */}
+                    {(ev.vessel_name || ev.barrel_risk_estimate) && (
+                      <div className="flex flex-wrap items-center gap-1.5 my-1 text-[10px] font-mono">
+                        {ev.vessel_name && (
+                          <span className="rounded bg-rose-950/70 text-rose-300 px-1.5 py-0.5 border border-rose-500/30">
+                            🚢 {ev.vessel_name}
+                          </span>
+                        )}
+                        {ev.barrel_risk_estimate && (
+                          <span className="rounded bg-slate-800 text-amber-300 px-1.5 py-0.5 border border-slate-700">
+                            🛢️ {ev.barrel_risk_estimate}
+                          </span>
+                        )}
+                      </div>
+                    )}
+
+                    <h4 className="text-xs sm:text-sm font-semibold text-slate-100 group-hover:text-cyan-400 transition mb-1 leading-snug">
                       {ev.title}
                     </h4>
 
@@ -108,11 +124,11 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ events, onSelect }) 
                     </p>
 
                     <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 pt-2 border-t border-slate-800/80">
-                      <div className="flex items-center space-x-1">
-                        <MapPin className="h-3 w-3 text-cyan-400" />
-                        <span>{ev.location_name || 'Theater'}</span>
+                      <div className="flex items-center space-x-1 truncate max-w-[200px]">
+                        <MapPin className="h-3 w-3 text-cyan-400 flex-shrink-0" />
+                        <span className="truncate">{ev.location_name || 'Theater'}</span>
                       </div>
-                      <span className="text-cyan-400 hover:underline">View Dossier →</span>
+                      <span className="text-cyan-400 font-semibold flex-shrink-0">Dossier →</span>
                     </div>
                   </div>
                 </div>
