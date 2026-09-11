@@ -21,6 +21,10 @@ CREATE TABLE IF NOT EXISTS events (
     affected_infrastructure JSONB DEFAULT '[]'::jsonb,
     vessel_name VARCHAR(128),
     barrel_risk_estimate VARCHAR(128),
+    audio_url TEXT,
+    podcast_duration VARCHAR(32),
+    is_podcast_analysis BOOLEAN DEFAULT FALSE,
+    synopsis TEXT,
     tsv TSVECTOR
 );
 

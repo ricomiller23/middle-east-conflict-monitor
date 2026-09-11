@@ -41,12 +41,17 @@ export async function sendEmailDigest(events: SecurityEvent[]): Promise<{ succes
       ['critical', 'high', 'moderate'].includes(ev.oil_market_impact || '')
   );
 
-  const htmlContent = buildDigestHtml(grouped, energyEvents, dateStr, appUrl, events.length);
+  // Extract Warfronts podcast tactical updates
+  const podcastEvents = events.filter(
+    (ev) => ev.is_podcast_analysis || ev.primary_source.includes('Warfronts')
+  );
+
+  const htmlContent = buildDigestHtml(grouped, energyEvents, podcastEvents, dateStr, appUrl, events.length);
 
   // If no API key or placeholder key, simulate delivery gracefully
   if (!apiKey || apiKey.startsWith('re_placeholder') || apiKey.length < 15) {
     console.log(
-      `[Email Digest - Simulation] Resend API key is not configured or placeholder. Simulating email dispatch of ${events.length} events (${energyEvents.length} energy/tanker impacts) to ${recipient}.`
+      `[Email Digest - Simulation] Resend API key is not configured or placeholder. Simulating email dispatch of ${events.length} events (${energyEvents.length} energy/tanker impacts, ${podcastEvents.length} Warfronts podcasts) to ${recipient}.`
     );
     return { success: true, simulated: true };
   }
@@ -56,10 +61,11 @@ export async function sendEmailDigest(events: SecurityEvent[]): Promise<{ succes
     const energySubjectTag = energyEvents.some((e) => e.oil_market_impact === 'critical' || e.oil_market_impact === 'high')
       ? ' 🛢️ CRITICAL ENERGY ALERT'
       : '';
+    const podcastSubjectTag = podcastEvents.length > 0 ? ' 🎙️ WARFRONTS' : '';
     const result = await resend.emails.send({
       from: sender,
       to: recipient,
-      subject: `🚨 [OSINT Digest]${energySubjectTag} ${events.length} New Security Event${events.length > 1 ? 's' : ''} - ${dateStr}`,
+      subject: `🚨 [OSINT Digest]${energySubjectTag}${podcastSubjectTag} ${events.length} New Security Event${events.length > 1 ? 's' : ''} - ${dateStr}`,
       html: htmlContent,
     });
 
@@ -79,6 +85,7 @@ export async function sendEmailDigest(events: SecurityEvent[]): Promise<{ succes
 function buildDigestHtml(
   grouped: Record<Country, SecurityEvent[]>,
   energyEvents: SecurityEvent[],
+  podcastEvents: SecurityEvent[],
   dateStr: string,
   appUrl: string,
   totalCount: number
@@ -86,6 +93,7 @@ function buildDigestHtml(
   const pauseUrl = `${appUrl}/api/digest/pause?action=pause`;
 
   const renderEventItem = (ev: SecurityEvent) => {
+    const isWarfronts = ev.is_podcast_analysis || ev.primary_source.includes('Warfronts');
     const tierColor = ev.credibility_tier === 'tier_1' ? '#10b981' : '#f59e0b';
     const tierLabel = ev.credibility_tier === 'tier_1' ? 'VERIFIED (TIER 1)' : 'ANALYST (TIER 2)';
     const categoryBadge = ev.category.replace('_', ' ').toUpperCase();
@@ -97,6 +105,26 @@ function buildDigestHtml(
       oilImpactBadge = `<span style="background-color: ${impactColor}20; color: ${impactColor}; border: 1px solid ${impactColor}50; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px; margin-left: 6px; letter-spacing: 0.5px;">🛢️ ${ev.oil_market_impact.toUpperCase()} OIL IMPACT</span>`;
     }
 
+    // Warfronts Duration Badge
+    let podcastBadge = '';
+    if (isWarfronts) {
+      podcastBadge = `<span style="background-color: #7c3aed25; color: #c084fc; border: 1px solid #7c3aed60; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px; margin-left: 6px; letter-spacing: 0.5px;">🎙️ WARFRONTS (SIMON WHISTLER)</span>`;
+      if (ev.podcast_duration) {
+        podcastBadge += `<span style="background-color: #312e81; color: #a5b4fc; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; margin-left: 6px;">⏱️ ${ev.podcast_duration}</span>`;
+      }
+    }
+
+    // Synopsis block
+    let synopsisHtml = '';
+    if (ev.synopsis) {
+      synopsisHtml = `
+        <div style="margin: 8px 0; padding: 10px 14px; background-color: #1e1138; border-left: 3px solid #9333ea; border-radius: 4px; font-size: 12px; color: #f3e8ff; line-height: 1.5;">
+          <strong style="color: #c084fc; font-size: 11px; display: block; margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.5px;">🎙️ Simon Whistler Synopsis:</strong>
+          ${ev.synopsis}
+        </div>
+      `;
+    }
+
     // Energy / Maritime Metadata
     let energyDetailsHtml = '';
     if (ev.vessel_name || ev.affected_infrastructure || ev.barrel_risk_estimate) {
@@ -106,6 +134,15 @@ function buildDigestHtml(
           ${ev.affected_infrastructure ? `<div style="color: #cbd5e1;"><strong>Affected Asset:</strong> ${ev.affected_infrastructure}</div>` : ''}
           ${ev.barrel_risk_estimate ? `<div style="color: #fde047;"><strong>Supply Exposure:</strong> ${ev.barrel_risk_estimate}</div>` : ''}
         </div>
+      `;
+    }
+
+    let listenButtonHtml = '';
+    if (ev.audio_url) {
+      listenButtonHtml = `
+        <a href="${ev.audio_url}" target="_blank" style="display: inline-block; background-color: #581c87; color: #f3e8ff; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; text-decoration: none; margin-left: 10px; border: 1px solid #9333ea;">
+          🎧 Stream Episode MP3
+        </a>
       `;
     }
 
@@ -129,10 +166,11 @@ function buildDigestHtml(
         : '';
 
     return `
-      <div style="background-color: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 16px; margin-bottom: 12px;">
+      <div style="background-color: #0f172a; border: 1px solid ${isWarfronts ? '#581c87' : '#1e293b'}; border-radius: 8px; padding: 16px; margin-bottom: 12px;">
         <div style="margin-bottom: 8px;">
           <span style="background-color: ${tierColor}20; color: ${tierColor}; border: 1px solid ${tierColor}50; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; letter-spacing: 0.5px;">${tierLabel}</span>
           <span style="background-color: #334155; color: #cbd5e1; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; margin-left: 6px; letter-spacing: 0.5px;">${categoryBadge}</span>
+          ${podcastBadge}
           ${oilImpactBadge}
           ${ev.location_name ? `<span style="color: #64748b; font-size: 11px; margin-left: 8px;">📍 ${ev.location_name}</span>` : ''}
         </div>
@@ -140,11 +178,15 @@ function buildDigestHtml(
           <a href="${ev.primary_url}" target="_blank" style="color: #f8fafc; text-decoration: none;">${ev.title}</a>
         </h3>
         <p style="margin: 0 0 8px 0; color: #94a3b8; font-size: 13px; line-height: 1.5;">${ev.summary}</p>
+        ${synopsisHtml}
         ${energyDetailsHtml}
-        <div style="border-top: 1px solid #1e293b; padding-top: 8px;">
-          <span style="color: #64748b; font-size: 12px; margin-right: 8px;">Sources:</span>
-          ${sourcesHtml}
-          ${citationsHtml}
+        <div style="border-top: 1px solid #1e293b; padding-top: 8px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+          <div>
+            <span style="color: #64748b; font-size: 12px; margin-right: 8px;">Sources:</span>
+            ${sourcesHtml}
+            ${citationsHtml}
+          </div>
+          ${listenButtonHtml}
         </div>
       </div>
     `;
@@ -165,6 +207,30 @@ function buildDigestHtml(
       </div>
     `;
   };
+
+  // Render Warfronts Podcast Intelligence Section if present
+  let podcastSectionHtml = '';
+  if (podcastEvents.length > 0) {
+    podcastSectionHtml = `
+      <div style="margin-top: 24px; background: linear-gradient(180deg, #2e1065 0%, #0f172a 100%); border: 1px solid #7c3aed; border-radius: 10px; padding: 18px;">
+        <div style="display: flex; align-items: center; margin-bottom: 12px;">
+          <span style="font-size: 20px; margin-right: 8px;">🎙️</span>
+          <div>
+            <h2 style="margin: 0; font-size: 16px; font-weight: 800; color: #f3e8ff; letter-spacing: 0.5px;">
+              WARFRONTS PODCAST INTELLIGENCE & SYNOPSES
+            </h2>
+            <div style="font-size: 11px; color: #c084fc;">
+              Simon Whistler • Strategic Theater Analysis & Deep Geopolitical Synopses (${podcastEvents.length} update${podcastEvents.length > 1 ? 's' : ''})
+            </div>
+          </div>
+        </div>
+        <div style="background-color: #120924; border: 1px solid #581c87; border-radius: 6px; padding: 10px; margin-bottom: 14px; font-size: 12px; color: #e9d5ff;">
+          <strong>Audio OSINT Feed:</strong> Tactical analysis covering Houthi Red Sea operations, Bab al-Mandeb chokepoints, Iranian military postures, and Gulf defense dynamics.
+        </div>
+        ${podcastEvents.map(renderEventItem).join('')}
+      </div>
+    `;
+  }
 
   // Render Energy Market & Maritime Security Section if present
   let energySectionHtml = '';
@@ -217,6 +283,13 @@ function buildDigestHtml(
           ⚡ ${totalCount} Security Incident${totalCount > 1 ? 's' : ''}
         </span>
         ${
+          podcastEvents.length > 0
+            ? `<span style="background-color: #4c1d95; border-radius: 6px; padding: 6px 12px; font-size: 12px; color: #e9d5ff; font-weight: 700;">
+                🎙️ ${podcastEvents.length} Warfronts Pod Briefing${podcastEvents.length > 1 ? 's' : ''}
+              </span>`
+            : ''
+        }
+        ${
           energyEvents.length > 0
             ? `<span style="background-color: #312e81; border-radius: 6px; padding: 6px 12px; font-size: 12px; color: #fbbf24; font-weight: 700;">
                 🛢️ ${energyEvents.length} Oil/Maritime Impact${energyEvents.length > 1 ? 's' : ''}
@@ -225,6 +298,9 @@ function buildDigestHtml(
         }
       </div>
     </div>
+
+    <!-- Warfronts Podcast Tactical Intelligence Section -->
+    ${podcastSectionHtml}
 
     <!-- Maritime & Energy Market Section (High Visibility) -->
     ${energySectionHtml}
@@ -240,7 +316,7 @@ function buildDigestHtml(
         This automated intelligence brief was compiled by <a href="${appUrl}" target="_blank" style="color: #38bdf8; text-decoration: none;">Middle East Conflict & Energy Monitor</a>.
       </p>
       <p style="margin: 0 0 16px 0;">
-        Ingestion Frequency: Every 6 Hours • Connectors: UKMTO, Ambrey, OilPrice, S&P Platts, GDELT 2.0, Defense OSINT.
+        Ingestion Frequency: Every 6 Hours • Connectors: Warfronts (Simon Whistler), UKMTO, Ambrey, OilPrice, S&P Platts, GDELT 2.0.
       </p>
       <p style="margin: 0;">
         <a href="${appUrl}" target="_blank" style="color: #94a3b8; text-decoration: underline; margin-right: 16px;">Open Live Tactical Dashboard</a>

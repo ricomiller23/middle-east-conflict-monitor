@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { SecurityEvent } from '@/lib/types';
-import { ExternalLink, MapPin, ShieldCheck, AlertTriangle, Layers, Share2, Compass } from 'lucide-react';
+import { ExternalLink, MapPin, ShieldCheck, AlertTriangle, Layers, Share2, Compass, Headphones } from 'lucide-react';
 
 interface EventCardProps {
   event: SecurityEvent;
@@ -10,6 +10,8 @@ interface EventCardProps {
 }
 
 export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
+  const isWarfronts = event.is_podcast_analysis || event.primary_source.includes('Warfronts');
+
   const getCategoryColor = (cat: string) => {
     switch (cat) {
       case 'tanker_attack':
@@ -63,7 +65,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
   };
 
   return (
-    <div className="group relative rounded-lg border border-slate-800 bg-[#0d1424] p-3.5 sm:p-4 hover:border-slate-700 hover:bg-[#111a2f] transition-all shadow-sm active:scale-[0.995]">
+    <div className={`group relative rounded-lg border ${isWarfronts ? 'border-purple-900/60 bg-[#0e1226]' : 'border-slate-800 bg-[#0d1424]'} p-3.5 sm:p-4 hover:border-slate-700 hover:bg-[#111a2f] transition-all shadow-sm active:scale-[0.995]`}>
       {/* Top Header Row */}
       <div className="flex flex-wrap items-center justify-between gap-1.5 sm:gap-2 mb-2">
         <div className="flex flex-wrap items-center gap-1.5 sm:space-x-2">
@@ -72,6 +74,21 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
             <span>{getCountryFlag(event.country)}</span>
             <span>{event.country}</span>
           </span>
+
+          {/* Warfronts Badge if applicable */}
+          {isWarfronts && (
+            <span className="flex items-center space-x-1 rounded bg-purple-950/90 px-2 py-0.5 text-[10px] sm:text-[11px] font-mono font-bold text-purple-300 border border-purple-500/60 shadow-sm">
+              <Headphones className="h-3 w-3 text-purple-400" />
+              <span>WARFRONTS</span>
+            </span>
+          )}
+
+          {/* Podcast Duration Pill */}
+          {event.podcast_duration && (
+            <span className="rounded bg-indigo-950/70 px-1.5 py-0.5 text-[10px] font-mono text-indigo-300 border border-indigo-500/40">
+              ⏱️ {event.podcast_duration}
+            </span>
+          )}
 
           {/* Category Tag */}
           <span
@@ -137,10 +154,22 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
         {event.title}
       </h2>
 
-      {/* Summary Excerpt */}
-      <p className="text-xs text-slate-300 line-clamp-2 leading-relaxed mb-2.5">
-        {event.summary}
-      </p>
+      {/* Summary / Military Synopsis Excerpt */}
+      {isWarfronts && event.synopsis ? (
+        <div className="rounded-md border border-purple-900/50 bg-purple-950/25 p-2.5 mb-2.5">
+          <div className="flex items-center space-x-1 text-[10px] font-mono uppercase text-purple-400 font-bold mb-1">
+            <Headphones className="h-3 w-3 text-purple-400" />
+            <span>Simon Whistler Synopsis & Intelligence</span>
+          </div>
+          <p className="text-xs text-slate-200 line-clamp-3 leading-relaxed">
+            {event.synopsis}
+          </p>
+        </div>
+      ) : (
+        <p className="text-xs text-slate-300 line-clamp-2 leading-relaxed mb-2.5">
+          {event.summary}
+        </p>
+      )}
 
       {/* Geolocation Tag */}
       {event.location_name && (
@@ -205,14 +234,31 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
           )}
         </div>
 
-        {/* Inspect Dossier Action */}
-        <button
-          onClick={() => onSelect(event)}
-          className="flex min-h-[32px] items-center space-x-1 rounded-lg px-2.5 py-1 text-xs font-medium text-cyan-400 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-500/30 transition active:scale-95"
-        >
-          <Compass className="h-3.5 w-3.5" />
-          <span>Dossier</span>
-        </button>
+        {/* Action Buttons */}
+        <div className="flex items-center space-x-2">
+          {event.audio_url && (
+            <a
+              href={event.audio_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="flex min-h-[32px] items-center space-x-1 rounded-lg px-2.5 py-1 text-xs font-semibold text-purple-300 bg-purple-950/70 hover:bg-purple-900 border border-purple-500/50 transition active:scale-95 shadow-sm"
+              title="Stream Full Warfronts Audio Episode"
+            >
+              <Headphones className="h-3.5 w-3.5 text-purple-400" />
+              <span>Listen</span>
+            </a>
+          )}
+
+          {/* Inspect Dossier Action */}
+          <button
+            onClick={() => onSelect(event)}
+            className="flex min-h-[32px] items-center space-x-1 rounded-lg px-2.5 py-1 text-xs font-medium text-cyan-400 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-500/30 transition active:scale-95"
+          >
+            <Compass className="h-3.5 w-3.5" />
+            <span>Dossier</span>
+          </button>
+        </div>
       </div>
     </div>
   );

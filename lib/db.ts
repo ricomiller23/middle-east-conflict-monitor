@@ -178,8 +178,9 @@ export async function upsertEvents(events: SecurityEvent[]): Promise<number> {
             INSERT INTO events (
               id, title, summary, country, category, primary_source, primary_url,
               published_at, credibility_tier, lat, lng, location_name, x_citations, is_verified,
-              oil_market_impact, affected_infrastructure, vessel_name, barrel_risk_estimate
-            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)
+              oil_market_impact, affected_infrastructure, vessel_name, barrel_risk_estimate,
+              audio_url, podcast_duration, is_podcast_analysis, synopsis
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22)
             ON CONFLICT (id) DO UPDATE SET
               summary = EXCLUDED.summary,
               category = EXCLUDED.category,
@@ -188,6 +189,10 @@ export async function upsertEvents(events: SecurityEvent[]): Promise<number> {
               affected_infrastructure = EXCLUDED.affected_infrastructure,
               vessel_name = EXCLUDED.vessel_name,
               barrel_risk_estimate = EXCLUDED.barrel_risk_estimate,
+              audio_url = COALESCE(EXCLUDED.audio_url, events.audio_url),
+              podcast_duration = COALESCE(EXCLUDED.podcast_duration, events.podcast_duration),
+              is_podcast_analysis = COALESCE(EXCLUDED.is_podcast_analysis, events.is_podcast_analysis),
+              synopsis = COALESCE(EXCLUDED.synopsis, events.synopsis),
               updated_at = NOW()
             RETURNING id;
           `,
@@ -210,6 +215,10 @@ export async function upsertEvents(events: SecurityEvent[]): Promise<number> {
               JSON.stringify(ev.affected_infrastructure || []),
               ev.vessel_name || null,
               ev.barrel_risk_estimate || null,
+              ev.audio_url || null,
+              ev.podcast_duration || null,
+              Boolean(ev.is_podcast_analysis),
+              ev.synopsis || null,
             ]
           );
 
@@ -377,6 +386,10 @@ function mapRowToEvent(row: any): SecurityEvent {
       : [],
     vessel_name: row.vessel_name || null,
     barrel_risk_estimate: row.barrel_risk_estimate || null,
+    audio_url: row.audio_url || null,
+    podcast_duration: row.podcast_duration || null,
+    is_podcast_analysis: Boolean(row.is_podcast_analysis),
+    synopsis: row.synopsis || null,
   };
 }
 
@@ -385,6 +398,114 @@ function seedFallbackData() {
   const now = new Date();
 
   inMemoryEvents = [
+    {
+      id: 'sec-wf-houthi-yemen-01',
+      title: 'Warfronts: Are the Houthi Rebels About to Conquer Yemen?',
+      summary: "Yemen's Houthi rebels have launched a devastating offensive, seizing the entire western coastline and capturing the strategic Bab al-Mandeb Strait. With control over ten percent of global maritime trade routes, the Houthis now hold unprecedented leverage over international shipping.",
+      synopsis: "Yemen's Houthi rebels have launched a devastating offensive, seizing the entire western coastline and capturing the strategic Bab al-Mandeb Strait. Saudi-backed forces collapsed amid coalition infighting and betrayal by resurgent separatists. With control over ten percent of global maritime trade routes, the Houthis now hold unprecedented leverage over international shipping.",
+      country: 'Yemen',
+      category: 'tanker_attack',
+      primary_source: 'Warfronts (Simon Whistler)',
+      primary_url: 'https://feeds.megaphone.fm/warfronts',
+      audio_url: 'https://traffic.megaphone.fm/CTL1417361991.mp3',
+      podcast_duration: '20m 07s',
+      is_podcast_analysis: true,
+      published_at: new Date(now.getTime() - 0.5 * 3600000).toISOString(),
+      created_at: now.toISOString(),
+      updated_at: now.toISOString(),
+      credibility_tier: 'tier_2',
+      lat: 12.5833,
+      lng: 43.3333,
+      location_name: 'Bab al-Mandab Strait Chokepoint',
+      oil_market_impact: 'critical',
+      affected_infrastructure: ['Bab al-Mandab Chokepoint', 'Southern Red Sea Maritime Lane'],
+      barrel_risk_estimate: '~4,800,000 BPD Global Chokepoint Flow',
+      sources: [
+        {
+          id: 'src-wf-1',
+          source_name: 'Warfronts (Simon Whistler)',
+          source_url: 'https://feeds.megaphone.fm/warfronts',
+          published_at: new Date(now.getTime() - 0.5 * 3600000).toISOString(),
+          credibility_tier: 'tier_2',
+          snippet: "Military synopsis: Houthi consolidation of western coastline and Bab al-Mandeb control gives the group unprecedented leverage over 10% of global seaborne oil trade.",
+        },
+      ],
+      x_citations: [],
+      is_verified: true,
+      raw_keywords: ['Warfronts', 'Simon Whistler', 'Houthi', 'Yemen', 'Bab al-Mandeb', 'Red Sea'],
+    },
+    {
+      id: 'sec-wf-houthi-ground-02',
+      title: 'Warfronts: The Houthi Rebels Just Launched a Major Ground Campaign…And It Backfired',
+      summary: "Yemen's Houthi rebels launched a major ground offensive toward Taiz and the strategic Red Sea coastline, but Saudi-backed Yemeni forces responded with a swift, coordinated counterattack from multiple directions. With over 500 fighters killed and oil prices nearing $100 per barrel, both sides believe this battle could decide Yemen's future.",
+      synopsis: "Yemen's Houthi rebels launched a major ground offensive toward Taiz and the strategic Red Sea coastline, but Saudi-backed Yemeni forces responded with a swift, coordinated counterattack from multiple directions. With over 500 fighters killed and oil prices nearing $100 per barrel, both sides believe this battle could decide Yemen's future.",
+      country: 'Yemen',
+      category: 'energy_market',
+      primary_source: 'Warfronts (Simon Whistler)',
+      primary_url: 'https://feeds.megaphone.fm/warfronts',
+      audio_url: 'https://traffic.megaphone.fm/CTL7322897876.mp3',
+      podcast_duration: '18m 40s',
+      is_podcast_analysis: true,
+      published_at: new Date(now.getTime() - 2.5 * 3600000).toISOString(),
+      created_at: now.toISOString(),
+      updated_at: now.toISOString(),
+      credibility_tier: 'tier_2',
+      lat: 13.579,
+      lng: 44.020,
+      location_name: 'Taiz / Southern Coastal Flank, Yemen',
+      oil_market_impact: 'high',
+      affected_infrastructure: ['Red Sea Coastal Sector', 'Taiz Ground Corridor'],
+      barrel_risk_estimate: 'Oil Markets Nearing $100/bbl on Escalation',
+      sources: [
+        {
+          id: 'src-wf-2',
+          source_name: 'Warfronts (Simon Whistler)',
+          source_url: 'https://feeds.megaphone.fm/warfronts',
+          published_at: new Date(now.getTime() - 2.5 * 3600000).toISOString(),
+          credibility_tier: 'tier_2',
+          snippet: "Strategic analysis: The Houthi high command overextended ground lines toward southern oil hubs, triggering coalition counter-offensives and oil market risk premiums.",
+        },
+      ],
+      x_citations: [],
+      is_verified: true,
+      raw_keywords: ['Warfronts', 'Simon Whistler', 'Taiz', 'Saudi Coalition', 'Oil Price'],
+    },
+    {
+      id: 'sec-wf-iran-economy-03',
+      title: "Warfronts: Iran's Economy Is Facing Severe Strain Amid Escalation",
+      summary: "Iran's economy is collapsing under war, sanctions, soaring inflation, currency turmoil, fuel shortages, and industrial damage. Simon Whistler analyzes how Iranians are coping, why protests threaten Tehran, and whether pressure on strategic oil export facilities will succeed.",
+      synopsis: "Iran's economy is collapsing under war, sanctions, soaring inflation, currency turmoil, fuel shortages, and industrial damage. Explore how Iranians are coping, why protests threaten Tehran, and whether pressure will work.",
+      country: 'Iran',
+      category: 'energy_market',
+      primary_source: 'Warfronts (Simon Whistler)',
+      primary_url: 'https://feeds.megaphone.fm/warfronts',
+      audio_url: 'https://traffic.megaphone.fm/CTL8697234370.mp3',
+      podcast_duration: '21m 49s',
+      is_podcast_analysis: true,
+      published_at: new Date(now.getTime() - 4.2 * 3600000).toISOString(),
+      created_at: now.toISOString(),
+      updated_at: now.toISOString(),
+      credibility_tier: 'tier_2',
+      lat: 35.6892,
+      lng: 51.389,
+      location_name: 'Tehran / National Sector',
+      oil_market_impact: 'high',
+      affected_infrastructure: ['Kharg Island Crude Terminal', 'Domestic Refining Grid'],
+      barrel_risk_estimate: '1,500,000 BPD Iranian Export Capacity Exposed',
+      sources: [
+        {
+          id: 'src-wf-3',
+          source_name: 'Warfronts (Simon Whistler)',
+          source_url: 'https://feeds.megaphone.fm/warfronts',
+          published_at: new Date(now.getTime() - 4.2 * 3600000).toISOString(),
+          credibility_tier: 'tier_2',
+          snippet: "Economic and military assessment of Iranian domestic resilience, sanctions bypass corridors, and domestic fuel supply chokepoints.",
+        },
+      ],
+      x_citations: [],
+      is_verified: true,
+      raw_keywords: ['Warfronts', 'Simon Whistler', 'Iran Economy', 'Sanctions', 'Kharg Island'],
+    },
     {
       id: 'sec-ye-tanker-01',
       title: 'Crude Oil Tanker Struck by Multiple USV Drone Boats Off Hodeidah in Red Sea Transit',

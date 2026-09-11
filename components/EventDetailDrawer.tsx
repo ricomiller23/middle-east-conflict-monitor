@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { SecurityEvent } from '@/lib/types';
-import { X, ExternalLink, MapPin, ShieldCheck, Clock, Share2, Copy, Check, Layers, AlertTriangle } from 'lucide-react';
+import { X, ExternalLink, MapPin, ShieldCheck, Clock, Share2, Copy, Check, Layers, AlertTriangle, Headphones } from 'lucide-react';
 
 interface EventDetailDrawerProps {
   event: SecurityEvent | null;
@@ -13,6 +13,8 @@ export const EventDetailDrawer: React.FC<EventDetailDrawerProps> = ({ event, onC
   const [copied, setCopied] = React.useState(false);
 
   if (!event) return null;
+
+  const isWarfronts = event.is_podcast_analysis || event.primary_source.includes('Warfronts');
 
   const copyJson = () => {
     navigator.clipboard.writeText(JSON.stringify(event, null, 2));
@@ -48,6 +50,21 @@ export const EventDetailDrawer: React.FC<EventDetailDrawerProps> = ({ event, onC
             <span className="rounded bg-slate-800 px-2.5 py-1 text-xs font-semibold text-slate-200 border border-slate-700">
               {event.country}
             </span>
+
+            {/* Warfronts Badge */}
+            {isWarfronts && (
+              <span className="flex items-center space-x-1.5 rounded bg-purple-950/90 px-2.5 py-1 font-mono text-xs font-bold text-purple-300 border border-purple-500/60 shadow-sm">
+                <Headphones className="h-3.5 w-3.5 text-purple-400" />
+                <span>WARFRONTS PODCAST</span>
+              </span>
+            )}
+
+            {event.podcast_duration && (
+              <span className="rounded bg-indigo-950/80 px-2 py-1 font-mono text-xs text-indigo-300 border border-indigo-500/40">
+                ⏱️ {event.podcast_duration}
+              </span>
+            )}
+
             <span className="rounded bg-blue-950/70 px-2.5 py-1 font-mono text-xs font-bold text-blue-300 border border-blue-500/40 uppercase">
               {event.category.replace('_', ' ')}
             </span>
@@ -138,6 +155,63 @@ export const EventDetailDrawer: React.FC<EventDetailDrawerProps> = ({ event, onC
             </div>
           )}
 
+          {/* Warfronts Podcast Audio Dispatch Card */}
+          {event.audio_url && (
+            <div className="rounded-xl border border-purple-500/40 bg-gradient-to-r from-purple-950/40 via-[#18112e] to-indigo-950/40 p-4 sm:p-5 shadow-lg space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2.5">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-purple-900/70 border border-purple-400/40 text-purple-300 shadow-inner">
+                    <Headphones className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-mono font-bold uppercase tracking-wide text-purple-200">
+                      Warfronts Audio Dispatch
+                    </h4>
+                    <p className="text-[11px] text-purple-300/80">Hosted by Simon Whistler</p>
+                  </div>
+                </div>
+                {event.podcast_duration && (
+                  <span className="rounded-full bg-purple-950 px-2.5 py-0.5 text-[11px] font-mono font-semibold text-purple-300 border border-purple-500/30">
+                    ⏱️ {event.podcast_duration}
+                  </span>
+                )}
+              </div>
+
+              <audio
+                controls
+                preload="metadata"
+                src={event.audio_url}
+                className="w-full h-10 rounded-lg accent-purple-500 focus:outline-none"
+              />
+
+              <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 pt-1 border-t border-purple-900/30">
+                <span className="text-slate-400">Direct Megaphone Feed (.mp3)</span>
+                <a
+                  href={event.audio_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-purple-400 hover:text-purple-300 hover:underline inline-flex items-center space-x-1"
+                >
+                  <span>Open Direct Stream</span>
+                  <ExternalLink className="h-3 w-3 ml-0.5" />
+                </a>
+              </div>
+            </div>
+          )}
+
+          {/* Simon Whistler's Tactical & Strategic Synopsis */}
+          {event.synopsis && (
+            <div className="rounded-lg border border-purple-900/50 bg-[#120f26] p-3.5 sm:p-4 space-y-2">
+              <div className="flex items-center space-x-2 text-xs font-mono font-bold uppercase tracking-wider text-purple-300">
+                <Headphones className="h-3.5 w-3.5 text-purple-400" />
+                <span>Simon Whistler's Tactical Synopsis</span>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-100 leading-relaxed">
+                {event.synopsis}
+              </p>
+            </div>
+          )}
+
           {/* Executive Summary */}
           <div>
             <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mb-2">
@@ -225,6 +299,19 @@ export const EventDetailDrawer: React.FC<EventDetailDrawerProps> = ({ event, onC
               {copied ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4" />}
               <span>{copied ? 'JSON Copied!' : 'Copy Event JSON'}</span>
             </button>
+
+            {event.audio_url && (
+              <a
+                href={event.audio_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex min-h-[44px] items-center justify-center space-x-2 rounded-lg bg-purple-950/80 border border-purple-500/60 px-4 py-2.5 text-xs font-semibold text-purple-200 hover:bg-purple-900 active:scale-98 transition w-full sm:w-auto shadow-md"
+              >
+                <Headphones className="h-4 w-4 text-purple-400" />
+                <span>Stream Episode MP3</span>
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            )}
 
             <a
               href={event.primary_url}

@@ -1,6 +1,7 @@
 import { RSSConnector } from '../connectors/rss';
 import { GDELTConnector } from '../connectors/gdelt';
 import { XStubConnector } from '../connectors/x-stub';
+import { WarfrontsConnector } from '../connectors/warfronts';
 import { RawEvent, Connector } from '../connectors/types';
 import { SecurityEvent, Country, EventCategory, CredibilityTier, IngestionLog } from './types';
 import { getEvents, upsertEvents, logIngestion, updateSettings, getSettings } from './db';
@@ -12,7 +13,7 @@ const GEO_ANCHORS: Record<string, { lat: number; lng: number; location_name: str
   sanaa: { lat: 15.3694, lng: 44.191, location_name: "Sana'a, Yemen", country: 'Yemen' },
   aden: { lat: 12.7855, lng: 45.0187, location_name: 'Aden, Yemen', country: 'Yemen' },
   'red sea': { lat: 14.2, lng: 42.6, location_name: 'Southern Red Sea Maritime Corridor', country: 'Yemen' },
-  'bab al-mandab': { lat: 12.5833, lng: 43.3333, location_name: 'Bab al-Mandab Strait Chokepoint', country: 'Yemen' },
+  'bab al-mandeb': { lat: 12.5833, lng: 43.3333, location_name: 'Bab al-Mandab Strait Chokepoint', country: 'Yemen' },
   'ras isa': { lat: 15.192, lng: 42.753, location_name: 'Ras Isa Oil Terminal, Yemen', country: 'Yemen' },
   marib: { lat: 15.4639, lng: 45.3267, location_name: 'Marib Oil Fields, Yemen', country: 'Yemen' },
   riyadh: { lat: 24.7136, lng: 46.6753, location_name: 'Riyadh, Saudi Arabia', country: 'Saudi Arabia' },
@@ -43,7 +44,12 @@ export async function runIngestionPipeline(): Promise<{
   const startTime = Date.now();
   console.log('[Ingestion] Commencing 6-hour scheduled ingestion cycle...');
 
-  const connectors: Connector[] = [new RSSConnector(), new GDELTConnector(), new XStubConnector()];
+  const connectors: Connector[] = [
+    new RSSConnector(),
+    new GDELTConnector(),
+    new XStubConnector(),
+    new WarfrontsConnector(),
+  ];
   const allRawEvents: RawEvent[] = [];
   const logs: IngestionLog[] = [];
 
@@ -299,6 +305,10 @@ function processRawEvent(raw: RawEvent): SecurityEvent | null {
     affected_infrastructure: affectedInfra,
     vessel_name: vesselName,
     barrel_risk_estimate: barrelRiskEstimate,
+    audio_url: raw.audio_url || null,
+    podcast_duration: raw.podcast_duration || null,
+    is_podcast_analysis: Boolean(raw.is_podcast_analysis),
+    synopsis: raw.synopsis || null,
   };
 }
 
@@ -336,6 +346,14 @@ function deduplicateAndCollapse(events: SecurityEvent[]): SecurityEvent[] {
         if (ev.credibility_tier === 'tier_1') {
           existing.credibility_tier = 'tier_1';
           existing.is_verified = true;
+        }
+
+        // Retain podcast metadata & synopsis if present
+        if (ev.audio_url && !existing.audio_url) {
+          existing.audio_url = ev.audio_url;
+          existing.podcast_duration = ev.podcast_duration;
+          existing.is_podcast_analysis = ev.is_podcast_analysis;
+          existing.synopsis = ev.synopsis;
         }
 
         // Keep the more descriptive summary

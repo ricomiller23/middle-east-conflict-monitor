@@ -50,6 +50,10 @@ export interface SecurityEvent {
   affected_infrastructure?: string[];
   vessel_name?: string | null;
   barrel_risk_estimate?: string | null;
+  audio_url?: string | null;
+  podcast_duration?: string | null;
+  is_podcast_analysis?: boolean;
+  synopsis?: string | null;
 }
 
 export interface IngestionLog {

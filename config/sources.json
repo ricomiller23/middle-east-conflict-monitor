@@ -216,5 +216,18 @@
       "country_focus": ["Iran", "Yemen"],
       "description": "Specialized OSINT tracking Iranian security network and Yemen Houthi movements."
     }
+  ],
+  "podcast_sources": [
+    {
+      "id": "warfronts-simon-whistler",
+      "name": "Warfronts (Simon Whistler)",
+      "feed_url": "https://feeds.megaphone.fm/warfronts",
+      "host": "Simon Whistler",
+      "credibility_tier": "tier_2",
+      "country_focus": ["Saudi Arabia", "Yemen", "Iran"],
+      "category": "military",
+      "enabled": true,
+      "description": "In-depth tactical and geopolitical military analysis covering global conflict zones, maritime theaters, and strategic chokepoints."
+    }
   ]
 }

@@ -16,6 +16,10 @@ export interface RawEvent {
   extracted_x_urls?: string[];
   author_handle?: string;
   keywords?: string[];
+  audio_url?: string | null;
+  podcast_duration?: string | null;
+  is_podcast_analysis?: boolean;
+  synopsis?: string | null;
 }
 
 export interface Connector {
