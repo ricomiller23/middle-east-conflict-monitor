@@ -1,0 +1,156 @@
+{
+  "version": "1.0.0",
+  "updated_at": "2026-09-11T12:00:00Z",
+  "countries": ["Saudi Arabia", "Yemen", "Iran"],
+  "categories": ["military", "strike", "diplomatic", "statement", "other"],
+  "rss_sources": [
+    {
+      "id": "reuters-world",
+      "name": "Reuters World",
+      "feed_url": "https://www.reutersagency.com/feed/?best-topics=world&post_type=best",
+      "fallback_url": "https://feeds.bbci.co.uk/news/world/middle_east/rss.xml",
+      "credibility_tier": "tier_1",
+      "country_focus": ["Saudi Arabia", "Yemen", "Iran"],
+      "enabled": true
+    },
+    {
+      "id": "ap-mideast",
+      "name": "AP News Middle East",
+      "feed_url": "https://apnews.com/hub/middle-east?format=rss",
+      "fallback_url": "https://rss.nytimes.com/services/xml/rss/nyt/MiddleEast.xml",
+      "credibility_tier": "tier_1",
+      "country_focus": ["Saudi Arabia", "Yemen", "Iran"],
+      "enabled": true
+    },
+    {
+      "id": "aljazeera-mideast",
+      "name": "Al Jazeera English",
+      "feed_url": "https://www.aljazeera.com/xml/rss/all.xml",
+      "credibility_tier": "tier_1",
+      "country_focus": ["Yemen", "Iran", "Saudi Arabia"],
+      "enabled": true
+    },
+    {
+      "id": "middle-east-eye",
+      "name": "Middle East Eye",
+      "feed_url": "https://www.middleeasteye.net/rss",
+      "credibility_tier": "tier_2",
+      "country_focus": ["Saudi Arabia", "Yemen", "Iran"],
+      "enabled": true
+    },
+    {
+      "id": "isw-updates",
+      "name": "Institute for the Study of War (ISW)",
+      "feed_url": "https://www.understandingwar.org/rss.xml",
+      "credibility_tier": "tier_1",
+      "country_focus": ["Iran", "Yemen"],
+      "enabled": true
+    },
+    {
+      "id": "yemen-monitor",
+      "name": "Yemen Monitor",
+      "feed_url": "https://www.yemenmonitor.org/feed/",
+      "credibility_tier": "tier_2",
+      "country_focus": ["Yemen"],
+      "enabled": true
+    },
+    {
+      "id": "afp-mideast",
+      "name": "Agence France-Presse (AFP)",
+      "feed_url": "https://news.google.com/rss/search?q=when:24h+allinurl:afp.com+(Saudi+OR+Yemen+OR+Iran)&hl=en-US&gl=US&ceid=US:en",
+      "credibility_tier": "tier_1",
+      "country_focus": ["Saudi Arabia", "Yemen", "Iran"],
+      "enabled": true
+    }
+  ],
+  "gdelt_config": {
+    "enabled": true,
+    "api_base": "https://api.gdeltproject.org/api/v2/doc/doc",
+    "query": "(Saudi Arabia OR Yemen OR Iran OR Houthi OR IRGC) AND (military OR strike OR drone OR missile OR clashes OR attack OR defense OR air defense)",
+    "max_records": 75,
+    "credibility_tier": "tier_1"
+  },
+  "social_allowlist": [
+    {
+      "handle": "CENTCOM",
+      "name": "U.S. Central Command",
+      "category": "official_military",
+      "credibility_tier": "tier_1",
+      "verified": true,
+      "country_focus": ["Yemen", "Saudi Arabia", "Iran"],
+      "description": "Official account of United States Central Command responsible for Middle East theater operations."
+    },
+    {
+      "handle": "modgovksa",
+      "name": "Ministry of Defense Saudi Arabia",
+      "category": "official_military",
+      "credibility_tier": "tier_1",
+      "verified": true,
+      "country_focus": ["Saudi Arabia"],
+      "description": "Official Ministry of Defense of the Kingdom of Saudi Arabia."
+    },
+    {
+      "handle": "TheStudyofWar",
+      "name": "Institute for the Study of War",
+      "category": "verified_osint",
+      "credibility_tier": "tier_1",
+      "verified": true,
+      "country_focus": ["Iran", "Yemen"],
+      "description": "Non-partisan military research organization providing daily Middle East & Iran updates."
+    },
+    {
+      "handle": "Reuters",
+      "name": "Reuters",
+      "category": "verified_wire",
+      "credibility_tier": "tier_1",
+      "verified": true,
+      "country_focus": ["Saudi Arabia", "Yemen", "Iran"],
+      "description": "Global wire news agency."
+    },
+    {
+      "handle": "AP",
+      "name": "Associated Press",
+      "category": "verified_wire",
+      "credibility_tier": "tier_1",
+      "verified": true,
+      "country_focus": ["Saudi Arabia", "Yemen", "Iran"],
+      "description": "Independent global news organization."
+    },
+    {
+      "handle": "AFP",
+      "name": "Agence France-Presse",
+      "category": "verified_wire",
+      "credibility_tier": "tier_1",
+      "verified": true,
+      "country_focus": ["Saudi Arabia", "Yemen", "Iran"],
+      "description": "Global news agency covering regional defense events."
+    },
+    {
+      "handle": "criticalthreats",
+      "name": "AEI Critical Threats",
+      "category": "verified_osint",
+      "credibility_tier": "tier_1",
+      "verified": true,
+      "country_focus": ["Iran", "Yemen"],
+      "description": "Specialized OSINT tracking Iranian security network and Yemen Houthi movements."
+    },
+    {
+      "handle": "CalibreObscura",
+      "name": "Calibre Obscura",
+      "category": "regional_osint_tracker",
+      "credibility_tier": "tier_2",
+      "verified": true,
+      "country_focus": ["Yemen", "Saudi Arabia"],
+      "description": "Arms and munitions tracking across Yemen and Middle Eastern conflicts."
+    },
+    {
+      "handle": "AuroraIntel",
+      "name": "Aurora Intel",
+      "category": "regional_osint_tracker",
+      "credibility_tier": "tier_2",
+      "verified": true,
+      "country_focus": ["Iran", "Yemen", "Saudi Arabia"],
+      "description": "Open source geopolitical & defense news aggregation."
+    }
+  ]
+}

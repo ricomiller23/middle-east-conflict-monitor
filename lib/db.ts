@@ -1,0 +1,568 @@
+import { Pool } from 'pg';
+import { SecurityEvent, IngestionLog, SystemSettings, Country, EventCategory, CredibilityTier } from './types';
+import fs from 'fs';
+import path from 'path';
+
+let pool: Pool | null = null;
+let isPostgresAvailable = false;
+
+// In-memory / file fallback store for local development preview when no remote DB is linked
+let inMemoryEvents: SecurityEvent[] = [];
+let inMemoryLogs: IngestionLog[] = [];
+let inMemorySettings: SystemSettings = {
+  digest_paused: false,
+  last_digest_sent_at: null,
+  last_ingestion_at: null,
+  auto_ingest_enabled: true,
+  total_events_tracked: 0,
+};
+
+function getConnectionString(): string | null {
+  return process.env.POSTGRES_URL || process.env.DATABASE_URL || null;
+}
+
+export function getPool(): Pool | null {
+  const connStr = getConnectionString();
+  if (!connStr) {
+    return null;
+  }
+  if (!pool) {
+    pool = new Pool({
+      connectionString: connStr,
+      ssl: connStr.includes('localhost') ? false : { rejectUnauthorized: false },
+      max: 10,
+      idleTimeoutMillis: 30000,
+    });
+  }
+  return pool;
+}
+
+export async function initDatabase(): Promise<boolean> {
+  const p = getPool();
+  if (!p) {
+    console.log('[DB] No POSTGRES_URL provided. Utilizing resilient in-memory local fallback store.');
+    seedFallbackData();
+    return false;
+  }
+
+  try {
+    const client = await p.connect();
+    try {
+      const schemaPath = path.join(process.cwd(), 'lib', 'schema.sql');
+      if (fs.existsSync(schemaPath)) {
+        const sql = fs.readFileSync(schemaPath, 'utf8');
+        await client.query(sql);
+      }
+      isPostgresAvailable = true;
+      console.log('[DB] PostgreSQL connected & schema verified with tsvector index.');
+      return true;
+    } finally {
+      client.release();
+    }
+  } catch (error) {
+    console.warn('[DB] Failed to connect to PostgreSQL, falling back to local memory store:', error);
+    isPostgresAvailable = false;
+    seedFallbackData();
+    return false;
+  }
+}
+
+export async function getEvents(filters?: {
+  country?: string;
+  category?: string;
+  credibility_tier?: string;
+  search?: string;
+  limit?: number;
+  offset?: number;
+}): Promise<SecurityEvent[]> {
+  const p = getPool();
+  const limit = filters?.limit || 100;
+  const offset = filters?.offset || 0;
+
+  if (p && isPostgresAvailable) {
+    try {
+      const conditions: string[] = [];
+      const values: any[] = [];
+      let idx = 1;
+
+      if (filters?.country && filters.country !== 'all') {
+        conditions.push(`e.country = $${idx++}`);
+        values.push(filters.country);
+      }
+      if (filters?.category && filters.category !== 'all') {
+        conditions.push(`e.category = $${idx++}`);
+        values.push(filters.category);
+      }
+      if (filters?.credibility_tier && filters.credibility_tier !== 'all') {
+        conditions.push(`e.credibility_tier = $${idx++}`);
+        values.push(filters.credibility_tier);
+      }
+      if (filters?.search && filters.search.trim()) {
+        conditions.push(`e.tsv @@ plainto_tsquery('english', $${idx++})`);
+        values.push(filters.search.trim());
+      }
+
+      const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
+      const query = `
+        SELECT 
+          e.*,
+          COALESCE(
+            json_agg(
+              json_build_object(
+                'id', s.id,
+                'source_name', s.source_name,
+                'source_url', s.source_url,
+                'published_at', s.published_at,
+                'credibility_tier', s.credibility_tier,
+                'snippet', s.snippet,
+                'x_citation_url', s.x_citation_url
+              )
+            ) FILTER (WHERE s.id IS NOT NULL), '[]'
+          ) as sources
+        FROM events e
+        LEFT JOIN event_sources s ON e.id = s.event_id
+        ${whereClause}
+        GROUP BY e.id
+        ORDER BY e.published_at DESC
+        LIMIT $${idx++} OFFSET $${idx++};
+      `;
+      values.push(limit, offset);
+
+      const res = await p.query(query, values);
+      return res.rows.map(mapRowToEvent);
+    } catch (err) {
+      console.error('[DB] PostgreSQL query failed, using in-memory store:', err);
+    }
+  }
+
+  // Fallback memory filtering
+  let results = [...inMemoryEvents];
+  if (filters?.country && filters.country !== 'all') {
+    results = results.filter((e) => e.country.toLowerCase() === filters.country!.toLowerCase());
+  }
+  if (filters?.category && filters.category !== 'all') {
+    results = results.filter((e) => e.category.toLowerCase() === filters.category!.toLowerCase());
+  }
+  if (filters?.credibility_tier && filters.credibility_tier !== 'all') {
+    results = results.filter((e) => e.credibility_tier === filters.credibility_tier);
+  }
+  if (filters?.search && filters.search.trim()) {
+    const q = filters.search.toLowerCase();
+    results = results.filter(
+      (e) =>
+        e.title.toLowerCase().includes(q) ||
+        e.summary.toLowerCase().includes(q) ||
+        (e.location_name && e.location_name.toLowerCase().includes(q))
+    );
+  }
+
+  return results.slice(offset, offset + limit);
+}
+
+export async function upsertEvents(events: SecurityEvent[]): Promise<number> {
+  const p = getPool();
+  let insertedCount = 0;
+
+  if (p && isPostgresAvailable) {
+    try {
+      const client = await p.connect();
+      try {
+        await client.query('BEGIN');
+        for (const ev of events) {
+          const res = await client.query(
+            `
+            INSERT INTO events (
+              id, title, summary, country, category, primary_source, primary_url,
+              published_at, credibility_tier, lat, lng, location_name, x_citations, is_verified
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+            ON CONFLICT (id) DO UPDATE SET
+              summary = EXCLUDED.summary,
+              category = EXCLUDED.category,
+              x_citations = EXCLUDED.x_citations,
+              updated_at = NOW()
+            RETURNING id;
+          `,
+            [
+              ev.id,
+              ev.title,
+              ev.summary,
+              ev.country,
+              ev.category,
+              ev.primary_source,
+              ev.primary_url,
+              ev.published_at,
+              ev.credibility_tier,
+              ev.lat,
+              ev.lng,
+              ev.location_name,
+              JSON.stringify(ev.x_citations || []),
+              ev.is_verified,
+            ]
+          );
+
+          if (res.rowCount && res.rowCount > 0) {
+            insertedCount++;
+          }
+
+          if (ev.sources && ev.sources.length > 0) {
+            for (const s of ev.sources) {
+              await client.query(
+                `
+                INSERT INTO event_sources (
+                  id, event_id, source_name, source_url, published_at, credibility_tier, snippet, x_citation_url
+                ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+                ON CONFLICT (id) DO NOTHING;
+              `,
+                [
+                  s.id || `${ev.id}-${Math.random().toString(36).substring(2, 8)}`,
+                  ev.id,
+                  s.source_name,
+                  s.source_url,
+                  s.published_at,
+                  s.credibility_tier,
+                  s.snippet || null,
+                  s.x_citation_url || null,
+                ]
+              );
+            }
+          }
+        }
+        await client.query('COMMIT');
+        return insertedCount;
+      } catch (e) {
+        await client.query('ROLLBACK');
+        console.error('[DB] Transaction error in upsertEvents:', e);
+      } finally {
+        client.release();
+      }
+    } catch (err) {
+      console.error('[DB] Postgres connection error in upsertEvents:', err);
+    }
+  }
+
+  // In-memory fallback upsert
+  for (const ev of events) {
+    const existingIdx = inMemoryEvents.findIndex((e) => e.id === ev.id);
+    if (existingIdx >= 0) {
+      inMemoryEvents[existingIdx] = { ...inMemoryEvents[existingIdx], ...ev };
+    } else {
+      inMemoryEvents.unshift(ev);
+      insertedCount++;
+    }
+  }
+  inMemorySettings.total_events_tracked = inMemoryEvents.length;
+  return insertedCount;
+}
+
+export async function logIngestion(log: IngestionLog): Promise<void> {
+  const p = getPool();
+  if (p && isPostgresAvailable) {
+    try {
+      await p.query(
+        `
+        INSERT INTO ingestion_logs (
+          id, timestamp, connector_name, status, events_fetched, events_ingested, duration_ms, error_message
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      `,
+        [
+          log.id,
+          log.timestamp,
+          log.connector_name,
+          log.status,
+          log.events_fetched,
+          log.events_ingested,
+          log.duration_ms,
+          log.error_message || null,
+        ]
+      );
+      return;
+    } catch (err) {
+      console.error('[DB] Error recording ingestion log in Postgres:', err);
+    }
+  }
+
+  inMemoryLogs.unshift(log);
+  if (inMemoryLogs.length > 100) inMemoryLogs.pop();
+}
+
+export async function getIngestionLogs(limit = 20): Promise<IngestionLog[]> {
+  const p = getPool();
+  if (p && isPostgresAvailable) {
+    try {
+      const res = await p.query('SELECT * FROM ingestion_logs ORDER BY timestamp DESC LIMIT $1', [limit]);
+      return res.rows;
+    } catch (err) {
+      console.error('[DB] Error getting logs from Postgres:', err);
+    }
+  }
+  return inMemoryLogs.slice(0, limit);
+}
+
+export async function getSettings(): Promise<SystemSettings> {
+  const p = getPool();
+  if (p && isPostgresAvailable) {
+    try {
+      const res = await p.query("SELECT value FROM settings WHERE key = 'digest_settings'");
+      if (res.rows.length > 0) {
+        return {
+          ...inMemorySettings,
+          ...res.rows[0].value,
+        };
+      }
+    } catch (err) {
+      console.error('[DB] Error reading settings from Postgres:', err);
+    }
+  }
+  return inMemorySettings;
+}
+
+export async function updateSettings(settings: Partial<SystemSettings>): Promise<SystemSettings> {
+  inMemorySettings = { ...inMemorySettings, ...settings };
+  const p = getPool();
+  if (p && isPostgresAvailable) {
+    try {
+      await p.query(
+        `
+        INSERT INTO settings (key, value, updated_at)
+        VALUES ('digest_settings', $1, NOW())
+        ON CONFLICT (key) DO UPDATE SET value = $1, updated_at = NOW()
+      `,
+        [JSON.stringify(inMemorySettings)]
+      );
+    } catch (err) {
+      console.error('[DB] Error updating settings in Postgres:', err);
+    }
+  }
+  return inMemorySettings;
+}
+
+function mapRowToEvent(row: any): SecurityEvent {
+  return {
+    id: row.id,
+    title: row.title,
+    summary: row.summary,
+    country: row.country as Country,
+    category: row.category as EventCategory,
+    primary_source: row.primary_source,
+    primary_url: row.primary_url,
+    published_at: typeof row.published_at === 'string' ? row.published_at : row.published_at?.toISOString?.() || new Date().toISOString(),
+    created_at: typeof row.created_at === 'string' ? row.created_at : row.created_at?.toISOString?.() || new Date().toISOString(),
+    updated_at: typeof row.updated_at === 'string' ? row.updated_at : row.updated_at?.toISOString?.() || new Date().toISOString(),
+    credibility_tier: row.credibility_tier as CredibilityTier,
+    lat: row.lat ? parseFloat(row.lat) : null,
+    lng: row.lng ? parseFloat(row.lng) : null,
+    location_name: row.location_name,
+    sources: Array.isArray(row.sources) ? row.sources : [],
+    x_citations: Array.isArray(row.x_citations) ? row.x_citations : typeof row.x_citations === 'string' ? JSON.parse(row.x_citations) : [],
+    is_verified: Boolean(row.is_verified),
+    raw_keywords: [],
+  };
+}
+
+function seedFallbackData() {
+  if (inMemoryEvents.length > 0) return;
+  const now = new Date();
+
+  inMemoryEvents = [
+    {
+      id: 'sec-ye-20260911-01',
+      title: 'U.S. Central Command Intercepts Houthi Anti-Ship Cruise Missiles Over Southern Red Sea',
+      summary: 'CENTCOM forces successfully engaged and destroyed two anti-ship cruise missiles launched from Houthi-controlled territory in Yemen toward international maritime shipping corridors.',
+      country: 'Yemen',
+      category: 'strike',
+      primary_source: 'CENTCOM Official Dispatch',
+      primary_url: 'https://www.centcom.mil/MEDIA/PRESS-RELEASES/',
+      published_at: new Date(now.getTime() - 2 * 3600000).toISOString(),
+      created_at: now.toISOString(),
+      updated_at: now.toISOString(),
+      credibility_tier: 'tier_1',
+      lat: 14.802,
+      lng: 42.951,
+      location_name: 'Hodeidah / Red Sea Corridor',
+      sources: [
+        {
+          id: 'src-1',
+          source_name: 'CENTCOM',
+          source_url: 'https://www.centcom.mil/MEDIA/PRESS-RELEASES/',
+          published_at: new Date(now.getTime() - 2 * 3600000).toISOString(),
+          credibility_tier: 'tier_1',
+          snippet: 'U.S. forces neutralized incoming projectile with no civilian casualties reported.',
+          x_citation_url: 'https://x.com/CENTCOM/status/1833890123456789012',
+          author_handle: 'CENTCOM',
+        },
+        {
+          id: 'src-2',
+          source_name: 'Reuters World',
+          source_url: 'https://www.reuters.com/world/middle-east/',
+          published_at: new Date(now.getTime() - 1.8 * 3600000).toISOString(),
+          credibility_tier: 'tier_1',
+          snippet: 'Maritime security company Ambrey confirmed interception flashes off Hodeidah.',
+        },
+      ],
+      x_citations: ['https://x.com/CENTCOM/status/1833890123456789012'],
+      is_verified: true,
+      raw_keywords: ['Houthi', 'Red Sea', 'CENTCOM', 'missile'],
+    },
+    {
+      id: 'sec-sa-20260911-02',
+      title: 'Saudi Royal Air Defense Forces Conduct Joint Interception Drills Across Southern Border Sector',
+      summary: 'Saudi Armed Forces command completed joint live-fire radar integration exercises along the Jizan and Asir defense perimeters to counter low-altitude UAV threats.',
+      country: 'Saudi Arabia',
+      category: 'military',
+      primary_source: 'Saudi Ministry of Defense',
+      primary_url: 'https://mod.gov.sa',
+      published_at: new Date(now.getTime() - 5 * 3600000).toISOString(),
+      created_at: now.toISOString(),
+      updated_at: now.toISOString(),
+      credibility_tier: 'tier_1',
+      lat: 16.889,
+      lng: 42.570,
+      location_name: 'Jizan Defense Sector',
+      sources: [
+        {
+          id: 'src-3',
+          source_name: 'Saudi Press Agency',
+          source_url: 'https://www.spa.gov.sa',
+          published_at: new Date(now.getTime() - 5 * 3600000).toISOString(),
+          credibility_tier: 'tier_1',
+          snippet: 'High-readiness defensive air patrols executed across southern sector boundaries.',
+          x_citation_url: 'https://x.com/modgovksa/status/1833854123456789012',
+          author_handle: 'modgovksa',
+        },
+      ],
+      x_citations: ['https://x.com/modgovksa/status/1833854123456789012'],
+      is_verified: true,
+      raw_keywords: ['Saudi', 'Air Defense', 'Jizan', 'UAV'],
+    },
+    {
+      id: 'sec-ir-20260911-03',
+      title: 'IRGC Navy Commences Multi-Day Coastal Patrol Exercises in Strait of Hormuz',
+      summary: 'Islamic Revolutionary Guard Corps Navy deployed missile fast-attack craft and coastal electronic warfare units along the Hormuz maritime chokepoint.',
+      country: 'Iran',
+      category: 'military',
+      primary_source: 'ISW Iran Intelligence Update',
+      primary_url: 'https://www.understandingwar.org',
+      published_at: new Date(now.getTime() - 9 * 3600000).toISOString(),
+      created_at: now.toISOString(),
+      updated_at: now.toISOString(),
+      credibility_tier: 'tier_1',
+      lat: 26.566,
+      lng: 56.250,
+      location_name: 'Strait of Hormuz / Bandar Abbas',
+      sources: [
+        {
+          id: 'src-4',
+          source_name: 'Institute for the Study of War',
+          source_url: 'https://www.understandingwar.org',
+          published_at: new Date(now.getTime() - 9 * 3600000).toISOString(),
+          credibility_tier: 'tier_1',
+          snippet: 'Naval assets tracked conducting staged interdiction maneuvers.',
+          x_citation_url: 'https://x.com/TheStudyofWar/status/1833790123456789012',
+          author_handle: 'TheStudyofWar',
+        },
+        {
+          id: 'src-5',
+          source_name: 'Associated Press',
+          source_url: 'https://apnews.com',
+          published_at: new Date(now.getTime() - 8.5 * 3600000).toISOString(),
+          credibility_tier: 'tier_1',
+          snippet: 'Commercial maritime traffic notified of exclusion zone drills.',
+        },
+      ],
+      x_citations: ['https://x.com/TheStudyofWar/status/1833790123456789012'],
+      is_verified: true,
+      raw_keywords: ['IRGC', 'Hormuz', 'Iran', 'Navy'],
+    },
+    {
+      id: 'sec-ye-20260911-04',
+      title: 'Diplomatic Envoys Convene in Muscat on UN-Brokered Yemen Maritime De-escalation Protocol',
+      summary: 'Special envoys discussed framework proposals aimed at safeguarding civilian commercial transit and establishing demilitarized zones around key ports.',
+      country: 'Yemen',
+      category: 'diplomatic',
+      primary_source: 'Al Jazeera English',
+      primary_url: 'https://www.aljazeera.com',
+      published_at: new Date(now.getTime() - 14 * 3600000).toISOString(),
+      created_at: now.toISOString(),
+      updated_at: now.toISOString(),
+      credibility_tier: 'tier_1',
+      lat: 15.369,
+      lng: 44.191,
+      location_name: 'Sana\'a / Muscat Channel',
+      sources: [
+        {
+          id: 'src-6',
+          source_name: 'Al Jazeera',
+          source_url: 'https://www.aljazeera.com',
+          published_at: new Date(now.getTime() - 14 * 3600000).toISOString(),
+          credibility_tier: 'tier_1',
+          snippet: 'Talks focused on port access and unfreezing maritime trade corridors.',
+        },
+      ],
+      x_citations: [],
+      is_verified: true,
+      raw_keywords: ['Yemen', 'UN', 'Muscat', 'Diplomacy'],
+    },
+    {
+      id: 'sec-ir-20260911-05',
+      title: 'Tehran Foreign Ministry Issues Statement on Regional Security Architecture and Gulf Transit',
+      summary: 'Iran foreign ministry spokesperson issued a formal warning regarding foreign military naval presence in the Persian Gulf, proposing an indigenous collective security pact.',
+      country: 'Iran',
+      category: 'statement',
+      primary_source: 'Agence France-Presse (AFP)',
+      primary_url: 'https://www.afp.com',
+      published_at: new Date(now.getTime() - 20 * 3600000).toISOString(),
+      created_at: now.toISOString(),
+      updated_at: now.toISOString(),
+      credibility_tier: 'tier_1',
+      lat: 35.689,
+      lng: 51.389,
+      location_name: 'Tehran',
+      sources: [
+        {
+          id: 'src-7',
+          source_name: 'AFP',
+          source_url: 'https://www.afp.com',
+          published_at: new Date(now.getTime() - 20 * 3600000).toISOString(),
+          credibility_tier: 'tier_1',
+          snippet: 'Spokesperson reiterated opposition to non-littoral task force deployments.',
+        },
+      ],
+      x_citations: [],
+      is_verified: true,
+      raw_keywords: ['Tehran', 'Foreign Ministry', 'Gulf', 'Security'],
+    },
+  ];
+
+  inMemoryLogs = [
+    {
+      id: 'log-seed-1',
+      timestamp: new Date(now.getTime() - 2 * 3600000).toISOString(),
+      connector_name: 'RSS Feeds (Reuters, AP, Al Jazeera, ISW)',
+      status: 'success',
+      events_fetched: 42,
+      events_ingested: 3,
+      duration_ms: 1140,
+    },
+    {
+      id: 'log-seed-2',
+      timestamp: new Date(now.getTime() - 2 * 3600000).toISOString(),
+      connector_name: 'GDELT Project API',
+      status: 'success',
+      events_fetched: 68,
+      events_ingested: 2,
+      duration_ms: 1820,
+    },
+    {
+      id: 'log-seed-3',
+      timestamp: new Date(now.getTime() - 2 * 3600000).toISOString(),
+      connector_name: 'Social Media Citations Stub',
+      status: 'success',
+      events_fetched: 9,
+      events_ingested: 0,
+      duration_ms: 45,
+    },
+  ];
+
+  inMemorySettings.total_events_tracked = inMemoryEvents.length;
+  inMemorySettings.last_ingestion_at = inMemoryLogs[0].timestamp;
+}

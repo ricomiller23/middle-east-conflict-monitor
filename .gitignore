@@ -1,0 +1,41 @@
+# Node dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Testing and coverage
+/coverage
+
+# Next.js build output
+/.next/
+/out/
+
+# Production build artifacts
+/build
+
+# Debug and runtime logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+*.log
+ingestion_debug.json
+*.dump
+*.sql.gz
+
+# Environment variables & secrets (CRITICAL: NEVER COMMIT)
+.env
+.env*.local
+.env.production
+.env.development
+.env.test
+*.env*
+!.env.example
+
+# Vercel deployment cache
+.vercel
+
+# Operating System files
+.DS_Store
+*.pem
+Thumbs.db

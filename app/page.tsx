@@ -1,0 +1,206 @@
+'use client';
+
+import React, { useState, useEffect, useMemo } from 'react';
+import { Navbar } from '@/components/Navbar';
+import { FilterBar } from '@/components/FilterBar';
+import { EventCard } from '@/components/EventCard';
+import { TimelineView } from '@/components/TimelineView';
+import { TacticalMapView } from '@/components/TacticalMapView';
+import { EventDetailDrawer } from '@/components/EventDetailDrawer';
+import { SecurityEvent, Country } from '@/lib/types';
+import { Shield, AlertCircle, RefreshCw, Flame, Radio, ExternalLink } from 'lucide-react';
+
+export default function DashboardPage() {
+  const [events, setEvents] = useState<SecurityEvent[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState<SecurityEvent | null>(null);
+
+  // Filters state
+  const [search, setSearch] = useState('');
+  const [selectedCountry, setSelectedCountry] = useState('all');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedTier, setSelectedTier] = useState('all');
+  const [currentView, setCurrentView] = useState<'feed' | 'timeline' | 'map'>('feed');
+
+  const fetchEvents = async () => {
+    try {
+      setRefreshing(true);
+      const res = await fetch('/api/events');
+      const data = await res.json();
+      if (data.success && Array.isArray(data.events)) {
+        setEvents(data.events);
+      }
+    } catch (err) {
+      console.error('Failed to load events:', err);
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchEvents();
+  }, []);
+
+  // Country counts calculation
+  const countryCounts = useMemo(() => {
+    return {
+      saudi: events.filter((e) => e.country === 'Saudi Arabia').length,
+      yemen: events.filter((e) => e.country === 'Yemen').length,
+      iran: events.filter((e) => e.country === 'Iran').length,
+    };
+  }, [events]);
+
+  // Client-side filtering
+  const filteredEvents = useMemo(() => {
+    return events.filter((ev) => {
+      if (selectedCountry !== 'all' && ev.country !== selectedCountry) {
+        return false;
+      }
+      if (selectedCategory !== 'all' && ev.category !== selectedCategory) {
+        return false;
+      }
+      if (selectedTier !== 'all' && ev.credibility_tier !== selectedTier) {
+        return false;
+      }
+      if (search.trim()) {
+        const q = search.toLowerCase();
+        const matchTitle = ev.title.toLowerCase().includes(q);
+        const matchSummary = ev.summary.toLowerCase().includes(q);
+        const matchLoc = ev.location_name?.toLowerCase().includes(q);
+        const matchSource = ev.sources.some((s) => s.source_name.toLowerCase().includes(q));
+        if (!matchTitle && !matchSummary && !matchLoc && !matchSource) {
+          return false;
+        }
+      }
+      return true;
+    });
+  }, [events, selectedCountry, selectedCategory, selectedTier, search]);
+
+  return (
+    <div className="min-h-screen bg-[#080c14] text-slate-100 flex flex-col font-sans">
+      {/* Top Navbar */}
+      <Navbar
+        totalEvents={events.length}
+        countryCounts={countryCounts}
+        lastSyncAt={events[0]?.published_at || null}
+        onRefresh={fetchEvents}
+        isRefreshing={refreshing}
+      />
+
+      {/* Filter and View Selection Bar */}
+      <FilterBar
+        search={search}
+        onSearchChange={setSearch}
+        selectedCountry={selectedCountry}
+        onCountryChange={setSelectedCountry}
+        selectedCategory={selectedCategory}
+        onCategoryChange={setSelectedCategory}
+        selectedTier={selectedTier}
+        onTierChange={setSelectedTier}
+        currentView={currentView}
+        onViewChange={setCurrentView}
+        totalFiltered={filteredEvents.length}
+      />
+
+      {/* Main Content Area */}
+      <main className="flex-1 mx-auto w-full max-w-7xl px-4 sm:px-6 py-6 space-y-6">
+        {/* Threat Situation Bar */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs">
+          <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-3.5 flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <span className="text-2xl">🇾🇪</span>
+              <div>
+                <div className="font-bold text-amber-400">YEMEN THEATER</div>
+                <div className="text-[11px] text-slate-400">Red Sea & Bab al-Mandab</div>
+              </div>
+            </div>
+            <div className="text-right">
+              <div className="text-lg font-bold text-amber-300">{countryCounts.yemen}</div>
+              <div className="text-[10px] text-amber-500/80">INCIDENTS</div>
+            </div>
+          </div>
+
+          <div className="rounded-lg border border-emerald-500/30 bg-emerald-950/20 p-3.5 flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <span className="text-2xl">🇸🇦</span>
+              <div>
+                <div className="font-bold text-emerald-400">SAUDI ARABIA</div>
+                <div className="text-[11px] text-slate-400">Border Sectors & Air Defense</div>
+              </div>
+            </div>
+            <div className="text-right">
+              <div className="text-lg font-bold text-emerald-300">{countryCounts.saudi}</div>
+              <div className="text-[10px] text-emerald-500/80">INCIDENTS</div>
+            </div>
+          </div>
+
+          <div className="rounded-lg border border-rose-500/30 bg-rose-950/20 p-3.5 flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <span className="text-2xl">🇮🇷</span>
+              <div>
+                <div className="font-bold text-rose-400">IRAN THEATER</div>
+                <div className="text-[11px] text-slate-400">Strait of Hormuz & Gulf</div>
+              </div>
+            </div>
+            <div className="text-right">
+              <div className="text-lg font-bold text-rose-300">{countryCounts.iran}</div>
+              <div className="text-[10px] text-rose-500/80">INCIDENTS</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Dynamic View Mode */}
+        {loading ? (
+          <div className="rounded-xl border border-slate-800 bg-[#0d1424] p-16 text-center space-y-4">
+            <RefreshCw className="mx-auto h-8 w-8 text-cyan-400 animate-spin" />
+            <p className="font-mono text-sm text-slate-300">
+              Initializing OSINT Ingestion Pipeline & Geospatial Indexes...
+            </p>
+          </div>
+        ) : filteredEvents.length === 0 ? (
+          <div className="rounded-xl border border-slate-800 bg-[#0d1424] p-16 text-center space-y-3">
+            <AlertCircle className="mx-auto h-8 w-8 text-slate-500" />
+            <h3 className="text-base font-semibold text-slate-300">No Incidents Found</h3>
+            <p className="text-xs text-slate-400 max-w-md mx-auto">
+              No incidents match your active filters or full-text query. Try clearing filters or trigger a live ingest in the Admin portal.
+            </p>
+          </div>
+        ) : currentView === 'feed' ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {filteredEvents.map((ev) => (
+              <EventCard key={ev.id} event={ev} onSelect={setSelectedEvent} />
+            ))}
+          </div>
+        ) : currentView === 'timeline' ? (
+          <TimelineView events={filteredEvents} onSelect={setSelectedEvent} />
+        ) : (
+          <TacticalMapView events={filteredEvents} onSelect={setSelectedEvent} />
+        )}
+      </main>
+
+      {/* Slide-over Incident Dossier Drawer */}
+      <EventDetailDrawer
+        event={selectedEvent}
+        onClose={() => setSelectedEvent(null)}
+      />
+
+      {/* Terminal Footer */}
+      <footer className="mt-auto border-t border-slate-800/80 bg-[#070b14] py-4 text-center text-xs text-slate-500 font-mono">
+        <div className="mx-auto max-w-7xl px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <div>
+            Middle East Conflict Monitor • Ingestion: RSS • GDELT 2.0 • Verified OSINT Allowlist
+          </div>
+          <div className="flex items-center space-x-4 text-slate-400">
+            <span>6-Hour Cron Schedule</span>
+            <span>•</span>
+            <a href="/admin" className="hover:text-cyan-400 transition">
+              Admin Ops Center
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}

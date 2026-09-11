@@ -1,0 +1,39 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { getEvents, initDatabase } from '@/lib/db';
+
+export const dynamic = 'force-dynamic';
+
+export async function GET(req: NextRequest) {
+  await initDatabase();
+
+  const searchParams = req.nextUrl.searchParams;
+  const country = searchParams.get('country') || undefined;
+  const category = searchParams.get('category') || undefined;
+  const credibility_tier = searchParams.get('credibility_tier') || undefined;
+  const search = searchParams.get('search') || undefined;
+  const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')!, 10) : 100;
+  const offset = searchParams.get('offset') ? parseInt(searchParams.get('offset')!, 10) : 0;
+
+  try {
+    const events = await getEvents({
+      country,
+      category,
+      credibility_tier,
+      search,
+      limit,
+      offset,
+    });
+
+    return NextResponse.json({
+      success: true,
+      count: events.length,
+      events,
+    });
+  } catch (err: any) {
+    console.error('[API /api/events] Error fetching events:', err);
+    return NextResponse.json(
+      { success: false, error: err?.message || 'Failed to retrieve events' },
+      { status: 500 }
+    );
+  }
+}
