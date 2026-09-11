@@ -80,8 +80,12 @@ export async function getEvents(filters?: {
   offset?: number;
 }): Promise<SecurityEvent[]> {
   const p = getPool();
-  const limit = filters?.limit || 100;
+  const limit = filters?.limit ?? 500;
   const offset = filters?.offset || 0;
+
+  if (inMemoryEvents.length === 0) {
+    seedFallbackData();
+  }
 
   if (p && isPostgresAvailable) {
     try {
@@ -397,7 +401,22 @@ function seedFallbackData() {
   if (inMemoryEvents.length > 0) return;
   const now = new Date();
 
-  inMemoryEvents = [
+  let historicalEvents: SecurityEvent[] = [];
+  try {
+    const seedPath = path.join(process.cwd(), 'lib', 'historical_seed.json');
+    if (fs.existsSync(seedPath)) {
+      const rawData = fs.readFileSync(seedPath, 'utf8');
+      const parsed = JSON.parse(rawData);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        historicalEvents = parsed;
+        console.log(`[DB Fallback] Loaded ${parsed.length} historical events spanning 6 months from seed archive.`);
+      }
+    }
+  } catch (err) {
+    console.warn('[DB Fallback] Could not read historical_seed.json:', err);
+  }
+
+  const baseItems: SecurityEvent[] = [
     {
       id: 'sec-wf-houthi-yemen-01',
       title: 'Warfronts: Are the Houthi Rebels About to Conquer Yemen?',
@@ -852,6 +871,17 @@ function seedFallbackData() {
       raw_keywords: ['Tehran', 'Foreign Ministry', 'Gulf', 'Security'],
     },
   ];
+
+  const existingIds = new Set(baseItems.map((e) => e.id));
+  const merged = [...baseItems];
+  for (const hist of historicalEvents) {
+    if (!existingIds.has(hist.id)) {
+      merged.push(hist);
+      existingIds.add(hist.id);
+    }
+  }
+
+  inMemoryEvents = merged;
 
   inMemoryLogs = [
     {

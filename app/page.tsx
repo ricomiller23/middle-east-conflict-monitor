@@ -24,11 +24,12 @@ export default function DashboardPage() {
   const [selectedTier, setSelectedTier] = useState('all');
   const [isEnergyOnly, setIsEnergyOnly] = useState(false);
   const [currentView, setCurrentView] = useState<'feed' | 'timeline' | 'map'>('feed');
+  const [visibleCount, setVisibleCount] = useState(60);
 
   const fetchEvents = async () => {
     try {
       setRefreshing(true);
-      const res = await fetch('/api/events');
+      const res = await fetch('/api/events?limit=2500');
       const data = await res.json();
       if (data.success && Array.isArray(data.events)) {
         setEvents(data.events);
@@ -40,6 +41,10 @@ export default function DashboardPage() {
       setRefreshing(false);
     }
   };
+
+  useEffect(() => {
+    setVisibleCount(60);
+  }, [selectedCountry, selectedCategory, selectedTier, isEnergyOnly, search]);
 
   useEffect(() => {
     fetchEvents();
@@ -207,10 +212,33 @@ export default function DashboardPage() {
             </p>
           </div>
         ) : currentView === 'feed' ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {filteredEvents.map((ev) => (
-              <EventCard key={ev.id} event={ev} onSelect={setSelectedEvent} />
-            ))}
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {filteredEvents.slice(0, visibleCount).map((ev) => (
+                <EventCard key={ev.id} event={ev} onSelect={setSelectedEvent} />
+              ))}
+            </div>
+            {filteredEvents.length > visibleCount && (
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2 pb-6 border-t border-slate-800/80">
+                <span className="font-mono text-xs text-slate-400">
+                  Displaying {Math.min(visibleCount, filteredEvents.length)} of {filteredEvents.length} incidents
+                </span>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setVisibleCount((prev) => prev + 60)}
+                    className="rounded-lg border border-cyan-500/40 bg-cyan-950/40 hover:bg-cyan-900/60 px-4 py-2 font-mono text-xs font-semibold text-cyan-300 transition active:scale-95 shadow-sm"
+                  >
+                    Load Next 60 Incidents
+                  </button>
+                  <button
+                    onClick={() => setVisibleCount(filteredEvents.length)}
+                    className="rounded-lg border border-slate-700 bg-slate-800/60 hover:bg-slate-700/80 px-3.5 py-2 font-mono text-xs text-slate-300 transition active:scale-95"
+                  >
+                    Show All ({filteredEvents.length})
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         ) : currentView === 'timeline' ? (
           <TimelineView events={filteredEvents} onSelect={setSelectedEvent} />

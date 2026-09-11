@@ -34,6 +34,9 @@ export default function AdminPage() {
   const [triggering, setTriggering] = useState(false);
   const [triggerMsg, setTriggerMsg] = useState<string | null>(null);
 
+  const [backfilling, setBackfilling] = useState(false);
+  const [backfillMsg, setBackfillMsg] = useState<string | null>(null);
+
   const authenticate = async (pwdToTest = password) => {
     setLoading(true);
     setAuthError('');
@@ -114,6 +117,30 @@ export default function AdminPage() {
       setTriggerMsg(`Error: ${e.message}`);
     } finally {
       setTriggering(false);
+    }
+  };
+
+  const handleTriggerBackfill = async () => {
+    setBackfilling(true);
+    setBackfillMsg(null);
+    try {
+      const res = await fetch('/api/admin/backfill', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${password}` },
+      });
+      const data = await res.json();
+      if (data.success) {
+        setBackfillMsg(
+          `Backfill complete: ${data.totalIngested} incidents ingested across 6 months (${data.warfrontsCount} Warfronts episodes).`
+        );
+        authenticate(password);
+      } else {
+        setBackfillMsg(`Backfill failed: ${data.error}`);
+      }
+    } catch (e: any) {
+      setBackfillMsg(`Error: ${e.message}`);
+    } finally {
+      setBackfilling(false);
     }
   };
 
@@ -203,7 +230,7 @@ export default function AdminPage() {
         ) : (
           <div className="space-y-6">
             {/* Top Operational Controls */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* Ingestion Trigger */}
               <div className="rounded-xl border border-slate-800 bg-[#0d1424] p-5">
                 <div className="flex items-center space-x-2 text-cyan-400 font-mono text-xs font-bold uppercase mb-2">
@@ -223,6 +250,28 @@ export default function AdminPage() {
                 </button>
                 {triggerMsg && (
                   <p className="mt-2 text-[11px] font-mono text-emerald-400">{triggerMsg}</p>
+                )}
+              </div>
+
+              {/* 6-Month Historical Backfill */}
+              <div className="rounded-xl border border-purple-900/50 bg-[#0e1226] p-5">
+                <div className="flex items-center space-x-2 text-purple-400 font-mono text-xs font-bold uppercase mb-2">
+                  <RefreshCw className="h-4 w-4" />
+                  <span>6-Month Backfill</span>
+                </div>
+                <p className="text-xs text-slate-400 mb-4">
+                  Run 180-day retrospective sweep across conflict, tankers, oil markets, and Warfronts episodes.
+                </p>
+                <button
+                  onClick={handleTriggerBackfill}
+                  disabled={backfilling}
+                  className="w-full flex items-center justify-center space-x-2 rounded-lg bg-purple-700 px-4 py-2 text-xs font-semibold text-white hover:bg-purple-600 transition disabled:opacity-50 shadow-sm"
+                >
+                  <RefreshCw className={`h-3.5 w-3.5 ${backfilling ? 'animate-spin' : ''}`} />
+                  <span>{backfilling ? 'Backfilling Archive...' : 'Run 6-Month Backfill'}</span>
+                </button>
+                {backfillMsg && (
+                  <p className="mt-2 text-[11px] font-mono text-purple-300 leading-tight">{backfillMsg}</p>
                 )}
               </div>
 

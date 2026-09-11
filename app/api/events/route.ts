@@ -11,7 +11,8 @@ export async function GET(req: NextRequest) {
   const category = searchParams.get('category') || undefined;
   const credibility_tier = searchParams.get('credibility_tier') || undefined;
   const search = searchParams.get('search') || undefined;
-  const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')!, 10) : 100;
+  const limitParam = searchParams.get('limit');
+  const limit = limitParam ? Math.min(Math.max(parseInt(limitParam, 10) || 500, 1), 2500) : 500;
   const offset = searchParams.get('offset') ? parseInt(searchParams.get('offset')!, 10) : 0;
 
   try {
