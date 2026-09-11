@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { SecurityEvent } from '@/lib/types';
-import { MapPin, Shield, Crosshair, ZoomIn, ZoomOut, Compass, ExternalLink } from 'lucide-react';
+import { MapPin, Shield, Crosshair, ZoomIn, ZoomOut, Compass, ExternalLink, Fuel, Anchor, Flame } from 'lucide-react';
 
 interface TacticalMapViewProps {
   events: SecurityEvent[];
@@ -11,7 +11,7 @@ interface TacticalMapViewProps {
 
 export const TacticalMapView: React.FC<TacticalMapViewProps> = ({ events, onSelect }) => {
   const [selectedPin, setSelectedPin] = useState<SecurityEvent | null>(null);
-  const [activeTheater, setActiveTheater] = useState<'all' | 'yemen' | 'saudi' | 'iran'>('all');
+  const [activeTheater, setActiveTheater] = useState<'all' | 'yemen' | 'saudi' | 'iran' | 'energy'>('all');
 
   // Geographic bounds of the region:
   // Lat: 10°N to 40°N
@@ -34,11 +34,26 @@ export const TacticalMapView: React.FC<TacticalMapViewProps> = ({ events, onSele
 
   const getPinColor = (category: string) => {
     switch (category) {
-      case 'strike': return '#f43f5e'; // rose-500
+      case 'tanker_attack': return '#e11d48'; // crimson rose
+      case 'refinery_disruption': return '#f97316'; // orange flame
+      case 'pipeline_infrastructure': return '#10b981'; // emerald pipeline
+      case 'energy_market': return '#f59e0b'; // amber oil
+      case 'strike': return '#ef4444'; // red
       case 'military': return '#38bdf8'; // sky-400
-      case 'diplomatic': return '#10b981'; // emerald-500
-      case 'statement': return '#f59e0b'; // amber-500
+      case 'diplomatic': return '#34d399'; // green
+      case 'statement': return '#fbbf24'; // yellow
       default: return '#94a3b8';
+    }
+  };
+
+  const getPinIcon = (category: string) => {
+    switch (category) {
+      case 'tanker_attack': return '🚢';
+      case 'pipeline_infrastructure': return '⚡';
+      case 'refinery_disruption': return '⛽';
+      case 'energy_market': return '🛢️';
+      case 'strike': return '🎯';
+      default: return null;
     }
   };
 
@@ -47,6 +62,14 @@ export const TacticalMapView: React.FC<TacticalMapViewProps> = ({ events, onSele
     if (activeTheater === 'yemen') return ev.country === 'Yemen';
     if (activeTheater === 'saudi') return ev.country === 'Saudi Arabia';
     if (activeTheater === 'iran') return ev.country === 'Iran';
+    if (activeTheater === 'energy') {
+      return (
+        ev.category === 'tanker_attack' ||
+        ev.category === 'pipeline_infrastructure' ||
+        ev.category === 'refinery_disruption' ||
+        ev.category === 'energy_market'
+      );
+    }
     return true;
   });
 
@@ -57,18 +80,18 @@ export const TacticalMapView: React.FC<TacticalMapViewProps> = ({ events, onSele
         <div className="flex items-center space-x-2">
           <Crosshair className="h-4 w-4 text-cyan-400" />
           <span className="font-mono text-xs font-bold text-slate-200">
-            TACTICAL THEATER MAP (SAUDI ARABIA • YEMEN • IRAN)
+            TACTICAL THEATER & ENERGY INFRASTRUCTURE RADAR
           </span>
           <span className="rounded bg-cyan-950/60 px-2 py-0.5 font-mono text-[10px] text-cyan-400 border border-cyan-500/30">
-            {filteredEvents.length} GEOTAGGED PINS
+            {filteredEvents.length} INCIDENT PINS
           </span>
         </div>
 
         {/* Quick Theater Selectors */}
-        <div className="flex items-center space-x-1.5 font-mono text-xs">
+        <div className="flex flex-wrap items-center gap-1.5 font-mono text-xs">
           <button
             onClick={() => setActiveTheater('all')}
-            className={`rounded px-2.5 py-1 transition ${
+            className={`rounded px-2 py-1 transition ${
               activeTheater === 'all'
                 ? 'bg-cyan-600 text-white font-semibold'
                 : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
@@ -77,10 +100,20 @@ export const TacticalMapView: React.FC<TacticalMapViewProps> = ({ events, onSele
             All Theaters
           </button>
           <button
-            onClick={() => setActiveTheater('yemen')}
-            className={`rounded px-2.5 py-1 transition ${
-              activeTheater === 'yemen'
+            onClick={() => setActiveTheater('energy')}
+            className={`rounded px-2 py-1 transition ${
+              activeTheater === 'energy'
                 ? 'bg-amber-600 text-white font-semibold'
+                : 'bg-slate-800 text-amber-400 hover:bg-slate-700'
+            }`}
+          >
+            🛢️ Energy & Tankers Only
+          </button>
+          <button
+            onClick={() => setActiveTheater('yemen')}
+            className={`rounded px-2 py-1 transition ${
+              activeTheater === 'yemen'
+                ? 'bg-amber-700 text-white font-semibold'
                 : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
             }`}
           >
@@ -88,7 +121,7 @@ export const TacticalMapView: React.FC<TacticalMapViewProps> = ({ events, onSele
           </button>
           <button
             onClick={() => setActiveTheater('saudi')}
-            className={`rounded px-2.5 py-1 transition ${
+            className={`rounded px-2 py-1 transition ${
               activeTheater === 'saudi'
                 ? 'bg-emerald-600 text-white font-semibold'
                 : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
@@ -98,7 +131,7 @@ export const TacticalMapView: React.FC<TacticalMapViewProps> = ({ events, onSele
           </button>
           <button
             onClick={() => setActiveTheater('iran')}
-            className={`rounded px-2.5 py-1 transition ${
+            className={`rounded px-2 py-1 transition ${
               activeTheater === 'iran'
                 ? 'bg-rose-600 text-white font-semibold'
                 : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
@@ -110,13 +143,13 @@ export const TacticalMapView: React.FC<TacticalMapViewProps> = ({ events, onSele
       </div>
 
       {/* SVG Tactical Map Surface */}
-      <div className="relative w-full h-[520px] bg-[#070b14] select-none">
+      <div className="relative w-full h-[540px] bg-[#070b14] select-none">
         <svg
           viewBox="0 0 1000 650"
           className="w-full h-full object-cover"
           preserveAspectRatio="none"
         >
-          {/* Subtle Grid Lines */}
+          {/* Grid lines and gradients */}
           <defs>
             <pattern id="tactical-grid" width="40" height="40" patternUnits="userSpaceOnUse">
               <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="0.8" />
@@ -129,30 +162,30 @@ export const TacticalMapView: React.FC<TacticalMapViewProps> = ({ events, onSele
 
           <rect width="1000" height="650" fill="url(#tactical-grid)" />
 
-          {/* Regional Landmass Geometry (Representative Theater Silhouette) */}
-          {/* Iran Region */}
+          {/* Regional Landmass Geometry */}
+          {/* Iran */}
           <path
             d="M 460,80 L 820,70 L 920,240 L 760,340 L 680,310 L 610,260 L 520,220 Z"
             fill="#10192e"
             stroke="#1e293b"
             strokeWidth="1.5"
           />
-          <text x="660" y="180" fill="#475569" fontSize="18" fontFamily="monospace" fontWeight="bold" letterSpacing="4">
+          <text x="660" y="160" fill="#475569" fontSize="18" fontFamily="monospace" fontWeight="bold" letterSpacing="4">
             IRAN
           </text>
 
-          {/* Saudi Arabia Region */}
+          {/* Saudi Arabia */}
           <path
             d="M 220,180 L 460,190 L 580,260 L 610,320 L 540,460 L 360,490 L 260,410 L 210,290 Z"
             fill="#0f192b"
             stroke="#1e293b"
             strokeWidth="1.5"
           />
-          <text x="350" y="330" fill="#475569" fontSize="22" fontFamily="monospace" fontWeight="bold" letterSpacing="6">
+          <text x="350" y="310" fill="#475569" fontSize="22" fontFamily="monospace" fontWeight="bold" letterSpacing="6">
             SAUDI ARABIA
           </text>
 
-          {/* Yemen Region */}
+          {/* Yemen */}
           <path
             d="M 270,470 L 540,460 L 590,520 L 480,590 L 330,580 L 270,520 Z"
             fill="#131e33"
@@ -163,42 +196,90 @@ export const TacticalMapView: React.FC<TacticalMapViewProps> = ({ events, onSele
             YEMEN
           </text>
 
-          {/* Waterways: Red Sea & Persian Gulf Labels */}
-          <path d="M 230,280 L 290,490" stroke="#0284c7" strokeWidth="1" strokeDasharray="4,4" fill="none" opacity="0.4" />
-          <text x="180" y="380" fill="#0284c7" fontSize="12" fontFamily="monospace" opacity="0.7">
-            [ RED SEA CORRIDOR ]
+          {/* STRATEGIC PIPELINE OVERLAYS */}
+          {/* 1. Saudi East-West Petroline (Abqaiq to Yanbu across the kingdom) */}
+          <path
+            d="M 530,295 L 430,325 L 320,335 L 235,340"
+            stroke="#10b981"
+            strokeWidth="3.5"
+            strokeDasharray="6,4"
+            fill="none"
+            opacity="0.9"
+          />
+          <text x="290" y="325" fill="#10b981" fontSize="10" fontFamily="monospace" fontWeight="bold">
+            [ SAUDI EAST-WEST PETROLINE (5M BPD) ]
           </text>
 
-          <text x="610" y="290" fill="#0284c7" fontSize="11" fontFamily="monospace" opacity="0.7">
-            [ STRAIT OF HORMUZ ]
+          {/* 2. Iranian Goureh-Jask Pipeline (Bypassing Hormuz) */}
+          <path
+            d="M 570,240 L 630,275 L 685,310 L 750,345"
+            stroke="#f59e0b"
+            strokeWidth="2.5"
+            strokeDasharray="5,4"
+            fill="none"
+            opacity="0.8"
+          />
+          <text x="640" y="360" fill="#f59e0b" fontSize="9" fontFamily="monospace" fontWeight="bold">
+            [ IRAN GOUREH-JASK PIPELINE ]
           </text>
 
-          <text x="330" y="615" fill="#0284c7" fontSize="11" fontFamily="monospace" opacity="0.6">
-            [ GULF OF ADEN / BAB AL-MANDAB ]
+          {/* Critical Waterways & Maritime Chokepoints */}
+          <path d="M 230,280 L 290,490" stroke="#0284c7" strokeWidth="1.5" strokeDasharray="4,4" fill="none" opacity="0.5" />
+          <text x="160" y="400" fill="#0284c7" fontSize="12" fontFamily="monospace" opacity="0.8">
+            [ RED SEA TANKER TRANSIT CORRIDOR ]
           </text>
 
-          {/* Key Strategic Anchors */}
-          <circle cx="430" cy="330" r="3" fill="#38bdf8" opacity="0.6" />
-          <text x="438" y="334" fill="#94a3b8" fontSize="10" fontFamily="monospace">Riyadh</text>
+          <text x="620" y="275" fill="#f43f5e" fontSize="11" fontFamily="monospace" fontWeight="bold" opacity="0.9">
+            ⚠️ [ STRAIT OF HORMUZ CHOKEPOINT ]
+          </text>
 
-          <circle cx="340" cy="525" r="3" fill="#38bdf8" opacity="0.6" />
-          <text x="348" y="529" fill="#94a3b8" fontSize="10" fontFamily="monospace">Sana'a</text>
+          <text x="250" y="580" fill="#f43f5e" fontSize="11" fontFamily="monospace" fontWeight="bold" opacity="0.9">
+            ⚠️ [ BAB AL-MANDAB CHOKEPOINT ]
+          </text>
 
-          <circle cx="640" cy="165" r="3" fill="#38bdf8" opacity="0.6" />
-          <text x="648" y="169" fill="#94a3b8" fontSize="10" fontFamily="monospace">Tehran</text>
+          {/* Strategic Oil & Energy Terminals */}
+          {/* Ras Tanura */}
+          <circle cx="535" cy="290" r="4" fill="#10b981" />
+          <text x="545" y="294" fill="#10b981" fontSize="10" fontFamily="monospace" fontWeight="bold">
+            Ras Tanura Terminal (Aramco)
+          </text>
 
-          <circle cx="690" cy="310" r="3" fill="#f59e0b" opacity="0.8" />
-          <text x="698" y="314" fill="#f59e0b" fontSize="10" fontFamily="monospace">Bandar Abbas</text>
+          {/* Yanbu Terminal */}
+          <circle cx="235" cy="340" r="4" fill="#10b981" />
+          <text x="165" y="335" fill="#10b981" fontSize="10" fontFamily="monospace">
+            Yanbu Port
+          </text>
 
-          <circle cx="310" cy="510" r="3" fill="#f43f5e" opacity="0.8" />
-          <text x="250" y="514" fill="#f43f5e" fontSize="10" fontFamily="monospace">Hodeidah</text>
+          {/* Kharg Island */}
+          <circle cx="550" cy="235" r="4" fill="#f59e0b" />
+          <text x="560" y="238" fill="#f59e0b" fontSize="10" fontFamily="monospace" fontWeight="bold">
+            Kharg Island (Iran Crude)
+          </text>
+
+          {/* Fujairah */}
+          <circle cx="700" cy="325" r="3.5" fill="#38bdf8" />
+          <text x="708" y="328" fill="#94a3b8" fontSize="9" fontFamily="monospace">
+            Fujairah Bunkering Hub
+          </text>
+
+          {/* Cities */}
+          <circle cx="430" cy="330" r="2.5" fill="#64748b" />
+          <text x="438" y="334" fill="#64748b" fontSize="10" fontFamily="monospace">Riyadh</text>
+
+          <circle cx="340" cy="525" r="2.5" fill="#64748b" />
+          <text x="348" y="529" fill="#64748b" fontSize="10" fontFamily="monospace">Sana'a</text>
+
+          <circle cx="640" cy="165" r="2.5" fill="#64748b" />
+          <text x="648" y="169" fill="#64748b" fontSize="10" fontFamily="monospace">Tehran</text>
         </svg>
 
         {/* Dynamic Incident Pins */}
         {filteredEvents.map((ev) => {
           const pos = projectToMap(ev.lat, ev.lng);
           const color = getPinColor(ev.category);
+          const icon = getPinIcon(ev.category);
           const isSelected = selectedPin?.id === ev.id;
+          const isTanker = ev.category === 'tanker_attack';
 
           return (
             <div
@@ -213,26 +294,44 @@ export const TacticalMapView: React.FC<TacticalMapViewProps> = ({ events, onSele
               }}
               className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer group z-20"
             >
-              {/* Pulsing ring */}
+              {/* Pulsing ring for strikes/tanker attacks */}
               <div
                 style={{ borderColor: color }}
-                className="absolute -inset-2 rounded-full border animate-ping opacity-60 pointer-events-none"
+                className={`absolute -inset-2 rounded-full border opacity-70 pointer-events-none ${
+                  isTanker ? 'animate-ping' : 'animate-pulse_slow'
+                }`}
               />
 
               {/* Pin Head */}
               <div
                 style={{ backgroundColor: color }}
-                className={`flex h-6 w-6 items-center justify-center rounded-full border-2 border-[#080c14] shadow-lg transition-transform group-hover:scale-125 ${
+                className={`flex h-6 w-6 items-center justify-center rounded-full border-2 border-[#080c14] shadow-lg transition-transform group-hover:scale-125 text-xs ${
                   isSelected ? 'ring-4 ring-cyan-400 scale-125' : ''
                 }`}
               >
-                <div className="h-1.5 w-1.5 rounded-full bg-white" />
+                {icon ? (
+                  <span className="text-[11px] leading-none">{icon}</span>
+                ) : (
+                  <div className="h-1.5 w-1.5 rounded-full bg-white" />
+                )}
               </div>
 
               {/* Tooltip on hover */}
               <div className="pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-slate-950/95 px-2.5 py-1.5 text-[11px] text-slate-100 opacity-0 border border-slate-700 shadow-xl transition-opacity group-hover:opacity-100 z-30 font-mono">
-                <div className="font-bold text-cyan-400">{ev.country} • {ev.category.toUpperCase()}</div>
-                <div className="truncate max-w-[200px] text-slate-300 font-sans">{ev.title}</div>
+                <div className="font-bold text-cyan-400">
+                  {ev.category.toUpperCase().replace('_', ' ')} • {ev.country}
+                </div>
+                {ev.vessel_name && (
+                  <div className="text-rose-300 font-bold text-[10px]">
+                    🚢 Vessel: {ev.vessel_name}
+                  </div>
+                )}
+                {ev.barrel_risk_estimate && (
+                  <div className="text-amber-300 text-[10px]">
+                    🛢️ {ev.barrel_risk_estimate}
+                  </div>
+                )}
+                <div className="truncate max-w-[220px] text-slate-300 font-sans">{ev.title}</div>
               </div>
             </div>
           );
@@ -240,28 +339,32 @@ export const TacticalMapView: React.FC<TacticalMapViewProps> = ({ events, onSele
       </div>
 
       {/* Map Legend */}
-      <div className="flex flex-wrap items-center justify-between border-t border-slate-800/80 bg-[#0b1220] px-4 py-2 text-[11px] font-mono text-slate-400">
-        <div className="flex items-center space-x-4">
+      <div className="flex flex-wrap items-center justify-between border-t border-slate-800/80 bg-[#0b1220] px-4 py-2 text-[11px] font-mono text-slate-300">
+        <div className="flex flex-wrap items-center gap-4">
           <div className="flex items-center space-x-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-rose-500" />
-            <span>Strikes / Missiles</span>
+            <span className="text-xs">🚢</span>
+            <span className="text-rose-400 font-semibold">Tanker Attacks</span>
+          </div>
+          <div className="flex items-center space-x-1.5">
+            <span className="h-1.5 w-4 bg-emerald-500 rounded" />
+            <span className="text-emerald-400">Petroline Route</span>
+          </div>
+          <div className="flex items-center space-x-1.5">
+            <span className="h-1.5 w-4 bg-amber-500 rounded" />
+            <span className="text-amber-400">Goureh-Jask Pipeline</span>
+          </div>
+          <div className="flex items-center space-x-1.5">
+            <span className="text-xs">⛽</span>
+            <span>Refineries & Terminals</span>
           </div>
           <div className="flex items-center space-x-1.5">
             <span className="h-2.5 w-2.5 rounded-full bg-sky-400" />
-            <span>Military / Naval Drills</span>
-          </div>
-          <div className="flex items-center space-x-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
-            <span>Diplomatic / Talks</span>
-          </div>
-          <div className="flex items-center space-x-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-amber-500" />
-            <span>Statements</span>
+            <span>Military/Naval Drills</span>
           </div>
         </div>
 
-        <span className="text-slate-500 hidden sm:inline">
-          Click any pin to inspect verified incident dossier
+        <span className="text-slate-500 hidden lg:inline">
+          Click any incident or pipeline terminal to open tactical dossier
         </span>
       </div>
     </div>

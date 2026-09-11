@@ -1,8 +1,19 @@
 export type Country = 'Saudi Arabia' | 'Yemen' | 'Iran';
 
-export type EventCategory = 'military' | 'strike' | 'diplomatic' | 'statement' | 'other';
+export type EventCategory =
+  | 'military'
+  | 'strike'
+  | 'diplomatic'
+  | 'statement'
+  | 'tanker_attack'
+  | 'pipeline_infrastructure'
+  | 'energy_market'
+  | 'refinery_disruption'
+  | 'other';
 
 export type CredibilityTier = 'tier_1' | 'tier_2' | 'tier_3';
+
+export type OilMarketImpact = 'critical' | 'high' | 'moderate' | 'low' | 'neutral';
 
 export interface EventSource {
   id?: string;
@@ -35,6 +46,10 @@ export interface SecurityEvent {
   x_citations: string[];
   is_verified: boolean;
   raw_keywords: string[];
+  oil_market_impact?: OilMarketImpact;
+  affected_infrastructure?: string[];
+  vessel_name?: string | null;
+  barrel_risk_estimate?: string | null;
 }
 
 export interface IngestionLog {
@@ -54,4 +69,9 @@ export interface SystemSettings {
   last_ingestion_at: string | null;
   auto_ingest_enabled: boolean;
   total_events_tracked: number;
+  brent_crude_usd?: number;
+  wti_crude_usd?: number;
+  maritime_war_risk_level?: string;
+  tanker_reroute_pct?: number;
 }
+

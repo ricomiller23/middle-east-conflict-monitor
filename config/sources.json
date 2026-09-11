@@ -2,13 +2,32 @@
   "version": "1.0.0",
   "updated_at": "2026-09-11T12:00:00Z",
   "countries": ["Saudi Arabia", "Yemen", "Iran"],
-  "categories": ["military", "strike", "diplomatic", "statement", "other"],
+  "categories": [
+    "military",
+    "strike",
+    "diplomatic",
+    "statement",
+    "tanker_attack",
+    "pipeline_infrastructure",
+    "energy_market",
+    "refinery_disruption",
+    "other"
+  ],
   "rss_sources": [
     {
       "id": "reuters-world",
       "name": "Reuters World",
       "feed_url": "https://www.reutersagency.com/feed/?best-topics=world&post_type=best",
       "fallback_url": "https://feeds.bbci.co.uk/news/world/middle_east/rss.xml",
+      "credibility_tier": "tier_1",
+      "country_focus": ["Saudi Arabia", "Yemen", "Iran"],
+      "enabled": true
+    },
+    {
+      "id": "reuters-energy",
+      "name": "Reuters Energy & Commodities",
+      "feed_url": "https://news.google.com/rss/search?q=allinurl:reuters.com+(oil+OR+tanker+OR+crude+OR+Aramco+OR+OPEC)+when:48h&hl=en-US&gl=US&ceid=US:en",
+      "fallback_url": "https://oilprice.com/rss/main",
       "credibility_tier": "tier_1",
       "country_focus": ["Saudi Arabia", "Yemen", "Iran"],
       "enabled": true
@@ -28,6 +47,24 @@
       "feed_url": "https://www.aljazeera.com/xml/rss/all.xml",
       "credibility_tier": "tier_1",
       "country_focus": ["Yemen", "Iran", "Saudi Arabia"],
+      "enabled": true
+    },
+    {
+      "id": "oilprice-news",
+      "name": "OilPrice.com Energy Intelligence",
+      "feed_url": "https://oilprice.com/rss/main",
+      "fallback_url": "https://news.google.com/rss/search?q=when:48h+(Brent+OR+WTI+OR+Aramco+OR+tanker+attack)&hl=en-US&gl=US&ceid=US:en",
+      "credibility_tier": "tier_1",
+      "country_focus": ["Saudi Arabia", "Iran", "Yemen"],
+      "enabled": true
+    },
+    {
+      "id": "ukmto-maritime",
+      "name": "UKMTO Maritime Trade Alerts",
+      "feed_url": "https://news.google.com/rss/search?q=when:48h+allinurl:ukmto.org+OR+(UKMTO+OR+Ambrey+AND+(attack+OR+missile+OR+tanker))&hl=en-US&gl=US&ceid=US:en",
+      "fallback_url": "https://feeds.bbci.co.uk/news/world/middle_east/rss.xml",
+      "credibility_tier": "tier_1",
+      "country_focus": ["Yemen", "Saudi Arabia", "Iran"],
       "enabled": true
     },
     {
@@ -66,8 +103,8 @@
   "gdelt_config": {
     "enabled": true,
     "api_base": "https://api.gdeltproject.org/api/v2/doc/doc",
-    "query": "(Saudi Arabia OR Yemen OR Iran OR Houthi OR IRGC) AND (military OR strike OR drone OR missile OR clashes OR attack OR defense OR air defense)",
-    "max_records": 75,
+    "query": "(Saudi Arabia OR Yemen OR Iran OR Houthi OR IRGC) AND (oil OR tanker OR petroleum OR pipeline OR refinery OR crude OR brent OR Aramco OR Petroline OR VLCC OR maritime OR UKMTO OR Ambrey OR military OR strike OR missile OR drone)",
+    "max_records": 85,
     "credibility_tier": "tier_1"
   },
   "social_allowlist": [
@@ -78,7 +115,61 @@
       "credibility_tier": "tier_1",
       "verified": true,
       "country_focus": ["Yemen", "Saudi Arabia", "Iran"],
-      "description": "Official account of United States Central Command responsible for Middle East theater operations."
+      "description": "Official account of United States Central Command responsible for Red Sea and Gulf security."
+    },
+    {
+      "handle": "UK_MTO",
+      "name": "UK Maritime Trade Operations",
+      "category": "official_maritime",
+      "credibility_tier": "tier_1",
+      "verified": true,
+      "country_focus": ["Yemen", "Saudi Arabia", "Iran"],
+      "description": "Royal Navy operational focal point for commercial shipping security and incident notices."
+    },
+    {
+      "handle": "TankerTrackers",
+      "name": "TankerTrackers.com",
+      "category": "verified_energy_osint",
+      "credibility_tier": "tier_1",
+      "verified": true,
+      "country_focus": ["Iran", "Saudi Arabia", "Yemen"],
+      "description": "Independent maritime and satellite tracking of crude oil shipments, sanctions evasion, and tanker flows."
+    },
+    {
+      "handle": "Ambrey_Intel",
+      "name": "Ambrey Maritime Intelligence",
+      "category": "verified_maritime_security",
+      "credibility_tier": "tier_1",
+      "verified": true,
+      "country_focus": ["Yemen", "Saudi Arabia", "Iran"],
+      "description": "Global maritime security firm assessing Bab al-Mandab and Red Sea commercial vessel risk."
+    },
+    {
+      "handle": "JavierBlas",
+      "name": "Javier Blas (Bloomberg Energy)",
+      "category": "verified_energy_columnist",
+      "credibility_tier": "tier_1",
+      "verified": true,
+      "country_focus": ["Saudi Arabia", "Iran"],
+      "description": "Bloomberg Opinion energy columnist covering OPEC+, Aramco, crude flows, and pipeline geopolitics."
+    },
+    {
+      "handle": "Amena__Bakr",
+      "name": "Amena Bakr (Energy Intelligence)",
+      "category": "verified_energy_reporter",
+      "credibility_tier": "tier_1",
+      "verified": true,
+      "country_focus": ["Saudi Arabia", "Iran"],
+      "description": "Chief OPEC correspondent and Middle East energy analyst."
+    },
+    {
+      "handle": "OPECSecretariat",
+      "name": "OPEC Secretariat",
+      "category": "official_energy",
+      "credibility_tier": "tier_1",
+      "verified": true,
+      "country_focus": ["Saudi Arabia", "Iran"],
+      "description": "Organization of the Petroleum Exporting Countries official communications."
     },
     {
       "handle": "modgovksa",
@@ -117,15 +208,6 @@
       "description": "Independent global news organization."
     },
     {
-      "handle": "AFP",
-      "name": "Agence France-Presse",
-      "category": "verified_wire",
-      "credibility_tier": "tier_1",
-      "verified": true,
-      "country_focus": ["Saudi Arabia", "Yemen", "Iran"],
-      "description": "Global news agency covering regional defense events."
-    },
-    {
       "handle": "criticalthreats",
       "name": "AEI Critical Threats",
       "category": "verified_osint",
@@ -133,24 +215,6 @@
       "verified": true,
       "country_focus": ["Iran", "Yemen"],
       "description": "Specialized OSINT tracking Iranian security network and Yemen Houthi movements."
-    },
-    {
-      "handle": "CalibreObscura",
-      "name": "Calibre Obscura",
-      "category": "regional_osint_tracker",
-      "credibility_tier": "tier_2",
-      "verified": true,
-      "country_focus": ["Yemen", "Saudi Arabia"],
-      "description": "Arms and munitions tracking across Yemen and Middle Eastern conflicts."
-    },
-    {
-      "handle": "AuroraIntel",
-      "name": "Aurora Intel",
-      "category": "regional_osint_tracker",
-      "credibility_tier": "tier_2",
-      "verified": true,
-      "country_focus": ["Iran", "Yemen", "Saudi Arabia"],
-      "description": "Open source geopolitical & defense news aggregation."
     }
   ]
 }

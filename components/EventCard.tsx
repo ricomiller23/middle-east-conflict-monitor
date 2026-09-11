@@ -12,6 +12,14 @@ interface EventCardProps {
 export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
   const getCategoryColor = (cat: string) => {
     switch (cat) {
+      case 'tanker_attack':
+        return 'bg-rose-950/80 text-rose-300 border-rose-500/60 font-bold';
+      case 'pipeline_infrastructure':
+        return 'bg-emerald-950/80 text-emerald-300 border-emerald-500/60 font-bold';
+      case 'energy_market':
+        return 'bg-amber-950/80 text-amber-300 border-amber-500/60 font-bold';
+      case 'refinery_disruption':
+        return 'bg-orange-950/80 text-orange-300 border-orange-500/60 font-bold';
       case 'strike':
         return 'bg-rose-950/60 text-rose-400 border-rose-500/40';
       case 'military':
@@ -93,6 +101,33 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
           {formatTimeAgo(event.published_at)}
         </span>
       </div>
+
+      {/* Oil & Energy Impact Pill Bar */}
+      {(event.vessel_name || event.barrel_risk_estimate || (event.oil_market_impact && event.oil_market_impact !== 'neutral')) && (
+        <div className="flex flex-wrap items-center gap-1.5 mb-2 font-mono text-[10px]">
+          {event.vessel_name && (
+            <span className="rounded bg-rose-950/70 text-rose-300 px-2 py-0.5 border border-rose-500/40 font-semibold flex items-center space-x-1">
+              <span>🚢 Vessel:</span>
+              <span className="text-white">{event.vessel_name}</span>
+            </span>
+          )}
+          {event.oil_market_impact && event.oil_market_impact === 'critical' && (
+            <span className="rounded bg-red-950/90 text-red-400 px-2 py-0.5 border border-red-500/50 font-bold uppercase animate-pulse_slow">
+              ⚡ CRITICAL OIL IMPACT
+            </span>
+          )}
+          {event.oil_market_impact && event.oil_market_impact === 'high' && (
+            <span className="rounded bg-amber-950/80 text-amber-400 px-2 py-0.5 border border-amber-500/40 font-bold uppercase">
+              ⚠️ HIGH MARKET RISK
+            </span>
+          )}
+          {event.barrel_risk_estimate && (
+            <span className="rounded bg-slate-800 text-amber-300 px-2 py-0.5 border border-slate-700">
+              🛢️ {event.barrel_risk_estimate}
+            </span>
+          )}
+        </div>
+      )}
 
       {/* Title */}
       <h2

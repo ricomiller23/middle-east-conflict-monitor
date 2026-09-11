@@ -40,6 +40,10 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
   const categories = [
     { id: 'all', label: 'All Categories' },
+    { id: 'tanker_attack', label: '🚢 Commercial Tanker Attacks' },
+    { id: 'pipeline_infrastructure', label: '⚡ Pipelines & Terminals' },
+    { id: 'energy_market', label: '🛢️ Oil & Energy Markets' },
+    { id: 'refinery_disruption', label: '⛽ Refineries & Processing' },
     { id: 'strike', label: '🎯 Strikes & Intercepts' },
     { id: 'military', label: '⚔️ Military & Naval Ops' },
     { id: 'diplomatic', label: '🕊️ Diplomatic / Talks' },

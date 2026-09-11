@@ -15,6 +15,10 @@ let inMemorySettings: SystemSettings = {
   last_ingestion_at: null,
   auto_ingest_enabled: true,
   total_events_tracked: 0,
+  brent_crude_usd: 84.15,
+  wti_crude_usd: 79.80,
+  maritime_war_risk_level: 'DEFCON 1 (CRITICAL)',
+  tanker_reroute_pct: 68.5,
 };
 
 function getConnectionString(): string | null {
@@ -173,12 +177,17 @@ export async function upsertEvents(events: SecurityEvent[]): Promise<number> {
             `
             INSERT INTO events (
               id, title, summary, country, category, primary_source, primary_url,
-              published_at, credibility_tier, lat, lng, location_name, x_citations, is_verified
-            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+              published_at, credibility_tier, lat, lng, location_name, x_citations, is_verified,
+              oil_market_impact, affected_infrastructure, vessel_name, barrel_risk_estimate
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)
             ON CONFLICT (id) DO UPDATE SET
               summary = EXCLUDED.summary,
               category = EXCLUDED.category,
               x_citations = EXCLUDED.x_citations,
+              oil_market_impact = EXCLUDED.oil_market_impact,
+              affected_infrastructure = EXCLUDED.affected_infrastructure,
+              vessel_name = EXCLUDED.vessel_name,
+              barrel_risk_estimate = EXCLUDED.barrel_risk_estimate,
               updated_at = NOW()
             RETURNING id;
           `,
@@ -197,6 +206,10 @@ export async function upsertEvents(events: SecurityEvent[]): Promise<number> {
               ev.location_name,
               JSON.stringify(ev.x_citations || []),
               ev.is_verified,
+              ev.oil_market_impact || 'neutral',
+              JSON.stringify(ev.affected_infrastructure || []),
+              ev.vessel_name || null,
+              ev.barrel_risk_estimate || null,
             ]
           );
 
@@ -356,6 +369,14 @@ function mapRowToEvent(row: any): SecurityEvent {
     x_citations: Array.isArray(row.x_citations) ? row.x_citations : typeof row.x_citations === 'string' ? JSON.parse(row.x_citations) : [],
     is_verified: Boolean(row.is_verified),
     raw_keywords: [],
+    oil_market_impact: row.oil_market_impact || 'neutral',
+    affected_infrastructure: Array.isArray(row.affected_infrastructure)
+      ? row.affected_infrastructure
+      : typeof row.affected_infrastructure === 'string'
+      ? JSON.parse(row.affected_infrastructure)
+      : [],
+    vessel_name: row.vessel_name || null,
+    barrel_risk_estimate: row.barrel_risk_estimate || null,
   };
 }
 
@@ -364,6 +385,184 @@ function seedFallbackData() {
   const now = new Date();
 
   inMemoryEvents = [
+    {
+      id: 'sec-ye-tanker-01',
+      title: 'Crude Oil Tanker Struck by Multiple USV Drone Boats Off Hodeidah in Red Sea Transit',
+      summary: 'UKMTO and Ambrey report commercial crude carrier sustained hits from explosive USVs 77NM west of Hodeidah. Crew evacuated as salvage teams mobilize. Incident threatens 1M barrels of crude cargo and triggers immediate Brent crude prompt-month spike.',
+      country: 'Yemen',
+      category: 'tanker_attack',
+      primary_source: 'UKMTO Maritime Trade Operations',
+      primary_url: 'https://www.ukmto.org',
+      published_at: new Date(now.getTime() - 1 * 3600000).toISOString(),
+      created_at: now.toISOString(),
+      updated_at: now.toISOString(),
+      credibility_tier: 'tier_1',
+      lat: 14.750,
+      lng: 42.450,
+      location_name: 'Bab al-Mandab / Hodeidah Transit Lane',
+      vessel_name: 'M/T Sounion (Suezmax Crude Tanker)',
+      oil_market_impact: 'critical',
+      affected_infrastructure: ['Bab al-Mandab Chokepoint', 'Southern Red Sea Maritime Lane'],
+      barrel_risk_estimate: '1,000,000 Barrels Crude Cargo',
+      sources: [
+        {
+          id: 'src-tanker-1',
+          source_name: 'UKMTO Warning 064/2026',
+          source_url: 'https://www.ukmto.org',
+          published_at: new Date(now.getTime() - 1 * 3600000).toISOString(),
+          credibility_tier: 'tier_1',
+          snippet: 'Vessel attacked by two small craft, projectile struck starboard quarter, secondary USV explosion reported.',
+          x_citation_url: 'https://x.com/UK_MTO/status/1833920123456789012',
+          author_handle: 'UK_MTO',
+        },
+        {
+          id: 'src-tanker-2',
+          source_name: 'Ambrey Maritime Threat Intelligence',
+          source_url: 'https://ambrey.com',
+          published_at: new Date(now.getTime() - 0.9 * 3600000).toISOString(),
+          credibility_tier: 'tier_1',
+          snippet: 'Commercial vessel was unladen Greek-flagged crude carrier in ballast to Ras Isa terminal.',
+          x_citation_url: 'https://x.com/Ambrey_Intel/status/1833921123456789012',
+          author_handle: 'Ambrey_Intel',
+        },
+        {
+          id: 'src-tanker-3',
+          source_name: 'TankerTrackers Satellite Telemetry',
+          source_url: 'https://tankertrackers.com',
+          published_at: new Date(now.getTime() - 0.7 * 3600000).toISOString(),
+          credibility_tier: 'tier_1',
+          snippet: 'AIS transponder lost position lock following impact; plume confirmed by European Sentinel satellite.',
+          x_citation_url: 'https://x.com/TankerTrackers/status/1833924123456789012',
+          author_handle: 'TankerTrackers',
+        },
+      ],
+      x_citations: [
+        'https://x.com/UK_MTO/status/1833920123456789012',
+        'https://x.com/Ambrey_Intel/status/1833921123456789012',
+        'https://x.com/TankerTrackers/status/1833924123456789012',
+      ],
+      is_verified: true,
+      raw_keywords: ['Tanker Attack', 'USV', 'Red Sea', 'Sounion', 'UKMTO', 'Ambrey'],
+    },
+    {
+      id: 'sec-sa-pipeline-02',
+      title: 'Saudi Aramco Ramps East-West Petroline Pumping Capacity to 5M BPD Bypassing Strait of Hormuz',
+      summary: 'Saudi Aramco energized auxiliary gas-turbine booster stations along the 1,200km East-West Petroline connecting Abqaiq to Yanbu on the Red Sea, enabling 5.0 million barrels per day of crude to bypass Strait of Hormuz maritime risks.',
+      country: 'Saudi Arabia',
+      category: 'pipeline_infrastructure',
+      primary_source: 'S&P Global Commodity Insights',
+      primary_url: 'https://www.spglobal.com/commodityinsights',
+      published_at: new Date(now.getTime() - 3.5 * 3600000).toISOString(),
+      created_at: now.toISOString(),
+      updated_at: now.toISOString(),
+      credibility_tier: 'tier_1',
+      lat: 24.089,
+      lng: 38.063,
+      location_name: 'Yanbu Terminal & East-West Petroline Terminal',
+      vessel_name: null,
+      oil_market_impact: 'high',
+      affected_infrastructure: ['East-West Petroline (Abqaiq-Yanbu)', 'Yanbu Crude Export Terminal'],
+      barrel_risk_estimate: '5,000,000 BPD Pipeline Capacity',
+      sources: [
+        {
+          id: 'src-pipe-1',
+          source_name: 'S&P Global Commodity Insights',
+          source_url: 'https://www.spglobal.com/commodityinsights',
+          published_at: new Date(now.getTime() - 3.5 * 3600000).toISOString(),
+          credibility_tier: 'tier_1',
+          snippet: 'Saudi Arabia shifting crude export mix westwards to shield Asian customers from Hormuz disruptions.',
+        },
+        {
+          id: 'src-pipe-2',
+          source_name: 'Javier Blas (Bloomberg Energy)',
+          source_url: 'https://www.bloomberg.com/opinion',
+          published_at: new Date(now.getTime() - 3.1 * 3600000).toISOString(),
+          credibility_tier: 'tier_1',
+          snippet: 'Petroline is the most critical bypass valve in global energy logistics.',
+          x_citation_url: 'https://x.com/JavierBlas/status/1833870123456789012',
+          author_handle: 'JavierBlas',
+        },
+      ],
+      x_citations: ['https://x.com/JavierBlas/status/1833870123456789012'],
+      is_verified: true,
+      raw_keywords: ['Petroline', 'Pipeline', 'Aramco', 'Yanbu', 'Abqaiq', 'Bypass'],
+    },
+    {
+      id: 'sec-ir-tanker-03',
+      title: 'IRGC Navy Boarding Commandos Intercept Commercial Products Tanker in Strait of Hormuz',
+      summary: 'Islamic Revolutionary Guard Corps fast-attack craft and helicopter boarding teams seized an Aframax oil products carrier in international waters approaching the Strait of Hormuz, citing environmental inspection directives.',
+      country: 'Iran',
+      category: 'tanker_attack',
+      primary_source: 'Ambrey Maritime Threat Intelligence',
+      primary_url: 'https://ambrey.com',
+      published_at: new Date(now.getTime() - 6 * 3600000).toISOString(),
+      created_at: now.toISOString(),
+      updated_at: now.toISOString(),
+      credibility_tier: 'tier_1',
+      lat: 26.350,
+      lng: 56.400,
+      location_name: 'Strait of Hormuz Inbound Traffic Lane',
+      vessel_name: 'St. Nikolas (Aframax)',
+      oil_market_impact: 'high',
+      affected_infrastructure: ['Strait of Hormuz Chokepoint', 'Bandar Abbas Naval Sector'],
+      barrel_risk_estimate: '750,000 Barrels Gasoil Cargo',
+      sources: [
+        {
+          id: 'src-ir-1',
+          source_name: 'Ambrey Intelligence',
+          source_url: 'https://ambrey.com',
+          published_at: new Date(now.getTime() - 6 * 3600000).toISOString(),
+          credibility_tier: 'tier_1',
+          snippet: 'Armed personnel boarded vessel from speedboats and redirected heading toward Bandar Abbas anchorage.',
+          x_citation_url: 'https://x.com/Ambrey_Intel/status/1833840123456789012',
+          author_handle: 'Ambrey_Intel',
+        },
+      ],
+      x_citations: ['https://x.com/Ambrey_Intel/status/1833840123456789012'],
+      is_verified: true,
+      raw_keywords: ['Hormuz', 'IRGC', 'Tanker Seizure', 'St. Nikolas', 'Ambrey'],
+    },
+    {
+      id: 'sec-ye-market-04',
+      title: 'Lloyd\'s Joint War Committee Hikes Red Sea Tanker Insurance to 0.75%; 68% of Tankers Diverting Around Africa',
+      summary: 'Marine hull underwriters raised additional war risk premiums to 0.75% of vessel value. Global shipping intelligence confirms over 68% of laden crude and product tankers are rerouting via the Cape of Good Hope, adding 10-14 days transit and tying up ~3.2M bpd of global fleet capacity.',
+      country: 'Yemen',
+      category: 'energy_market',
+      primary_source: 'Reuters Energy',
+      primary_url: 'https://www.reuters.com/business/energy/',
+      published_at: new Date(now.getTime() - 8 * 3600000).toISOString(),
+      created_at: now.toISOString(),
+      updated_at: now.toISOString(),
+      credibility_tier: 'tier_1',
+      lat: 12.800,
+      lng: 43.150,
+      location_name: 'Bab al-Mandab Maritime Exclusion Sector',
+      vessel_name: null,
+      oil_market_impact: 'critical',
+      affected_infrastructure: ['Bab al-Mandab Strait', 'Suez Maritime Transit Corridor'],
+      barrel_risk_estimate: '3,200,000 BPD Rerouted Around Africa',
+      sources: [
+        {
+          id: 'src-mkt-1',
+          source_name: 'Reuters Energy',
+          source_url: 'https://www.reuters.com/business/energy/',
+          published_at: new Date(now.getTime() - 8 * 3600000).toISOString(),
+          credibility_tier: 'tier_1',
+          snippet: 'War risk insurance premiums surged tenfold since initial missile engagements, forcing shipping lines to abandon Suez.',
+        },
+        {
+          id: 'src-mkt-2',
+          source_name: 'OilPrice.com',
+          source_url: 'https://oilprice.com',
+          published_at: new Date(now.getTime() - 7.6 * 3600000).toISOString(),
+          credibility_tier: 'tier_1',
+          snippet: 'Brent crude spread widens as floating storage and diversion times consume global tanker supply.',
+        },
+      ],
+      x_citations: [],
+      is_verified: true,
+      raw_keywords: ['War Risk Insurance', 'Tanker Rerouting', 'Cape of Good Hope', 'Brent', 'Suez'],
+    },
     {
       id: 'sec-ye-20260911-01',
       title: 'U.S. Central Command Intercepts Houthi Anti-Ship Cruise Missiles Over Southern Red Sea',

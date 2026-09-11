@@ -17,6 +17,10 @@ CREATE TABLE IF NOT EXISTS events (
     location_name VARCHAR(128),
     x_citations JSONB DEFAULT '[]'::jsonb,
     is_verified BOOLEAN DEFAULT TRUE,
+    oil_market_impact VARCHAR(32) DEFAULT 'neutral',
+    affected_infrastructure JSONB DEFAULT '[]'::jsonb,
+    vessel_name VARCHAR(128),
+    barrel_risk_estimate VARCHAR(128),
     tsv TSVECTOR
 );
 
@@ -63,7 +67,9 @@ begin
   new.tsv :=
     setweight(to_tsvector('english', coalesce(new.title, '')), 'A') ||
     setweight(to_tsvector('english', coalesce(new.summary, '')), 'B') ||
-    setweight(to_tsvector('english', coalesce(new.location_name, '')), 'C');
+    setweight(to_tsvector('english', coalesce(new.location_name, '')), 'C') ||
+    setweight(to_tsvector('english', coalesce(new.vessel_name, '')), 'A') ||
+    setweight(to_tsvector('english', coalesce(new.category, '')), 'B');
   return new;
 end
 $$ LANGUAGE plpgsql;

@@ -91,6 +91,52 @@ export const EventDetailDrawer: React.FC<EventDetailDrawerProps> = ({ event, onC
             </div>
           </div>
 
+          {/* Energy & Maritime Strategic Assessment */}
+          {(event.vessel_name || event.barrel_risk_estimate || (event.affected_infrastructure && event.affected_infrastructure.length > 0) || (event.oil_market_impact && event.oil_market_impact !== 'neutral')) && (
+            <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-4 space-y-3 font-mono text-xs">
+              <div className="flex items-center justify-between border-b border-amber-500/20 pb-2">
+                <span className="font-bold text-amber-400 flex items-center space-x-1.5">
+                  <span>🛢️ CRUDE & MARITIME RISK ASSESSMENT</span>
+                </span>
+                {event.oil_market_impact && (
+                  <span className={`rounded px-2 py-0.5 font-bold uppercase text-[10px] ${
+                    event.oil_market_impact === 'critical' ? 'bg-rose-900 text-rose-300' : 'bg-amber-900 text-amber-300'
+                  }`}>
+                    {event.oil_market_impact} impact
+                  </span>
+                )}
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
+                {event.vessel_name && (
+                  <div>
+                    <span className="text-slate-400 block">Targeted Vessel:</span>
+                    <span className="text-rose-300 font-bold">{event.vessel_name}</span>
+                  </div>
+                )}
+                {event.barrel_risk_estimate && (
+                  <div>
+                    <span className="text-slate-400 block">Estimated Oil Volume:</span>
+                    <span className="text-amber-300 font-bold">{event.barrel_risk_estimate}</span>
+                  </div>
+                )}
+              </div>
+
+              {event.affected_infrastructure && event.affected_infrastructure.length > 0 && (
+                <div className="pt-2 border-t border-amber-500/10">
+                  <span className="text-slate-400 block text-[10px] uppercase mb-1">Affected Infrastructure & Corridors:</span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {event.affected_infrastructure.map((inf, idx) => (
+                      <span key={idx} className="rounded bg-slate-800/90 px-2 py-0.5 text-[10px] text-slate-200 border border-slate-700">
+                        ⚡ {inf}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Executive Summary */}
           <div>
             <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mb-2">

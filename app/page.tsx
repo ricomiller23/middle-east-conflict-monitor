@@ -2,13 +2,14 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { Navbar } from '@/components/Navbar';
+import { EnergyMarketTicker } from '@/components/EnergyMarketTicker';
 import { FilterBar } from '@/components/FilterBar';
 import { EventCard } from '@/components/EventCard';
 import { TimelineView } from '@/components/TimelineView';
 import { TacticalMapView } from '@/components/TacticalMapView';
 import { EventDetailDrawer } from '@/components/EventDetailDrawer';
 import { SecurityEvent, Country } from '@/lib/types';
-import { Shield, AlertCircle, RefreshCw, Flame, Radio, ExternalLink } from 'lucide-react';
+import { Shield, AlertCircle, RefreshCw, Flame, Radio, ExternalLink, Anchor, Fuel } from 'lucide-react';
 
 export default function DashboardPage() {
   const [events, setEvents] = useState<SecurityEvent[]>([]);
@@ -21,6 +22,7 @@ export default function DashboardPage() {
   const [selectedCountry, setSelectedCountry] = useState('all');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedTier, setSelectedTier] = useState('all');
+  const [isEnergyOnly, setIsEnergyOnly] = useState(false);
   const [currentView, setCurrentView] = useState<'feed' | 'timeline' | 'map'>('feed');
 
   const fetchEvents = async () => {
@@ -43,18 +45,34 @@ export default function DashboardPage() {
     fetchEvents();
   }, []);
 
-  // Country counts calculation
+  // Country and energy counts calculation
   const countryCounts = useMemo(() => {
     return {
       saudi: events.filter((e) => e.country === 'Saudi Arabia').length,
       yemen: events.filter((e) => e.country === 'Yemen').length,
       iran: events.filter((e) => e.country === 'Iran').length,
+      tankers: events.filter((e) => e.category === 'tanker_attack').length,
+      energy: events.filter(
+        (e) =>
+          e.category === 'tanker_attack' ||
+          e.category === 'pipeline_infrastructure' ||
+          e.category === 'refinery_disruption' ||
+          e.category === 'energy_market'
+      ).length,
     };
   }, [events]);
 
   // Client-side filtering
   const filteredEvents = useMemo(() => {
     return events.filter((ev) => {
+      if (isEnergyOnly) {
+        const isEnergyCat =
+          ev.category === 'tanker_attack' ||
+          ev.category === 'pipeline_infrastructure' ||
+          ev.category === 'refinery_disruption' ||
+          ev.category === 'energy_market';
+        if (!isEnergyCat) return false;
+      }
       if (selectedCountry !== 'all' && ev.country !== selectedCountry) {
         return false;
       }
@@ -69,14 +87,15 @@ export default function DashboardPage() {
         const matchTitle = ev.title.toLowerCase().includes(q);
         const matchSummary = ev.summary.toLowerCase().includes(q);
         const matchLoc = ev.location_name?.toLowerCase().includes(q);
+        const matchVessel = ev.vessel_name?.toLowerCase().includes(q);
         const matchSource = ev.sources.some((s) => s.source_name.toLowerCase().includes(q));
-        if (!matchTitle && !matchSummary && !matchLoc && !matchSource) {
+        if (!matchTitle && !matchSummary && !matchLoc && !matchVessel && !matchSource) {
           return false;
         }
       }
       return true;
     });
-  }, [events, selectedCountry, selectedCategory, selectedTier, search]);
+  }, [events, selectedCountry, selectedCategory, selectedTier, isEnergyOnly, search]);
 
   return (
     <div className="min-h-screen bg-[#080c14] text-slate-100 flex flex-col font-sans">
@@ -87,6 +106,12 @@ export default function DashboardPage() {
         lastSyncAt={events[0]?.published_at || null}
         onRefresh={fetchEvents}
         isRefreshing={refreshing}
+      />
+
+      {/* Real-Time Oil & Energy Telemetry Ticker */}
+      <EnergyMarketTicker
+        onFilterEnergyOnly={() => setIsEnergyOnly(!isEnergyOnly)}
+        isEnergyFiltered={isEnergyOnly}
       />
 
       {/* Filter and View Selection Bar */}
@@ -106,47 +131,61 @@ export default function DashboardPage() {
 
       {/* Main Content Area */}
       <main className="flex-1 mx-auto w-full max-w-7xl px-4 sm:px-6 py-6 space-y-6">
-        {/* Threat Situation Bar */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs">
-          <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-3.5 flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <span className="text-2xl">🇾🇪</span>
+        {/* Threat & Energy Situation Bar */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 font-mono text-xs">
+          <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-3 flex items-center justify-between">
+            <div className="flex items-center space-x-2.5">
+              <span className="text-xl">🇾🇪</span>
               <div>
                 <div className="font-bold text-amber-400">YEMEN THEATER</div>
-                <div className="text-[11px] text-slate-400">Red Sea & Bab al-Mandab</div>
+                <div className="text-[10px] text-slate-400">Red Sea & Bab al-Mandab</div>
               </div>
             </div>
             <div className="text-right">
-              <div className="text-lg font-bold text-amber-300">{countryCounts.yemen}</div>
-              <div className="text-[10px] text-amber-500/80">INCIDENTS</div>
+              <div className="text-base font-bold text-amber-300">{countryCounts.yemen}</div>
+              <div className="text-[9px] text-amber-500/80">INCIDENTS</div>
             </div>
           </div>
 
-          <div className="rounded-lg border border-emerald-500/30 bg-emerald-950/20 p-3.5 flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <span className="text-2xl">🇸🇦</span>
+          <div className="rounded-lg border border-emerald-500/30 bg-emerald-950/20 p-3 flex items-center justify-between">
+            <div className="flex items-center space-x-2.5">
+              <span className="text-xl">🇸🇦</span>
               <div>
                 <div className="font-bold text-emerald-400">SAUDI ARABIA</div>
-                <div className="text-[11px] text-slate-400">Border Sectors & Air Defense</div>
+                <div className="text-[10px] text-slate-400">Petroline & Air Defense</div>
               </div>
             </div>
             <div className="text-right">
-              <div className="text-lg font-bold text-emerald-300">{countryCounts.saudi}</div>
-              <div className="text-[10px] text-emerald-500/80">INCIDENTS</div>
+              <div className="text-base font-bold text-emerald-300">{countryCounts.saudi}</div>
+              <div className="text-[9px] text-emerald-500/80">INCIDENTS</div>
             </div>
           </div>
 
-          <div className="rounded-lg border border-rose-500/30 bg-rose-950/20 p-3.5 flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <span className="text-2xl">🇮🇷</span>
+          <div className="rounded-lg border border-rose-500/30 bg-rose-950/20 p-3 flex items-center justify-between">
+            <div className="flex items-center space-x-2.5">
+              <span className="text-xl">🇮🇷</span>
               <div>
                 <div className="font-bold text-rose-400">IRAN THEATER</div>
-                <div className="text-[11px] text-slate-400">Strait of Hormuz & Gulf</div>
+                <div className="text-[10px] text-slate-400">Strait of Hormuz & Kharg</div>
               </div>
             </div>
             <div className="text-right">
-              <div className="text-lg font-bold text-rose-300">{countryCounts.iran}</div>
-              <div className="text-[10px] text-rose-500/80">INCIDENTS</div>
+              <div className="text-base font-bold text-rose-300">{countryCounts.iran}</div>
+              <div className="text-[9px] text-rose-500/80">INCIDENTS</div>
+            </div>
+          </div>
+
+          <div className="rounded-lg border border-red-500/40 bg-red-950/30 p-3 flex items-center justify-between">
+            <div className="flex items-center space-x-2.5">
+              <span className="text-xl">🚢</span>
+              <div>
+                <div className="font-bold text-rose-400">TANKERS & ENERGY</div>
+                <div className="text-[10px] text-slate-400">Attacks & Pipelines</div>
+              </div>
+            </div>
+            <div className="text-right">
+              <div className="text-base font-bold text-rose-300">{countryCounts.energy}</div>
+              <div className="text-[9px] text-rose-400">EVENTS</div>
             </div>
           </div>
         </div>

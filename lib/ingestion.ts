@@ -12,17 +12,24 @@ const GEO_ANCHORS: Record<string, { lat: number; lng: number; location_name: str
   sanaa: { lat: 15.3694, lng: 44.191, location_name: "Sana'a, Yemen", country: 'Yemen' },
   aden: { lat: 12.7855, lng: 45.0187, location_name: 'Aden, Yemen', country: 'Yemen' },
   'red sea': { lat: 14.2, lng: 42.6, location_name: 'Southern Red Sea Maritime Corridor', country: 'Yemen' },
-  'bab al-mandab': { lat: 12.5833, lng: 43.3333, location_name: 'Bab al-Mandab Strait', country: 'Yemen' },
-  marib: { lat: 15.4639, lng: 45.3267, location_name: 'Marib, Yemen', country: 'Yemen' },
+  'bab al-mandab': { lat: 12.5833, lng: 43.3333, location_name: 'Bab al-Mandab Strait Chokepoint', country: 'Yemen' },
+  'ras isa': { lat: 15.192, lng: 42.753, location_name: 'Ras Isa Oil Terminal, Yemen', country: 'Yemen' },
+  marib: { lat: 15.4639, lng: 45.3267, location_name: 'Marib Oil Fields, Yemen', country: 'Yemen' },
   riyadh: { lat: 24.7136, lng: 46.6753, location_name: 'Riyadh, Saudi Arabia', country: 'Saudi Arabia' },
-  jizan: { lat: 16.889, lng: 42.57, location_name: 'Jizan Border Sector, Saudi Arabia', country: 'Saudi Arabia' },
+  'ras tanura': { lat: 26.643, lng: 50.158, location_name: 'Ras Tanura Refinery & Crude Export Terminal, Saudi Arabia', country: 'Saudi Arabia' },
+  abqaiq: { lat: 25.937, lng: 49.670, location_name: 'Abqaiq Crude Processing Facility (Aramco), Saudi Arabia', country: 'Saudi Arabia' },
+  yanbu: { lat: 24.089, lng: 38.063, location_name: 'Yanbu Petroline Terminal, Saudi Arabia', country: 'Saudi Arabia' },
+  petroline: { lat: 24.500, lng: 43.500, location_name: 'East-West Petroline Trans-Arabian Pipeline', country: 'Saudi Arabia' },
+  jizan: { lat: 16.889, lng: 42.57, location_name: 'Jizan Refinery & Border Sector, Saudi Arabia', country: 'Saudi Arabia' },
   jeddah: { lat: 21.5433, lng: 39.1728, location_name: 'Jeddah, Saudi Arabia', country: 'Saudi Arabia' },
   asir: { lat: 18.2164, lng: 42.5053, location_name: 'Asir Region, Saudi Arabia', country: 'Saudi Arabia' },
   najran: { lat: 17.4924, lng: 44.1277, location_name: 'Najran Sector, Saudi Arabia', country: 'Saudi Arabia' },
   tehran: { lat: 35.6892, lng: 51.389, location_name: 'Tehran, Iran', country: 'Iran' },
-  'strait of hormuz': { lat: 26.5667, lng: 56.25, location_name: 'Strait of Hormuz', country: 'Iran' },
+  'strait of hormuz': { lat: 26.5667, lng: 56.25, location_name: 'Strait of Hormuz Strategic Chokepoint', country: 'Iran' },
   'persian gulf': { lat: 26.9, lng: 51.5, location_name: 'Persian Gulf', country: 'Iran' },
+  'kharg island': { lat: 29.248, lng: 50.316, location_name: 'Kharg Island Crude Export Terminal, Iran', country: 'Iran' },
   'bandar abbas': { lat: 27.1832, lng: 56.2666, location_name: 'Bandar Abbas Naval Base, Iran', country: 'Iran' },
+  fujairah: { lat: 25.128, lng: 56.326, location_name: 'Fujairah Crude Storage & Bunkering Hub', country: 'Iran' },
   isfahan: { lat: 32.6546, lng: 51.668, location_name: 'Isfahan, Iran', country: 'Iran' },
 };
 
@@ -156,9 +163,20 @@ function processRawEvent(raw: RawEvent): SecurityEvent | null {
   // If no clear link to the three target countries, discard per requirements
   if (!country) return null;
 
-  // Determine Category
+  // Determine Category (Prioritize Tanker Attacks, Pipelines & Refineries, Energy Markets)
   let category: EventCategory = 'military';
-  if (text.match(/strike|missile|drone|uav|intercept|bomb|explosion|shelling|attack/i)) {
+  const isMaritime = text.match(/tanker|vessel|commercial ship|bulk carrier|cargo ship|container ship|usv|sea drone|boarding|maritime|anti-ship|ukmto|ambrey|cargo|aframax|suezmax|vlcc/i);
+  const isAttack = text.match(/strike|missile|drone|uav|intercept|bomb|explosion|shelling|attack|fire|hit|boarded|hijack|seiz/i);
+
+  if (isMaritime && isAttack) {
+    category = 'tanker_attack';
+  } else if (text.match(/pipeline|petroline|pumping station|crude line|goureh|marib-ras isa/i)) {
+    category = 'pipeline_infrastructure';
+  } else if (text.match(/refinery|ras tanura|abqaiq|processing plant|storage tank|oil depot|yanbu terminal|kharg island/i)) {
+    category = 'refinery_disruption';
+  } else if (text.match(/brent|wti|crude oil|opec|barrel|insurance premium|war risk|oil price|bunkering|rerout|cape of good hope/i)) {
+    category = 'energy_market';
+  } else if (isAttack) {
     category = 'strike';
   } else if (text.match(/talks|diplomat|envoy|ceasefire|treaty|muscat|un envoy|de-escalat/i)) {
     category = 'diplomatic';
@@ -168,6 +186,43 @@ function processRawEvent(raw: RawEvent): SecurityEvent | null {
     category = 'military';
   } else {
     category = 'other';
+  }
+
+  // Assess Oil Market Impact Level
+  let oilMarketImpact: 'critical' | 'high' | 'moderate' | 'low' | 'neutral' = 'neutral';
+  if (category === 'tanker_attack' || category === 'refinery_disruption' || text.match(/explosion|fire|sunk|burning|spill/i)) {
+    oilMarketImpact = 'critical';
+  } else if (category === 'pipeline_infrastructure' || text.match(/strait of hormuz|insurance|rerout|bypass|closed/i)) {
+    oilMarketImpact = 'high';
+  } else if (category === 'energy_market' || text.match(/opec|crude|brent|wti|barrel/i)) {
+    oilMarketImpact = 'moderate';
+  }
+
+  // Detect Affected Strategic Infrastructure
+  const affectedInfra: string[] = [];
+  if (text.includes('petroline') || text.includes('east-west')) affectedInfra.push('East-West Petroline (Abqaiq-Yanbu)');
+  if (text.includes('bab al-mandab') || text.includes('red sea')) affectedInfra.push('Bab al-Mandab Chokepoint');
+  if (text.includes('hormuz') || text.includes('bandar abbas')) affectedInfra.push('Strait of Hormuz Chokepoint');
+  if (text.includes('ras tanura')) affectedInfra.push('Ras Tanura Export Terminal');
+  if (text.includes('abqaiq')) affectedInfra.push('Abqaiq Processing Facility');
+  if (text.includes('kharg')) affectedInfra.push('Kharg Island Crude Terminal');
+  if (text.includes('yanbu')) affectedInfra.push('Yanbu Red Sea Terminal');
+
+  // Detect Vessel Name (if commercial shipping incident)
+  let vesselName: string | null = null;
+  const vesselMatch = raw.title.match(/(?:m\/t|mv|tanker|vessel|ship)\s+([A-Z][a-zA-Z0-9\s]{2,20})/i);
+  if (vesselMatch) {
+    vesselName = vesselMatch[0].trim();
+  }
+
+  // Estimate Barrels at Risk if applicable
+  let barrelRiskEstimate: string | null = null;
+  if (category === 'tanker_attack') {
+    barrelRiskEstimate = text.includes('vlcc') ? '~2,000,000 Barrels Crude Cargo' : '~1,000,000 Barrels Crude Cargo';
+  } else if (category === 'pipeline_infrastructure') {
+    barrelRiskEstimate = '5,000,000 BPD Pipeline Capacity';
+  } else if (category === 'energy_market') {
+    barrelRiskEstimate = '~3,200,000 BPD Transit Volume Diverted';
   }
 
   // Geotag coordinates
@@ -240,6 +295,10 @@ function processRawEvent(raw: RawEvent): SecurityEvent | null {
     x_citations: xUrls,
     is_verified: raw.credibility_tier === 'tier_1',
     raw_keywords: [country, category],
+    oil_market_impact: oilMarketImpact,
+    affected_infrastructure: affectedInfra,
+    vessel_name: vesselName,
+    barrel_risk_estimate: barrelRiskEstimate,
   };
 }
 
