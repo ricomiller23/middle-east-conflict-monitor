@@ -14,17 +14,16 @@ export async function POST(req: NextRequest) {
 async function handleIngest(req: NextRequest) {
   const cronSecret = process.env.CRON_SECRET;
   const authHeader = req.headers.get('authorization');
+  const bearerToken = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
+  const urlSecret = req.nextUrl.searchParams.get('key');
 
-  // Verify Bearer token against CRON_SECRET
-  if (cronSecret) {
-    const bearerToken = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
-    const urlSecret = req.nextUrl.searchParams.get('key');
-
-    if (bearerToken !== cronSecret && urlSecret !== cronSecret) {
+  // Hardened security gate: Require valid CRON_SECRET in production
+  if (process.env.VERCEL === '1' || cronSecret) {
+    if (!cronSecret || (bearerToken !== cronSecret && urlSecret !== cronSecret)) {
       return NextResponse.json(
         {
           error: 'Unauthorized: Invalid or missing Bearer token matching CRON_SECRET.',
-          hint: 'Provide Authorization: Bearer <CRON_SECRET> header in your request.',
+          hint: 'Configure CRON_SECRET in Vercel environment variables and pass Authorization: Bearer <CRON_SECRET>.',
         },
         { status: 401 }
       );
