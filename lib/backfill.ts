@@ -57,6 +57,8 @@ export async function executeSixMonthBackfill(): Promise<BackfillResult> {
 
   // Deduplicate and collapse
   const deduplicated = deduplicateAndCollapse(processedEvents);
+  // Ensure strict descending chronological order (most recent first)
+  deduplicated.sort((a, b) => new Date(b.published_at || 0).getTime() - new Date(a.published_at || 0).getTime());
 
   // Upsert into database
   const ingestedCount = await upsertEvents(deduplicated);

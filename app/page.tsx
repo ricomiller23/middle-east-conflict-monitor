@@ -32,7 +32,11 @@ export default function DashboardPage() {
       const res = await fetch('/api/events?limit=2500');
       const data = await res.json();
       if (data.success && Array.isArray(data.events)) {
-        setEvents(data.events);
+        const sorted = data.events.sort(
+          (a: any, b: any) =>
+            new Date(b.published_at || 0).getTime() - new Date(a.published_at || 0).getTime()
+        );
+        setEvents(sorted);
       }
     } catch (err) {
       console.error('Failed to load events:', err);
@@ -67,9 +71,9 @@ export default function DashboardPage() {
     };
   }, [events]);
 
-  // Client-side filtering
+  // Client-side filtering with strict descending chronological order (most recent first)
   const filteredEvents = useMemo(() => {
-    return events.filter((ev) => {
+    const matched = events.filter((ev) => {
       if (isEnergyOnly) {
         const isEnergyCat =
           ev.category === 'tanker_attack' ||
@@ -100,6 +104,10 @@ export default function DashboardPage() {
       }
       return true;
     });
+
+    return matched.sort(
+      (a, b) => new Date(b.published_at || 0).getTime() - new Date(a.published_at || 0).getTime()
+    );
   }, [events, selectedCountry, selectedCategory, selectedTier, isEnergyOnly, search]);
 
   return (

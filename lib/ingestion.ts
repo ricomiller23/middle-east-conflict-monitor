@@ -99,6 +99,8 @@ export async function runIngestionPipeline(): Promise<{
 
   // 3. Deduplicate and collapse overlapping reports
   const deduplicatedEvents = deduplicateAndCollapse(scopedEvents);
+  // Ensure strict descending chronological order (most recent first)
+  deduplicatedEvents.sort((a, b) => new Date(b.published_at || 0).getTime() - new Date(a.published_at || 0).getTime());
 
   // 4. Diff against existing database records to find genuinely new events
   const existingEvents = await getEvents({ limit: 300 });

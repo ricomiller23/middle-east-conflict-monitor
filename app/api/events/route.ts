@@ -25,6 +25,9 @@ export async function GET(req: NextRequest) {
       offset,
     });
 
+    // Ensure strict descending chronological order (most recent first)
+    events.sort((a, b) => new Date(b.published_at || 0).getTime() - new Date(a.published_at || 0).getTime());
+
     return NextResponse.json({
       success: true,
       count: events.length,

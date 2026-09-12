@@ -164,6 +164,8 @@ export async function getEvents(filters?: {
     );
   }
 
+  // Guarantee strict chronological order (most recent first)
+  results.sort((a, b) => new Date(b.published_at || 0).getTime() - new Date(a.published_at || 0).getTime());
   return results.slice(offset, offset + limit);
 }
 
@@ -276,6 +278,8 @@ export async function upsertEvents(events: SecurityEvent[]): Promise<number> {
       insertedCount++;
     }
   }
+  // Always keep in-memory store strictly ordered by most recent first
+  inMemoryEvents.sort((a, b) => new Date(b.published_at || 0).getTime() - new Date(a.published_at || 0).getTime());
   inMemorySettings.total_events_tracked = inMemoryEvents.length;
   return insertedCount;
 }
@@ -881,6 +885,8 @@ function seedFallbackData() {
     }
   }
 
+  // Strictly sort all merged seed items descending by published_at (most recent first)
+  merged.sort((a, b) => new Date(b.published_at || 0).getTime() - new Date(a.published_at || 0).getTime());
   inMemoryEvents = merged;
 
   inMemoryLogs = [
