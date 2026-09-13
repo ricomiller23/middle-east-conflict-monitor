@@ -122,8 +122,8 @@ export async function GET(req: NextRequest) {
         category,
         credibility_tier,
         search,
-        limit,
-        offset,
+        limit: limitParam ? Math.max(limit * 4, 200) : 2500,
+        offset: 0,
       });
     }
 
