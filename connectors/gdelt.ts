@@ -20,7 +20,7 @@ export class GDELTConnector implements Connector {
     url.searchParams.set('sort', 'DateDesc');
 
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 12000);
+    const timeout = setTimeout(() => controller.abort(), 3500);
 
     try {
       const response = await fetch(url.toString(), {

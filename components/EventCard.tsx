@@ -50,15 +50,33 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
 
   const formatTimeAgo = (iso: string) => {
     try {
-      const diffMs = Date.now() - new Date(iso).getTime();
+      const d = new Date(iso);
+      if (isNaN(d.getTime())) return 'recent';
+      const diffMs = Date.now() - d.getTime();
       const diffHours = Math.floor(diffMs / 3600000);
-      if (diffHours < 1) {
+      let rel = "";
+      if (diffMs < 0) {
+        rel = "just now";
+      } else if (diffHours < 1) {
         const diffMins = Math.max(1, Math.floor(diffMs / 60000));
-        return `${diffMins}m ago`;
+        rel = `${diffMins}m ago`;
+      } else if (diffHours < 24) {
+        rel = `${diffHours}h ago`;
+      } else {
+        const diffDays = Math.floor(diffHours / 24);
+        rel = `${diffDays}d ago`;
       }
-      if (diffHours < 24) return `${diffHours}h ago`;
-      const diffDays = Math.floor(diffHours / 24);
-      return `${diffDays}d ago`;
+      const dateStr = d.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+      });
+      const timeStr = d.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+        timeZone: "UTC",
+      });
+      return `${rel} • ${dateStr} ${timeStr} UTC`;
     } catch {
       return 'recent';
     }

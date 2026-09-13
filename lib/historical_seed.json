@@ -1,5 +1,651 @@
 [
   {
+    "id": "live-SXJhbuKAmXMgUGV6ZXNo",
+    "title": "Iran’s Pezeshkian: ‘We are not at war with Saudi Arabia’",
+    "summary": "Iranian President Masoud Pezeshkian said Tehran is not at war with Saudi Arabia.",
+    "country": "Saudi Arabia",
+    "category": "military",
+    "primary_source": "Al Jazeera English",
+    "published_at": "2026-09-13T01:32:56.000Z",
+    "created_at": "2026-09-13T02:46:27.532Z",
+    "updated_at": "2026-09-13T02:46:27.532Z",
+    "credibility_tier": "tier_1",
+    "lat": 24.7136,
+    "lng": 46.6753,
+    "location_name": "Saudi Arabia (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-SXJhbuKAmXMgUGV6ZXNo",
+        "source_name": "Al Jazeera English",
+        "published_at": "2026-09-13T01:32:56.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "Iranian President Masoud Pezeshkian said Tehran is not at war with Saudi Arabia."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Saudi Arabia",
+      "military"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-SG91dGhpIHByb2plY3Rp",
+    "title": "Houthi projectile wounds two, damages mosque in Jazan region, Saudi says",
+    "summary": "The Houthis claim their attack targeted a Saudi military base in Sharurah.",
+    "country": "Yemen",
+    "category": "strike",
+    "primary_source": "Al Jazeera English",
+    "published_at": "2026-09-13T00:24:29.000Z",
+    "created_at": "2026-09-13T02:46:27.532Z",
+    "updated_at": "2026-09-13T02:46:27.532Z",
+    "credibility_tier": "tier_1",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-SG91dGhpIHByb2plY3Rp",
+        "source_name": "Al Jazeera English",
+        "published_at": "2026-09-13T00:24:29.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "The Houthis claim their attack targeted a Saudi military base in Sharurah."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "strike"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-SXJhbiB3YXIgbGl2ZTog",
+    "title": "Iran war live: Saudi Arabia and Houthis trade strikes over Bab al-Mandeb",
+    "summary": "Houthis accuse Saudi Arabia of launching 129 strikes in 48 hours as fears grow over impact on Riyadh’s oil industry.",
+    "country": "Yemen",
+    "category": "strike",
+    "primary_source": "Al Jazeera English",
+    "published_at": "2026-09-13T00:00:40.000Z",
+    "created_at": "2026-09-13T02:46:27.532Z",
+    "updated_at": "2026-09-13T02:46:27.532Z",
+    "credibility_tier": "tier_1",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-SXJhbiB3YXIgbGl2ZTog",
+        "source_name": "Al Jazeera English",
+        "published_at": "2026-09-13T00:00:40.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "Houthis accuse Saudi Arabia of launching 129 strikes in 48 hours as fears grow over impact on Riyadh’s oil industry."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "strike"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-T2lsIEluZHVzdHJ5IEJy",
+    "title": "Oil Industry Braces for Years-Long Iran War",
+    "summary": "Oil producers, traders, and refiners are bracing for a prolonged war between the United States and Iran in the Persian Gulf with little to no hope of a quick resolution. By extension, they are also preparing for higher prices for longer, a theme present at this year’s edition of the Asia Pacific Petroleum Conference. Reuters’ Clyde Russell reported",
+    "country": "Iran",
+    "category": "military",
+    "primary_source": "OilPrice.com Energy Intelligence",
+    "published_at": "2026-09-12T23:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-T2lsIEluZHVzdHJ5IEJy",
+        "source_name": "OilPrice.com Energy Intelligence",
+        "published_at": "2026-09-12T23:00:00.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "Oil producers, traders, and refiners are bracing for a prolonged war between the United States and Iran in the Persian Gulf with little to no hope of a quick resolution. By extension, they are also preparing for higher prices for longer, a theme pres"
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "military"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-4oCYV2UgTGVmdCBpbiB0",
+    "title": "‘We Left in the Clothes We Were Wearing’: Yemenis Flee New Fighting",
+    "summary": "Hunger and disease have tormented Yemen for years. Now, fighting between the Saudi-backed government and Iran-backed Houthis is pushing it to the brink.",
+    "country": "Yemen",
+    "category": "military",
+    "primary_source": "AP News Middle East",
+    "published_at": "2026-09-12T22:28:44.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-4oCYV2UgTGVmdCBpbiB0",
+        "source_name": "AP News Middle East",
+        "published_at": "2026-09-12T22:28:44.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "Hunger and disease have tormented Yemen for years. Now, fighting between the Saudi-backed government and Iran-backed Houthis is pushing it to the brink."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "military"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-QmFocmFpbiBzYXlzIGl0",
+    "title": "Bahrain says it will not participate in Iran’s proposed Hormuz meeting",
+    "summary": "Iran tells Al Jazeera that Monday&#039;s meeting is a sign of &#039;good intentions&#039; towards neighbouring countries.",
+    "country": "Iran",
+    "category": "military",
+    "primary_source": "Al Jazeera English",
+    "published_at": "2026-09-12T19:34:04.000Z",
+    "created_at": "2026-09-13T02:46:27.532Z",
+    "updated_at": "2026-09-13T02:46:27.532Z",
+    "credibility_tier": "tier_1",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-QmFocmFpbiBzYXlzIGl0",
+        "source_name": "Al Jazeera English",
+        "published_at": "2026-09-12T19:34:04.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "Iran tells Al Jazeera that Monday&#039;s meeting is a sign of &#039;good intentions&#039; towards neighbouring countries."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "military"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-V2lsbCBIb3V0aGkgYWR2",
+    "title": "Will Houthi advances in Yemen give Iran leverage in its war with the US?",
+    "summary": "The Iranian ally seizes Yemen&#039;s Red Sea coast, cementing their hold on the Bab al-Mandeb strait.",
+    "country": "Yemen",
+    "category": "military",
+    "primary_source": "Al Jazeera English",
+    "published_at": "2026-09-12T19:17:37.000Z",
+    "created_at": "2026-09-13T02:46:27.532Z",
+    "updated_at": "2026-09-13T02:46:27.532Z",
+    "credibility_tier": "tier_1",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-V2lsbCBIb3V0aGkgYWR2",
+        "source_name": "Al Jazeera English",
+        "published_at": "2026-09-12T19:17:37.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "The Iranian ally seizes Yemen&#039;s Red Sea coast, cementing their hold on the Bab al-Mandeb strait."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "military"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-U2F1ZGkgT2lsIEV4cG9y",
+    "title": "Saudi Oil Exports Face Heightened Threats After Attacks on Pipeline",
+    "summary": "Ship operators already faced severe risks in navigating the region, and now the danger is higher as Houthi militias assert control in the Red Sea.",
+    "country": "Yemen",
+    "category": "energy_market",
+    "primary_source": "AP News Middle East",
+    "published_at": "2026-09-12T18:55:20.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-U2F1ZGkgT2lsIEV4cG9y",
+        "source_name": "AP News Middle East",
+        "published_at": "2026-09-12T18:55:20.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "Ship operators already faced severe risks in navigating the region, and now the danger is higher as Houthi militias assert control in the Red Sea."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "energy_market"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-SXJhcSBwcm9iZXMgZHJv",
+    "title": "Iraq probes drone strikes on Saudi Arabia, shuts three crossings to Iran",
+    "summary": "PM Ali al-Zaidi dismisses commander, orders investigation into operations command in Maysan province, bordering Iran.",
+    "country": "Saudi Arabia",
+    "category": "strike",
+    "primary_source": "Al Jazeera English",
+    "published_at": "2026-09-12T18:53:31.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 24.7136,
+    "lng": 46.6753,
+    "location_name": "Saudi Arabia (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-SXJhcSBwcm9iZXMgZHJv",
+        "source_name": "Al Jazeera English",
+        "published_at": "2026-09-12T18:53:31.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "PM Ali al-Zaidi dismisses commander, orders investigation into operations command in Maysan province, bordering Iran."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Saudi Arabia",
+      "strike"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-SXJhbiwgVUFFIGhvbGQg",
+    "title": "Iran, UAE hold first talks at BRICS summit since conflict began",
+    "summary": "Iran’s President has met Abu Dhabi’s Crown Prince at the BRICS summit for their highest-level talks since the war began.",
+    "country": "Iran",
+    "category": "diplomatic",
+    "primary_source": "Al Jazeera English",
+    "published_at": "2026-09-12T18:36:17.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-SXJhbiwgVUFFIGhvbGQg",
+        "source_name": "Al Jazeera English",
+        "published_at": "2026-09-12T18:36:17.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "Iran’s President has met Abu Dhabi’s Crown Prince at the BRICS summit for their highest-level talks since the war began."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "diplomatic"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-SXJhbiBGaW5kcyBFc2Nh",
+    "title": "Iran Finds Escalation Is Fruitful Path to Leverage in War With U.S.",
+    "summary": "Iran and its allies now hold sway over two key oil shipping routes, and Tehran is setting the stage for a diplomatic win that could enhance its stature.",
+    "country": "Iran",
+    "category": "diplomatic",
+    "primary_source": "AP News Middle East",
+    "published_at": "2026-09-12T18:07:10.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-SXJhbiBGaW5kcyBFc2Nh",
+        "source_name": "AP News Middle East",
+        "published_at": "2026-09-12T18:07:10.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "Iran and its allies now hold sway over two key oil shipping routes, and Tehran is setting the stage for a diplomatic win that could enhance its stature."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "diplomatic"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-U2F1ZGkgQXJhYmlh4oCZ",
+    "title": "Saudi Arabia’s Oil ‘Lifeline’ Was Attacked. Here’s What to Know.",
+    "summary": "A drone attack from Iraq forced Saudi Arabia to close its East-West pipeline, the kingdom said, threatening a key workaround to Iran’s Persian Gulf blockade.",
+    "country": "Saudi Arabia",
+    "category": "energy_market",
+    "primary_source": "AP News Middle East",
+    "published_at": "2026-09-12T18:02:41.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 24.7136,
+    "lng": 46.6753,
+    "location_name": "Saudi Arabia (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-U2F1ZGkgQXJhYmlh4oCZ",
+        "source_name": "AP News Middle East",
+        "published_at": "2026-09-12T18:02:41.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "A drone attack from Iraq forced Saudi Arabia to close its East-West pipeline, the kingdom said, threatening a key workaround to Iran’s Persian Gulf blockade."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Saudi Arabia",
+      "energy_market"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-SXJhbuKAmXMgU2VjdXJp",
+    "title": "Iran’s Security Crackdown Runs Into Resistance From Within",
+    "summary": "Iran&#039;s parliament is trying to turn fears of foreign infiltration into law. But as lawmakers work through the legislation, the debate is exposing an increasingly awkward question for the Islamic Republic: How far should the state go in policing Iranians&#039; contact with the outside world? At the center of that debate is Parliament Speaker Mo",
+    "country": "Iran",
+    "category": "military",
+    "primary_source": "OilPrice.com Energy Intelligence",
+    "published_at": "2026-09-12T17:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-SXJhbuKAmXMgU2VjdXJp",
+        "source_name": "OilPrice.com Energy Intelligence",
+        "published_at": "2026-09-12T17:00:00.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "Iran&#039;s parliament is trying to turn fears of foreign infiltration into law. But as lawmakers work through the legislation, the debate is exposing an increasingly awkward question for the Islamic Republic: How far should the state go in policing "
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "military"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-QW4gQXJ0aXN0IEluc3Bp",
+    "title": "An Artist Inspired by Men Behaving Badly",
+    "summary": "In a new show at David Kordansky Gallery, the Iranian American painter Tala Madani plumbs the lives of her characters with absurd humor and a strange tenderness.",
+    "country": "Iran",
+    "category": "military",
+    "primary_source": "AP News Middle East",
+    "published_at": "2026-09-12T13:38:06.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-QW4gQXJ0aXN0IEluc3Bp",
+        "source_name": "AP News Middle East",
+        "published_at": "2026-09-12T13:38:06.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "In a new show at David Kordansky Gallery, the Iranian American painter Tala Madani plumbs the lives of her characters with absurd humor and a strange tenderness."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "military"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-V2h5IE1va2hhLCBIaXN0",
+    "title": "Why Mokha, Historic Port That Shaped the Coffee Trade, Is a Prize in Yemen’s War",
+    "summary": "A strategic location on the Red Sea afforded the city centuries of trading dominance — and makes it a coveted target in today’s fighting in the Middle East.",
+    "country": "Yemen",
+    "category": "military",
+    "primary_source": "AP News Middle East",
+    "published_at": "2026-09-12T12:47:51.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-V2h5IE1va2hhLCBIaXN0",
+        "source_name": "AP News Middle East",
+        "published_at": "2026-09-12T12:47:51.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "A strategic location on the Red Sea afforded the city centuries of trading dominance — and makes it a coveted target in today’s fighting in the Middle East."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "military"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-U2F1ZGkgQXJhYmlhIHNo",
+    "title": "Saudi Arabia shuts key oil pipeline after drone attack launched from Iraq",
+    "summary": "Iraq removes a military commander and opens investigations into the attack that came from an area bordering Iran.",
+    "country": "Saudi Arabia",
+    "category": "energy_market",
+    "primary_source": "Reuters World",
+    "published_at": "2026-09-12T12:15:50.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 24.7136,
+    "lng": 46.6753,
+    "location_name": "Saudi Arabia (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-U2F1ZGkgQXJhYmlhIHNo",
+        "source_name": "Reuters World",
+        "published_at": "2026-09-12T12:15:50.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "Iraq removes a military commander and opens investigations into the attack that came from an area bordering Iran."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Saudi Arabia",
+      "energy_market"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-U2F1ZGlzIFNodXQgRG93",
+    "title": "Saudis Shut Down Crucial Pipeline After Drone Attack From Iraq",
+    "summary": "The news briefly pushed the price of oil to $110 a barrel over heightened fears of widening clashes in the Middle East.",
+    "country": "Saudi Arabia",
+    "category": "energy_market",
+    "primary_source": "AP News Middle East",
+    "published_at": "2026-09-11T22:51:56.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 24.7136,
+    "lng": 46.6753,
+    "location_name": "Saudi Arabia (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-U2F1ZGlzIFNodXQgRG93",
+        "source_name": "AP News Middle East",
+        "published_at": "2026-09-11T22:51:56.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "The news briefly pushed the price of oil to $110 a barrel over heightened fears of widening clashes in the Middle East."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Saudi Arabia",
+      "energy_market"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-RXVyb3BlJiMwMzk7cyAi",
+    "title": "Europe&#039;s \"Less\" Is Doing More Than Anyone Gives It Credit For",
+    "summary": "Brent is sitting a touch above $104 this morning, down slightly from yesterday&#039;s surge. The Strait of Hormuz, which used to move something like a fifth of the world&#039;s oil and LNG before the war, has been effectively shut since March. Saudi output dropped around 1.9 million barrels a day in August, tanker rates are breaking records, and th",
+    "country": "Saudi Arabia",
+    "category": "energy_market",
+    "primary_source": "OilPrice.com Energy Intelligence",
+    "published_at": "2026-09-11T22:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 24.7136,
+    "lng": 46.6753,
+    "location_name": "Saudi Arabia (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-RXVyb3BlJiMwMzk7cyAi",
+        "source_name": "OilPrice.com Energy Intelligence",
+        "published_at": "2026-09-11T22:00:00.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "Brent is sitting a touch above $104 this morning, down slightly from yesterday&#039;s surge. The Strait of Hormuz, which used to move something like a fifth of the world&#039;s oil and LNG before the war, has been effectively shut since March. Saudi "
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Saudi Arabia",
+      "energy_market"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-TGlnaHRuaW5nIEhvdXRo",
+    "title": "Lightning Houthi advance in Yemen may bring dangerous new dimension to Iran war",
+    "summary": "The capture by the rebels of a stretch of Yemen's strategic coastline is the group's most impressive military coup for several years.",
+    "country": "Yemen",
+    "category": "military",
+    "primary_source": "Reuters World",
+    "published_at": "2026-09-11T19:44:58.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-TGlnaHRuaW5nIEhvdXRo",
+        "source_name": "Reuters World",
+        "published_at": "2026-09-11T19:44:58.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "The capture by the rebels of a stretch of Yemen's strategic coastline is the group's most impressive military coup for several years."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "military"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
     "id": "hist-sa-saudiarabiashutsdownpipelinethat",
     "title": "Saudi Arabia Shuts Down Pipeline That Was a Crucial Hormuz Bypass",
     "summary": "Saudi Arabia Shuts Down Pipeline That Was a Crucial Hormuz Bypass &nbsp;&nbsp; WSJ",
@@ -580,6 +1226,40 @@
     "synopsis": null
   },
   {
+    "id": "live-RHJvbmUgU3RyaWtlcyBI",
+    "title": "Drone Strikes Hit Saudi Arabia’s Vital East-West Oil Pipeline",
+    "summary": "Saudi Arabia’s critical East-West oil pipeline system was struck on Thursday, with multiple pumping stations hit in an attack that could threaten one of the kingdom’s most important crude export routes, according to CNN, citing two U.S. officials familiar with the matter. The confirmation comes after satellite data on Thursday pointed to unusual ac",
+    "country": "Saudi Arabia",
+    "category": "energy_market",
+    "primary_source": "OilPrice.com Energy Intelligence",
+    "published_at": "2026-09-11T17:04:36.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 24.7136,
+    "lng": 46.6753,
+    "location_name": "Saudi Arabia (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-RHJvbmUgU3RyaWtlcyBI",
+        "source_name": "OilPrice.com Energy Intelligence",
+        "published_at": "2026-09-11T17:04:36.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "Saudi Arabia’s critical East-West oil pipeline system was struck on Thursday, with multiple pumping stations hit in an attack that could threaten one of the kingdom’s most important crude export routes, according to CNN, citing two U.S. officials fam"
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Saudi Arabia",
+      "energy_market"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
     "id": "hist-ye-howansarallahsweptpastsaudibacke",
     "title": "How Ansarallah Swept Past Saudi-Backed Forces to Control Yemen’s Red Sea Coast",
     "summary": "How Ansarallah Swept Past Saudi-Backed Forces to Control Yemen’s Red Sea Coast &nbsp;&nbsp; Drop Site News",
@@ -958,6 +1638,40 @@
     "synopsis": null
   },
   {
+    "id": "live-U3VwZXJ0YW5rZXIgUmF0",
+    "title": "Supertanker Rates Hit $800,000 a Day as Gulf Tensions Escalate",
+    "summary": "Supertanker rates on the Baltic Exchange&#039;s benchmark Middle East-to-China shipping route have surged to a staggering $800,000 a day. With US forces having destroyed five Iranian-linked tankers and Tehran threatening further escalation in recent days, prospects for near-term stabilization remain limited. The freight surge signals that crude oil",
+    "country": "Iran",
+    "category": "energy_market",
+    "primary_source": "OilPrice.com Energy Intelligence",
+    "published_at": "2026-09-11T16:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-U3VwZXJ0YW5rZXIgUmF0",
+        "source_name": "OilPrice.com Energy Intelligence",
+        "published_at": "2026-09-11T16:00:00.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "Supertanker rates on the Baltic Exchange&#039;s benchmark Middle East-to-China shipping route have surged to a staggering $800,000 a day. With US forces having destroyed five Iranian-linked tankers and Tehran threatening further escalation in recent "
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "energy_market"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
     "id": "hist-ye-yemensiranianbackedhouthisseizea",
     "title": "Yemen's Iranian-backed Houthis seize an island in a key strait, opening a new front in the Iran war",
     "summary": "Yemen's Iranian-backed Houthis seize an island in a key strait, opening a new front in the Iran War &nbsp;&nbsp; Gulf Coast News and Weather",
@@ -1222,6 +1936,40 @@
     "affected_infrastructure": [],
     "vessel_name": "tanker rates hit record high",
     "barrel_risk_estimate": "~1,000,000 Barrels Crude Cargo",
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-VUFFIFJldGhpbmtzIDUt",
+    "title": "UAE Rethinks 5-Gigawatt AI Campus After Iran Targets US Assets in Gulf",
+    "summary": "The United Arab Emirates (UAE) is considering significant changes to its plans to build a massive 5-gigawatt AI data center in Abu Dhabi in partnership with U.S. tech giants, after Iran started targeting American air bases and U.S.-linked critical infrastructure in the Persian Gulf, multiple sources have told Reuters. The UAE, which aims to become ",
+    "country": "Iran",
+    "category": "military",
+    "primary_source": "OilPrice.com Energy Intelligence",
+    "published_at": "2026-09-11T14:30:00.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-VUFFIFJldGhpbmtzIDUt",
+        "source_name": "OilPrice.com Energy Intelligence",
+        "published_at": "2026-09-11T14:30:00.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "The United Arab Emirates (UAE) is considering significant changes to its plans to build a massive 5-gigawatt AI data center in Abu Dhabi in partnership with U.S. tech giants, after Iran started targeting American air bases and U.S.-linked critical in"
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "military"
+    ],
     "audio_url": null,
     "podcast_duration": null,
     "is_podcast_analysis": false,
@@ -2232,6 +2980,40 @@
     "synopsis": null
   },
   {
+    "id": "live-QmVoaW5kIHRoZSBTY2Vu",
+    "title": "Behind the Scenes, Vance Gathered Unvarnished Views of the Iran War",
+    "summary": "Vice President JD Vance received sobering assessments about the war that did not line up with what he, President Trump and other top administration officials were saying publicly.",
+    "country": "Iran",
+    "category": "military",
+    "primary_source": "AP News Middle East",
+    "published_at": "2026-09-11T01:17:31.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-QmVoaW5kIHRoZSBTY2Vu",
+        "source_name": "AP News Middle East",
+        "published_at": "2026-09-11T01:17:31.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "Vice President JD Vance received sobering assessments about the war that did not line up with what he, President Trump and other top administration officials were saying publicly."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "military"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
     "id": "hist-ye-yemenrisksreturntocivilwarasiran",
     "title": "Yemen risks return to civil war as Iran-backed Houthis target vital oil shipping route",
     "summary": "Yemen risks return to civil war as Iran-backed Houthis target vital oil shipping route &nbsp;&nbsp; PBS",
@@ -2414,6 +3196,40 @@
     ],
     "vessel_name": null,
     "barrel_risk_estimate": null,
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-SG91dGhpcyBTZWl6ZSBT",
+    "title": "Houthis Seize Strategic Red Sea Port, a Major Victory for Iranian Ally",
+    "summary": "The Iran-backed militia routed Yemeni government forces in Mokha, putting the group in a stronger position to attack ships in a crucial waterway for global trade.",
+    "country": "Yemen",
+    "category": "strike",
+    "primary_source": "AP News Middle East",
+    "published_at": "2026-09-10T19:31:31.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-SG91dGhpcyBTZWl6ZSBT",
+        "source_name": "AP News Middle East",
+        "published_at": "2026-09-10T19:31:31.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "The Iran-backed militia routed Yemeni government forces in Mokha, putting the group in a stronger position to attack ships in a crucial waterway for global trade."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "strike"
+    ],
     "audio_url": null,
     "podcast_duration": null,
     "is_podcast_analysis": false,
@@ -2788,6 +3604,40 @@
     "synopsis": null
   },
   {
+    "id": "live-V2h5IFllbWVuIElzIEJh",
+    "title": "Why Yemen Is Back on the Brink of War",
+    "summary": "The Houthi militia, the Yemeni government, Iran and Saudi Arabia all have reasons to escalate the conflict. Here’s what to know.",
+    "country": "Yemen",
+    "category": "military",
+    "primary_source": "AP News Middle East",
+    "published_at": "2026-09-10T16:12:07.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-V2h5IFllbWVuIElzIEJh",
+        "source_name": "AP News Middle East",
+        "published_at": "2026-09-10T16:12:07.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "The Houthi militia, the Yemeni government, Iran and Saudi Arabia all have reasons to escalate the conflict. Here’s what to know."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "military"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
     "id": "hist-ye-houthisseizeyemensmochaporthowir",
     "title": "Houthis seize Yemen’s Mocha port: How Iran’s proxy war threatens Red Sea",
     "summary": "Houthis seize Yemen’s Mocha port: How Iran’s proxy war threatens Red Sea &nbsp;&nbsp; The Indian Express",
@@ -3108,6 +3958,40 @@
     "affected_infrastructure": [],
     "vessel_name": null,
     "barrel_risk_estimate": null,
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-SXJhbiB3YXIgd29uJ3Qg",
+    "title": "Iran war won't end until after crucial November elections, says Trump",
+    "summary": "The president also said oil prices won't come down until after the November races, claiming without evidence that Iran wants to impact the election.",
+    "country": "Iran",
+    "category": "military",
+    "primary_source": "Reuters World",
+    "published_at": "2026-09-10T10:43:53.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-SXJhbiB3YXIgd29uJ3Qg",
+        "source_name": "Reuters World",
+        "published_at": "2026-09-10T10:43:53.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "The president also said oil prices won't come down until after the November races, claiming without evidence that Iran wants to impact the election."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "military"
+    ],
     "audio_url": null,
     "podcast_duration": null,
     "is_podcast_analysis": false,
@@ -3562,6 +4446,40 @@
     "synopsis": null
   },
   {
+    "id": "live-T2lsIEhpdHMgJDEwMCBh",
+    "title": "Oil Hits $100 a Barrel as Turmoil Intensifies in Middle East",
+    "summary": "The cost of crude has risen 40 percent since the start of the war in Iran, pushing up the price of gasoline, diesel and other refined fuels.",
+    "country": "Iran",
+    "category": "energy_market",
+    "primary_source": "AP News Middle East",
+    "published_at": "2026-09-10T04:28:03.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-T2lsIEhpdHMgJDEwMCBh",
+        "source_name": "AP News Middle East",
+        "published_at": "2026-09-10T04:28:03.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "The cost of crude has risen 40 percent since the start of the war in Iran, pushing up the price of gasoline, diesel and other refined fuels."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "energy_market"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
     "id": "hist-ye-pakistanpledgesunwaveringsolidar",
     "title": "Pakistan pledges ‘unwavering solidarity’ with Saudi Arabia after Houthi attacks",
     "summary": "Pakistan pledges ‘unwavering solidarity’ with Saudi Arabia after Houthi attacks &nbsp;&nbsp; アラブニュース",
@@ -3918,6 +4836,40 @@
     "affected_infrastructure": [],
     "vessel_name": null,
     "barrel_risk_estimate": "~1,000,000 Barrels Crude Cargo",
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-SXJhbiByZWZlcnJlZCB0",
+    "title": "Iran referred to UN Security Council for nuclear non-compliance",
+    "summary": "Tehran condemns the resolution, blaming US and Israeli strikes on its nuclear facilities for disrupting inspections.",
+    "country": "Iran",
+    "category": "diplomatic",
+    "primary_source": "Reuters World",
+    "published_at": "2026-09-09T20:22:51.000Z",
+    "created_at": "2026-09-13T02:46:27.534Z",
+    "updated_at": "2026-09-13T02:46:27.534Z",
+    "credibility_tier": "tier_1",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-SXJhbiByZWZlcnJlZCB0",
+        "source_name": "Reuters World",
+        "published_at": "2026-09-09T20:22:51.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "Tehran condemns the resolution, blaming US and Israeli strikes on its nuclear facilities for disrupting inspections."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "diplomatic"
+    ],
     "audio_url": null,
     "podcast_duration": null,
     "is_podcast_analysis": false,
@@ -4366,6 +5318,40 @@
     "synopsis": null
   },
   {
+    "id": "live-T2lsIGhpdHMgJDEwMCBh",
+    "title": "Oil hits $100 a barrel for first time since July after US and Houthi strikes",
+    "summary": "Brent crude - the global benchmark for prices - rises after the US hit five Iranian tankers on Tuesday",
+    "country": "Yemen",
+    "category": "energy_market",
+    "primary_source": "Reuters World",
+    "published_at": "2026-09-09T16:46:53.000Z",
+    "created_at": "2026-09-13T02:46:27.534Z",
+    "updated_at": "2026-09-13T02:46:27.534Z",
+    "credibility_tier": "tier_1",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-T2lsIGhpdHMgJDEwMCBh",
+        "source_name": "Reuters World",
+        "published_at": "2026-09-09T16:46:53.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "Brent crude - the global benchmark for prices - rises after the US hit five Iranian tankers on Tuesday"
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "energy_market"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
     "id": "hist-ye-saudiarabiakills23inyemenprisons",
     "title": "Saudi Arabia Kills 23 in Yemen Prison Strike in Al-Jawf, Ansarallah Says: who 11 outlets blamed",
     "summary": "Saudi Arabia Kills 23 in Yemen Prison Strike in Al-Jawf, Ansarallah Says: who 11 outlets blamed &nbsp;&nbsp; NewsCord",
@@ -4644,6 +5630,40 @@
     "affected_infrastructure": [],
     "vessel_name": null,
     "barrel_risk_estimate": "~1,000,000 Barrels Crude Cargo",
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-SXJhbiBTaWduYWxzIFJl",
+    "title": "Iran Signals Readiness to Escalate War With U.S. Amid Rising Economic Pressure",
+    "summary": "The Iranian government is taking an increasingly aggressive approach as it confronts a growing economic threat and worries that its grip on the Strait of Hormuz is slipping, analysts say.",
+    "country": "Iran",
+    "category": "military",
+    "primary_source": "AP News Middle East",
+    "published_at": "2026-09-09T12:04:46.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-SXJhbiBTaWduYWxzIFJl",
+        "source_name": "AP News Middle East",
+        "published_at": "2026-09-09T12:04:46.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "The Iranian government is taking an increasingly aggressive approach as it confronts a growing economic threat and worries that its grip on the Strait of Hormuz is slipping, analysts say."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "military"
+    ],
     "audio_url": null,
     "podcast_duration": null,
     "is_podcast_analysis": false,
@@ -5432,6 +6452,40 @@
     "synopsis": null
   },
   {
+    "id": "live-VS5TLiBIaXRzIDUgSXJh",
+    "title": "U.S. Hits 5 Iranian Oil Tankers, Citing Attempted Strikes on Warship",
+    "summary": "Iran retaliated by launching missiles at Jordan, raising the specter of still more fighting.",
+    "country": "Iran",
+    "category": "tanker_attack",
+    "primary_source": "AP News Middle East",
+    "published_at": "2026-09-09T00:50:19.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-VS5TLiBIaXRzIDUgSXJh",
+        "source_name": "AP News Middle East",
+        "published_at": "2026-09-09T00:50:19.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "Iran retaliated by launching missiles at Jordan, raising the specter of still more fighting."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "tanker_attack"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
     "id": "hist-ir-brentcrudeoiltops101tocloseathig",
     "title": "Brent crude oil tops $101 to close at highest level since May as fighting escalates in Persian Gulf",
     "summary": "Brent crude oil tops $101 to close at highest level since May as fighting escalates in Persian Gulf &nbsp;&nbsp; CNBC",
@@ -5926,6 +6980,40 @@
     "affected_infrastructure": [],
     "vessel_name": "tanker attacks signal a dang",
     "barrel_risk_estimate": "~1,000,000 Barrels Crude Cargo",
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-T2lsIENsaW1icyBUb3dh",
+    "title": "Oil Climbs Toward $100 a Barrel Following Houthi Attacks",
+    "summary": "Analysts said they expected the price of Brent crude, the international benchmark, to remain elevated for the rest of the year.",
+    "country": "Yemen",
+    "category": "energy_market",
+    "primary_source": "AP News Middle East",
+    "published_at": "2026-09-08T20:39:15.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-T2lsIENsaW1icyBUb3dh",
+        "source_name": "AP News Middle East",
+        "published_at": "2026-09-08T20:39:15.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "Analysts said they expected the price of Brent crude, the international benchmark, to remain elevated for the rest of the year."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "energy_market"
+    ],
     "audio_url": null,
     "podcast_duration": null,
     "is_podcast_analysis": false,
@@ -8404,6 +9492,40 @@
     "synopsis": null
   },
   {
+    "id": "live-RGlkIHRoZSBGQkkgYnVy",
+    "title": "Did the FBI bury evidence of alleged Saudi agent’s role in 9/11?",
+    "summary": "Omar al-Bayoumi has always denied being an extremist and a Saudi spy.",
+    "country": "Saudi Arabia",
+    "category": "military",
+    "primary_source": "Reuters World",
+    "published_at": "2026-09-07T06:32:06.000Z",
+    "created_at": "2026-09-13T02:46:27.534Z",
+    "updated_at": "2026-09-13T02:46:27.534Z",
+    "credibility_tier": "tier_1",
+    "lat": 24.7136,
+    "lng": 46.6753,
+    "location_name": "Saudi Arabia (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-RGlkIHRoZSBGQkkgYnVy",
+        "source_name": "Reuters World",
+        "published_at": "2026-09-07T06:32:06.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "Omar al-Bayoumi has always denied being an extremist and a Saudi spy."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Saudi Arabia",
+      "military"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
     "id": "hist-ye-howsignificantaretheyemenigovern",
     "title": "How significant are the Yemeni government’s military gains against Houthis?",
     "summary": "How significant are the Yemeni government’s military gains against Houthis? &nbsp;&nbsp; Al Jazeera",
@@ -8604,6 +9726,40 @@
     ],
     "vessel_name": null,
     "barrel_risk_estimate": null,
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-T1BFQyBQbHVzIEhvbGRz",
+    "title": "OPEC Plus Holds Oil Production Steady as U.S.-Iran Strikes Resume",
+    "summary": "The decision on Sunday by the cartel of oil-producing nations and some of its allies came after the resumption of U.S. and Iranian military strikes in the Persian Gulf.",
+    "country": "Iran",
+    "category": "strike",
+    "primary_source": "AP News Middle East",
+    "published_at": "2026-09-06T17:24:41.000Z",
+    "created_at": "2026-09-13T02:46:27.533Z",
+    "updated_at": "2026-09-13T02:46:27.533Z",
+    "credibility_tier": "tier_1",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-T1BFQyBQbHVzIEhvbGRz",
+        "source_name": "AP News Middle East",
+        "published_at": "2026-09-06T17:24:41.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "The decision on Sunday by the cartel of oil-producing nations and some of its allies came after the resumption of U.S. and Iranian military strikes in the Persian Gulf."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "strike"
+    ],
     "audio_url": null,
     "podcast_duration": null,
     "is_podcast_analysis": false,
@@ -9669,6 +10825,40 @@
     "synopsis": null
   },
   {
+    "id": "live-SG93IGNvdWxkIFVTLUly",
+    "title": "How could US-Iran conflict end? Three experts give their views",
+    "summary": "After renewed strikes this week, does either side have an exit strategy?",
+    "country": "Iran",
+    "category": "strike",
+    "primary_source": "Reuters World",
+    "published_at": "2026-09-04T09:14:57.000Z",
+    "created_at": "2026-09-13T02:46:27.534Z",
+    "updated_at": "2026-09-13T02:46:27.534Z",
+    "credibility_tier": "tier_1",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-SG93IGNvdWxkIFVTLUly",
+        "source_name": "Reuters World",
+        "published_at": "2026-09-04T09:14:57.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "After renewed strikes this week, does either side have an exit strategy?"
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "strike"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
     "id": "hist-ir-vanceextremelyskepticalusstrikeh",
     "title": "Vance \"extremely skeptical\" U.S. strike hit Iran wedding party, says he wouldn't call conflict a war",
     "summary": "Vance \"extremely skeptical\" U.S. strike hit Iran wedding party, says he wouldn't call conflict a war &nbsp;&nbsp; CBS News",
@@ -9703,6 +10893,40 @@
     "affected_infrastructure": [],
     "vessel_name": null,
     "barrel_risk_estimate": null,
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-V2hhdCB3ZSBrbm93IGFi",
+    "title": "What we know about reported strike on Iran wedding celebrations",
+    "summary": "BBC Verify looks at footage showing the aftermath of a strike on a building in southern Iran.",
+    "country": "Iran",
+    "category": "strike",
+    "primary_source": "Reuters World",
+    "published_at": "2026-09-02T21:02:35.000Z",
+    "created_at": "2026-09-13T02:46:27.534Z",
+    "updated_at": "2026-09-13T02:46:27.534Z",
+    "credibility_tier": "tier_1",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-V2hhdCB3ZSBrbm93IGFi",
+        "source_name": "Reuters World",
+        "published_at": "2026-09-02T21:02:35.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "BBC Verify looks at footage showing the aftermath of a strike on a building in southern Iran."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "strike"
+    ],
     "audio_url": null,
     "podcast_duration": null,
     "is_podcast_analysis": false,
@@ -13357,6 +14581,40 @@
     ],
     "vessel_name": null,
     "barrel_risk_estimate": "~1,000,000 Barrels Crude Cargo",
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-VHJ1bXAgaG9wZXMgc2Fu",
+    "title": "Trump hopes sanctions will topple Iran's regime - its leaders are betting otherwise",
+    "summary": "The US says new sanctions are an \"economic D-Day\", but Tehran's leaders have survived restrictions before.",
+    "country": "Iran",
+    "category": "military",
+    "primary_source": "Reuters World",
+    "published_at": "2026-08-25T12:37:53.000Z",
+    "created_at": "2026-09-13T02:46:27.534Z",
+    "updated_at": "2026-09-13T02:46:27.534Z",
+    "credibility_tier": "tier_1",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-VHJ1bXAgaG9wZXMgc2Fu",
+        "source_name": "Reuters World",
+        "published_at": "2026-08-25T12:37:53.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "The US says new sanctions are an \"economic D-Day\", but Tehran's leaders have survived restrictions before."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "military"
+    ],
     "audio_url": null,
     "podcast_duration": null,
     "is_podcast_analysis": false,
@@ -20514,6 +21772,40 @@
     "synopsis": null
   },
   {
+    "id": "live-V2hhdCBpcyBJcmFuJ3Mg",
+    "title": "What is Iran's Pickaxe Mountain and why does Trump say he wants to bomb it?",
+    "summary": "BBC Verify has spoken to experts and analysed satellite imagery to piece together what we know about the site, and the potential impact of a US strike.",
+    "country": "Iran",
+    "category": "strike",
+    "primary_source": "Reuters World",
+    "published_at": "2026-08-01T05:01:19.000Z",
+    "created_at": "2026-09-13T02:46:27.534Z",
+    "updated_at": "2026-09-13T02:46:27.534Z",
+    "credibility_tier": "tier_1",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-V2hhdCBpcyBJcmFuJ3Mg",
+        "source_name": "Reuters World",
+        "published_at": "2026-08-01T05:01:19.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "BBC Verify has spoken to experts and analysed satellite imagery to piece together what we know about the site, and the potential impact of a US strike."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "strike"
+    ],
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
     "id": "hist-ye-anotherwarisstartinginthemiddlee",
     "title": "Another War is Starting in the Middle East",
     "summary": "The Middle East is spiraling again. Discover how Yemen’s Houthis, Saudi Arabia, strategic waterways, and global oil routes could ignite another devastating conflict with worldwide economic consequences.",
@@ -21662,6 +22954,40 @@
     "affected_infrastructure": [],
     "vessel_name": null,
     "barrel_risk_estimate": "5,000,000 BPD Pipeline Capacity",
+    "audio_url": null,
+    "podcast_duration": null,
+    "is_podcast_analysis": false,
+    "synopsis": null
+  },
+  {
+    "id": "live-J0VuZCB0aGlzIG5pZ2h0",
+    "title": "'End this nightmare': Wife of ailing Briton jailed in Saudi Arabia appeals for release",
+    "summary": "Ahmed al-Doush has been in jail in Saudi Arabia since 2024, apparently over a handful of social media posts dating back several years.",
+    "country": "Saudi Arabia",
+    "category": "military",
+    "primary_source": "Reuters World",
+    "published_at": "2026-07-30T06:51:46.000Z",
+    "created_at": "2026-09-13T02:46:27.534Z",
+    "updated_at": "2026-09-13T02:46:27.534Z",
+    "credibility_tier": "tier_1",
+    "lat": 24.7136,
+    "lng": 46.6753,
+    "location_name": "Saudi Arabia (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-J0VuZCB0aGlzIG5pZ2h0",
+        "source_name": "Reuters World",
+        "published_at": "2026-07-30T06:51:46.000Z",
+        "credibility_tier": "tier_1",
+        "snippet": "Ahmed al-Doush has been in jail in Saudi Arabia since 2024, apparently over a handful of social media posts dating back several years."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Saudi Arabia",
+      "military"
+    ],
     "audio_url": null,
     "podcast_duration": null,
     "is_podcast_analysis": false,
@@ -73329,5 +74655,1195 @@
     "podcast_duration": null,
     "is_podcast_analysis": false,
     "synopsis": null
+  },
+  {
+    "id": "live-QW1lcmljYSBhbmQgSXNy",
+    "title": "America and Israel are at War with Iran",
+    "summary": "America and Israel launch massive strikes on Iran in Operation Epic Fury. Missiles fly, Gulf bases hit, oil markets tremble. Is this the start of regional war—or regime change?",
+    "country": "Iran",
+    "category": "strike",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2026-02-28T17:37:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-QW1lcmljYSBhbmQgSXNy",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2026-02-28T17:37:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "America and Israel launch massive strikes on Iran in Operation Epic Fury. Missiles fly, Gulf bases hit, oil markets tremble. Is this the start of regional war—or regime change?"
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "strike"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL4913913275.mp3?updated=1772481710",
+    "podcast_duration": "19m 27s",
+    "is_podcast_analysis": true,
+    "synopsis": "America and Israel launch massive strikes on Iran in Operation Epic Fury. Missiles fly, Gulf bases hit, oil markets tremble. Is this the start of regional war—or regime change?"
+  },
+  {
+    "id": "live-SXJhbiBDYW4ndCBXaW4u",
+    "title": "Iran Can't Win. But it Can Hurt America.",
+    "summary": "As U.S.–Iran tensions surge, ballistic missiles, drones, and the Strait of Hormuz hang in the balance. If America strikes, how devastating could Iran’s retaliation be—for troops, oil markets, and the world?",
+    "country": "Iran",
+    "category": "strike",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2026-02-25T19:24:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-SXJhbiBDYW4ndCBXaW4u",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2026-02-25T19:24:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "As U.S.–Iran tensions surge, ballistic missiles, drones, and the Strait of Hormuz hang in the balance. If America strikes, how devastating could Iran’s retaliation be—for troops, oil markets, and the world?"
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "strike"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL9915610796.mp3?updated=1772136241",
+    "podcast_duration": "28m 45s",
+    "is_podcast_analysis": true,
+    "synopsis": "As U.S.–Iran tensions surge, ballistic missiles, drones, and the Strait of Hormuz hang in the balance. If America strikes, how devastating could Iran’s retaliation be—for troops, oil markets, and the world?"
+  },
+  {
+    "id": "live-VHJ1bXAgR2F2ZSBJcmFu",
+    "title": "Trump Gave Iran 10 Days",
+    "summary": "War drums beat in the Persian Gulf as Washington masses air power and Iran cracks from within. Can strikes topple the regime—or spark something far worse?",
+    "country": "Iran",
+    "category": "strike",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2026-02-20T18:30:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-VHJ1bXAgR2F2ZSBJcmFu",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2026-02-20T18:30:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "War drums beat in the Persian Gulf as Washington masses air power and Iran cracks from within. Can strikes topple the regime—or spark something far worse?"
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "strike"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL1717795122.mp3?updated=1771875022",
+    "podcast_duration": "21m 57s",
+    "is_podcast_analysis": true,
+    "synopsis": "War drums beat in the Persian Gulf as Washington masses air power and Iran cracks from within. Can strikes topple the regime—or spark something far worse?"
+  },
+  {
+    "id": "live-U3VkYW4ncyBNaWxpdGFy",
+    "title": "Sudan's Military is On A Roll",
+    "summary": "Sudan’s army is suddenly winning again. Sieges are breaking, alliances are shifting, and a Saudi-UAE rivalry may be reshaping the war—and the entire Red Sea region.",
+    "country": "Yemen",
+    "category": "military",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2026-02-06T18:30:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-U3VkYW4ncyBNaWxpdGFy",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2026-02-06T18:30:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "Sudan’s army is suddenly winning again. Sieges are breaking, alliances are shifting, and a Saudi-UAE rivalry may be reshaping the war—and the entire Red Sea region."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "military"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL1546672216.mp3?updated=1770499456",
+    "podcast_duration": "22m 14s",
+    "is_podcast_analysis": true,
+    "synopsis": "Sudan’s army is suddenly winning again. Sieges are breaking, alliances are shifting, and a Saudi-UAE rivalry may be reshaping the war—and the entire Red Sea region."
+  },
+  {
+    "id": "live-V2h5IEhhc27igJl0IEFt",
+    "title": "Why Hasn’t America Attacked Iran…Yet?",
+    "summary": "America looked ready for war with Iran—then paused. Behind the military buildup, secret diplomacy, and razor-thin margins shaping Washington’s decision on whether conflict is inevitable.",
+    "country": "Iran",
+    "category": "strike",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2026-02-03T19:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-V2h5IEhhc27igJl0IEFt",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2026-02-03T19:00:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "America looked ready for war with Iran—then paused. Behind the military buildup, secret diplomacy, and razor-thin margins shaping Washington’s decision on whether conflict is inevitable."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "strike"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL1588054859.mp3?updated=1770249934",
+    "podcast_duration": "19m 53s",
+    "is_podcast_analysis": true,
+    "synopsis": "America looked ready for war with Iran—then paused. Behind the military buildup, secret diplomacy, and razor-thin margins shaping Washington’s decision on whether conflict is inevitable."
+  },
+  {
+    "id": "live-VGhpcyBpcyB0aGUgQkxV",
+    "title": "This is the BLUEPRINT for an American Strike on Iran",
+    "summary": "War with Iran may be imminent. We break down America’s military buildup, targets, and regime-change strategy—using open-source intelligence—to explain how a US strike would unfold, and what it means globally.",
+    "country": "Iran",
+    "category": "strike",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2026-01-29T18:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-VGhpcyBpcyB0aGUgQkxV",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2026-01-29T18:00:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "War with Iran may be imminent. We break down America’s military buildup, targets, and regime-change strategy—using open-source intelligence—to explain how a US strike would unfold, and what it means globally."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "strike"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL3139585274.mp3?updated=1770100849",
+    "podcast_duration": "26m 22s",
+    "is_podcast_analysis": true,
+    "synopsis": "War with Iran may be imminent. We break down America’s military buildup, targets, and regime-change strategy—using open-source intelligence—to explain how a US strike would unfold, and what it means globally."
+  },
+  {
+    "id": "live-Q291bGQgVGhpcyBSRUFM",
+    "title": "Could This REALLY Be True?",
+    "summary": "How many died when Iran shut down the internet? We break down leaked reports, verified counts, and why estimates range from thousands to over thirty thousand killed in days crackdown.",
+    "country": "Iran",
+    "category": "military",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2026-01-28T18:30:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-Q291bGQgVGhpcyBSRUFM",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2026-01-28T18:30:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "How many died when Iran shut down the internet? We break down leaked reports, verified counts, and why estimates range from thousands to over thirty thousand killed in days crackdown."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "military"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL4385267533.mp3?updated=1770100792",
+    "podcast_duration": "22m 09s",
+    "is_podcast_analysis": true,
+    "synopsis": "How many died when Iran shut down the internet? We break down leaked reports, verified counts, and why estimates range from thousands to over thirty thousand killed in days crackdown."
+  },
+  {
+    "id": "live-V2h5IHRoZSBQcm90ZXN0",
+    "title": "Why the Protests in Iran Failed",
+    "summary": "Why Iran’s massive protests collapsed: brutal repression, fractured opposition, ironclad security forces, and false hopes of foreign intervention reveal how the regime survived—and why unrest may return.",
+    "country": "Iran",
+    "category": "military",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2026-01-21T19:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-V2h5IHRoZSBQcm90ZXN0",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2026-01-21T19:00:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "Why Iran’s massive protests collapsed: brutal repression, fractured opposition, ironclad security forces, and false hopes of foreign intervention reveal how the regime survived—and why unrest may return."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "military"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL2043578717.mp3?updated=1769024356",
+    "podcast_duration": "20m 51s",
+    "is_podcast_analysis": true,
+    "synopsis": "Why Iran’s massive protests collapsed: brutal repression, fractured opposition, ironclad security forces, and false hopes of foreign intervention reveal how the regime survived—and why unrest may return."
+  },
+  {
+    "id": "live-VGhlIFVBRSBpcyBpbiBN",
+    "title": "The UAE is in MASSIVE Trouble.",
+    "summary": "The UAE’s proxy empire is collapsing. From Yemen to Sudan, Abu Dhabi’s regional ambitions are unraveling fast—triggering backlash, alliances, and a looming geopolitical reckoning.",
+    "country": "Yemen",
+    "category": "military",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2026-01-21T04:58:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-VGhlIFVBRSBpcyBpbiBN",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2026-01-21T04:58:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "The UAE’s proxy empire is collapsing. From Yemen to Sudan, Abu Dhabi’s regional ambitions are unraveling fast—triggering backlash, alliances, and a looming geopolitical reckoning."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "military"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL6602900413.mp3?updated=1769024598",
+    "podcast_duration": "44m 37s",
+    "is_podcast_analysis": true,
+    "synopsis": "The UAE’s proxy empire is collapsing. From Yemen to Sudan, Abu Dhabi’s regional ambitions are unraveling fast—triggering backlash, alliances, and a looming geopolitical reckoning."
+  },
+  {
+    "id": "live-SXJhbidzIFJlZ2ltZSBN",
+    "title": "Iran's Regime May Still Survive. Here's Why.",
+    "summary": "Iran is erupting. A nationwide revolution challenges the ayatollahs, but brutal repression, fading morale, and looming foreign intervention raise one terrifying question: will this uprising succeed—or collapse into catastrophe?",
+    "country": "Iran",
+    "category": "military",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2026-01-13T17:30:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-SXJhbidzIFJlZ2ltZSBN",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2026-01-13T17:30:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "Iran is erupting. A nationwide revolution challenges the ayatollahs, but brutal repression, fading morale, and looming foreign intervention raise one terrifying question: will this uprising succeed—or collapse into catastrophe?"
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "military"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL1528609908.mp3?updated=1768355321",
+    "podcast_duration": "20m 07s",
+    "is_podcast_analysis": true,
+    "synopsis": "Iran is erupting. A nationwide revolution challenges the ayatollahs, but brutal repression, fading morale, and looming foreign intervention raise one terrifying question: will this uprising succeed—or collapse into catastrophe?"
+  },
+  {
+    "id": "live-V2hlcmUgV2lsbCBUcnVt",
+    "title": "Where Will Trump Strike Next?",
+    "summary": "After Maduro’s capture, Trump signals more force. We analyze where America might strike next—Mexico, Colombia, Iran, Cuba, Greenland, or Venezuela—and who should truly fear 2026, global power shifts explained today.",
+    "country": "Iran",
+    "category": "strike",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2026-01-08T18:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-V2hlcmUgV2lsbCBUcnVt",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2026-01-08T18:00:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "After Maduro’s capture, Trump signals more force. We analyze where America might strike next—Mexico, Colombia, Iran, Cuba, Greenland, or Venezuela—and who should truly fear 2026, global power shifts explained today."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "strike"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL5565704094.mp3?updated=1768006371",
+    "podcast_duration": "26m 20s",
+    "is_podcast_analysis": true,
+    "synopsis": "After Maduro’s capture, Trump signals more force. We analyze where America might strike next—Mexico, Colombia, Iran, Cuba, Greenland, or Venezuela—and who should truly fear 2026, global power shifts explained today."
+  },
+  {
+    "id": "live-SXJhbiBpcyBOZXh0LiBI",
+    "title": "Iran is Next. Here's Why.",
+    "summary": "Nationwide protests, economic collapse, water shortages, and looming war push Iran toward the brink. Here’s what’s unfolding now—and why the Islamic Republic could fall within days before global powers intervene.",
+    "country": "Iran",
+    "category": "military",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2026-01-07T18:30:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-SXJhbiBpcyBOZXh0LiBI",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2026-01-07T18:30:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "Nationwide protests, economic collapse, water shortages, and looming war push Iran toward the brink. Here’s what’s unfolding now—and why the Islamic Republic could fall within days before global powers intervene."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "military"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL7886448586.mp3?updated=1767811515",
+    "podcast_duration": "20m 47s",
+    "is_podcast_analysis": true,
+    "synopsis": "Nationwide protests, economic collapse, water shortages, and looming war push Iran toward the brink. Here’s what’s unfolding now—and why the Islamic Republic could fall within days before global powers intervene."
+  },
+  {
+    "id": "live-WWVtZW4gaXMgRGVhZC4g",
+    "title": "Yemen is Dead. Here's What Will Replace It.",
+    "summary": "A rebel blitz in Yemen may birth the world’s newest country. As global powers maneuver and the Houthis loom, the Southern Transitional Council’s bid for statehood could redraw Middle East geopolitics.",
+    "country": "Yemen",
+    "category": "military",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2025-12-18T18:30:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-WWVtZW4gaXMgRGVhZC4g",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2025-12-18T18:30:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "A rebel blitz in Yemen may birth the world’s newest country. As global powers maneuver and the Houthis loom, the Southern Transitional Council’s bid for statehood could redraw Middle East geopolitics."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "military"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL8318260520.mp3?updated=1766185049",
+    "podcast_duration": "20m 31s",
+    "is_podcast_analysis": true,
+    "synopsis": "A rebel blitz in Yemen may birth the world’s newest country. As global powers maneuver and the Houthis loom, the Southern Transitional Council’s bid for statehood could redraw Middle East geopolitics."
+  },
+  {
+    "id": "live-VGhlIFNoYWhlZCAxMzYg",
+    "title": "The Shahed 136 Might Be the Perfect Drone.",
+    "summary": "Inside Iran’s Shahed 136: the cheap, long-range kamikaze drone reshaping warfare. Why it terrifies budgets, powers swarm tactics, and forces US, Europe, and China to copy—and counter—fast. Lessons from Ukraine.",
+    "country": "Iran",
+    "category": "strike",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2025-10-31T18:06:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-VGhlIFNoYWhlZCAxMzYg",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2025-10-31T18:06:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "Inside Iran’s Shahed 136: the cheap, long-range kamikaze drone reshaping warfare. Why it terrifies budgets, powers swarm tactics, and forces US, Europe, and China to copy—and counter—fast. Lessons from Ukraine."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "strike"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL5066164749.mp3?updated=1762195285",
+    "podcast_duration": "30m 11s",
+    "is_podcast_analysis": true,
+    "synopsis": "Inside Iran’s Shahed 136: the cheap, long-range kamikaze drone reshaping warfare. Why it terrifies budgets, powers swarm tactics, and forces US, Europe, and China to copy—and counter—fast. Lessons from Ukraine."
+  },
+  {
+    "id": "live-SXJhbiBhbmQgSXNyYWVs",
+    "title": "Iran and Israel Could Return to War Soon.",
+    "summary": "After the Twelve-Day War, Iran and Israel rearm and edge toward renewed conflict. We break down triggers, timelines, and battle scenarios—and the diplomatic window. Watch to understand what’s coming next.",
+    "country": "Iran",
+    "category": "diplomatic",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2025-10-09T17:30:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-SXJhbiBhbmQgSXNyYWVs",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2025-10-09T17:30:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "After the Twelve-Day War, Iran and Israel rearm and edge toward renewed conflict. We break down triggers, timelines, and battle scenarios—and the diplomatic window. Watch to understand what’s coming next."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "diplomatic"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL9247889390.mp3?updated=1760447747",
+    "podcast_duration": "29m 34s",
+    "is_podcast_analysis": true,
+    "synopsis": "After the Twelve-Day War, Iran and Israel rearm and edge toward renewed conflict. We break down triggers, timelines, and battle scenarios—and the diplomatic window. Watch to understand what’s coming next."
+  },
+  {
+    "id": "live-U2F1ZGkgQXJhYmlhIGlz",
+    "title": "Saudi Arabia is Super-Rich: Why is Their Military so Awful?",
+    "summary": "Saudi Arabia spends billions, yet its military lags. We unpack imported hardware, Vision 2030’s limits, regime priorities, and what Riyadh could achieve if it truly built power at home today.",
+    "country": "Saudi Arabia",
+    "category": "military",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2025-09-02T17:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 24.7136,
+    "lng": 46.6753,
+    "location_name": "Saudi Arabia (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-U2F1ZGkgQXJhYmlhIGlz",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2025-09-02T17:00:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "Saudi Arabia spends billions, yet its military lags. We unpack imported hardware, Vision 2030’s limits, regime priorities, and what Riyadh could achieve if it truly built power at home today."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Saudi Arabia",
+      "military"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL7047152303.mp3?updated=1756846573",
+    "podcast_duration": "40m 49s",
+    "is_podcast_analysis": true,
+    "synopsis": "Saudi Arabia spends billions, yet its military lags. We unpack imported hardware, Vision 2030’s limits, regime priorities, and what Riyadh could achieve if it truly built power at home today."
+  },
+  {
+    "id": "live-VGVycm9yaXN0cyBhcmUg",
+    "title": "Terrorists are closing in on Mogadishu. And More.",
+    "summary": "Al-Shabaab surges near Mogadishu, Iran scrambles to rearm shattered proxies, and Congo’s “peace” deal teeters on collapse. Another week, another global crisis. Let’s break it all down.",
+    "country": "Iran",
+    "category": "diplomatic",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2025-07-28T17:35:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-VGVycm9yaXN0cyBhcmUg",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2025-07-28T17:35:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "Al-Shabaab surges near Mogadishu, Iran scrambles to rearm shattered proxies, and Congo’s “peace” deal teeters on collapse. Another week, another global crisis. Let’s break it all down."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "diplomatic"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL8696749698.mp3?updated=1753923504",
+    "podcast_duration": "36m 11s",
+    "is_podcast_analysis": true,
+    "synopsis": "Al-Shabaab surges near Mogadishu, Iran scrambles to rearm shattered proxies, and Congo’s “peace” deal teeters on collapse. Another week, another global crisis. Let’s break it all down."
+  },
+  {
+    "id": "live-V2h5IENhbid0IHRoZSBV",
+    "title": "Why Can't the US Stop the Houthis? And More.",
+    "summary": "Houthi sea drones sink two bulk carriers in days, Ukraine expands anti-Russia ops into Africa, Georgia’s democratic hopes fade, and Togo’s youth defy dynasty rule. This week in the Situation Room.",
+    "country": "Yemen",
+    "category": "strike",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2025-07-14T17:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-V2h5IENhbid0IHRoZSBV",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2025-07-14T17:00:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "Houthi sea drones sink two bulk carriers in days, Ukraine expands anti-Russia ops into Africa, Georgia’s democratic hopes fade, and Togo’s youth defy dynasty rule. This week in the Situation Room."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "strike"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL7425179032.mp3?updated=1752525196",
+    "podcast_duration": "47m 00s",
+    "is_podcast_analysis": true,
+    "synopsis": "Houthi sea drones sink two bulk carriers in days, Ukraine expands anti-Russia ops into Africa, Georgia’s democratic hopes fade, and Togo’s youth defy dynasty rule. This week in the Situation Room."
+  },
+  {
+    "id": "live-VGhlIElzcmFlbC1JcmFu",
+    "title": "The Israel-Iran War: a Definitive History.",
+    "summary": "The Middle East just changed forever. Israel and Iran waged a brutal 12-day war—bombs, drones, assassinations, and U.S. stealth bombers. Here’s how it started, escalated, and where it’s headed next.",
+    "country": "Iran",
+    "category": "strike",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2025-07-02T17:15:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-VGhlIElzcmFlbC1JcmFu",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2025-07-02T17:15:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "The Middle East just changed forever. Israel and Iran waged a brutal 12-day war—bombs, drones, assassinations, and U.S. stealth bombers. Here’s how it started, escalated, and where it’s headed next."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "strike"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL1207866864.mp3?updated=1751482138",
+    "podcast_duration": "1h 3m",
+    "is_podcast_analysis": true,
+    "synopsis": "The Middle East just changed forever. Israel and Iran waged a brutal 12-day war—bombs, drones, assassinations, and U.S. stealth bombers. Here’s how it started, escalated, and where it’s headed next."
+  },
+  {
+    "id": "live-V2FzIElyYW7igJlzIE51",
+    "title": "Was Iran’s Nuclear Program Really Destroyed?",
+    "summary": "Trump says Iran’s nukes are gone—but leaked intel and satellite data tell a murkier story. Was it victory or illusion? We dig into the aftermath of America’s most ambitious airstrike yet.",
+    "country": "Iran",
+    "category": "strike",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2025-06-26T17:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-V2FzIElyYW7igJlzIE51",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2025-06-26T17:00:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "Trump says Iran’s nukes are gone—but leaked intel and satellite data tell a murkier story. Was it victory or illusion? We dig into the aftermath of America’s most ambitious airstrike yet."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "strike"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL5664232528.mp3?updated=1750960194",
+    "podcast_duration": "17m 18s",
+    "is_podcast_analysis": true,
+    "synopsis": "Trump says Iran’s nukes are gone—but leaked intel and satellite data tell a murkier story. Was it victory or illusion? We dig into the aftermath of America’s most ambitious airstrike yet."
+  },
+  {
+    "id": "live-UnVzc2lhIGFuZCBDaGlu",
+    "title": "Russia and China Abandoned Iran. Here's Why",
+    "summary": "When Iran faced devastating strikes, its so-called allies—Russia, China, and North Korea—stood by. This video explores why the Axis of Upheaval collapsed when Tehran needed it most.",
+    "country": "Iran",
+    "category": "strike",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2025-06-25T17:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-UnVzc2lhIGFuZCBDaGlu",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2025-06-25T17:00:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "When Iran faced devastating strikes, its so-called allies—Russia, China, and North Korea—stood by. This video explores why the Axis of Upheaval collapsed when Tehran needed it most."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "strike"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL9339011154.mp3?updated=1750872516",
+    "podcast_duration": "21m 19s",
+    "is_podcast_analysis": true,
+    "synopsis": "When Iran faced devastating strikes, its so-called allies—Russia, China, and North Korea—stood by. This video explores why the Axis of Upheaval collapsed when Tehran needed it most."
+  },
+  {
+    "id": "live-SXNyYWVsIGFuZCBJcmFu",
+    "title": "Israel and Iran Reach A Ceasefire...Maybe...",
+    "summary": "Iran and Israel just maybe stopped bombing each other… or maybe not. After missiles, near-misses, and midnight drama, the region teeters between ceasefire and catastrophe. Here’s what actually happened.",
+    "country": "Iran",
+    "category": "strike",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2025-06-24T16:28:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-SXNyYWVsIGFuZCBJcmFu",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2025-06-24T16:28:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "Iran and Israel just maybe stopped bombing each other… or maybe not. After missiles, near-misses, and midnight drama, the region teeters between ceasefire and catastrophe. Here’s what actually happened."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "strike"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL8444028127.mp3?updated=1750786909",
+    "podcast_duration": "19m 54s",
+    "is_podcast_analysis": true,
+    "synopsis": "Iran and Israel just maybe stopped bombing each other… or maybe not. After missiles, near-misses, and midnight drama, the region teeters between ceasefire and catastrophe. Here’s what actually happened."
+  },
+  {
+    "id": "live-QW1lcmljYSBIYXMgQm9t",
+    "title": "America Has Bombed Iran. Here's What Matters.",
+    "summary": "America bombs Iran’s nuclear sites in a surprise strike—what was hit, why now, and what comes next. Retaliation looms, but is this the start of something far bigger?",
+    "country": "Iran",
+    "category": "strike",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2025-06-22T16:30:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.535Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-QW1lcmljYSBIYXMgQm9t",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2025-06-22T16:30:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "America bombs Iran’s nuclear sites in a surprise strike—what was hit, why now, and what comes next. Retaliation looms, but is this the start of something far bigger?"
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "strike"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL3410708624.mp3?updated=1750703585",
+    "podcast_duration": "18m 19s",
+    "is_podcast_analysis": true,
+    "synopsis": "America bombs Iran’s nuclear sites in a surprise strike—what was hit, why now, and what comes next. Retaliation looms, but is this the start of something far bigger?"
+  },
+  {
+    "id": "live-SXJhbiBIYXMgQmVlbiBB",
+    "title": "Iran Has Been Abandoned. Here's Why.",
+    "summary": "Iran’s proxy empire is crumbling. As war with Israel escalates, Hamas, Hezbollah, and the Houthis are silent—or shattered. Here’s why Iran’s decades-long strategy just collapsed when it mattered most.",
+    "country": "Yemen",
+    "category": "military",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2025-06-19T17:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.535Z",
+    "updated_at": "2026-09-13T02:46:27.536Z",
+    "credibility_tier": "tier_2",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-SXJhbiBIYXMgQmVlbiBB",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2025-06-19T17:00:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "Iran’s proxy empire is crumbling. As war with Israel escalates, Hamas, Hezbollah, and the Houthis are silent—or shattered. Here’s why Iran’s decades-long strategy just collapsed when it mattered most."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "military"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL7549455012.mp3?updated=1750356592",
+    "podcast_duration": "18m 24s",
+    "is_podcast_analysis": true,
+    "synopsis": "Iran’s proxy empire is crumbling. As war with Israel escalates, Hamas, Hezbollah, and the Houthis are silent—or shattered. Here’s why Iran’s decades-long strategy just collapsed when it mattered most."
+  },
+  {
+    "id": "live-UnVzc2lhJ3MgU3VtbWVy",
+    "title": "Russia's Summer Offensive Has Begun. And More.",
+    "summary": "Russia’s summer offensive escalates, Pakistan elevates a new strongman, the Chagos Islands change hands, and US-Iran nuclear talks inch forward—global power plays unfold in this week's Situation Room.",
+    "country": "Iran",
+    "category": "diplomatic",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2025-06-02T18:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.536Z",
+    "updated_at": "2026-09-13T02:46:27.536Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-UnVzc2lhJ3MgU3VtbWVy",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2025-06-02T18:00:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "Russia’s summer offensive escalates, Pakistan elevates a new strongman, the Chagos Islands change hands, and US-Iran nuclear talks inch forward—global power plays unfold in this week's Situation Room."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "diplomatic"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL5429785229.mp3?updated=1748894702",
+    "podcast_duration": "49m 37s",
+    "is_podcast_analysis": true,
+    "synopsis": "Russia’s summer offensive escalates, Pakistan elevates a new strongman, the Chagos Islands change hands, and US-Iran nuclear talks inch forward—global power plays unfold in this week's Situation Room."
+  },
+  {
+    "id": "live-QXJlIEFtZXJpY2EncyBB",
+    "title": "Are America's Allies about to Invade Yemen? (And More)",
+    "summary": "The world teeters on multiple breaking points: Yemen braces for invasion, al-Shabaab tightens its grip on Somalia, Haiti descends into anarchy, and Nigeria’s silent war turns genocidal. Watch now.",
+    "country": "Yemen",
+    "category": "military",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2025-04-30T17:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.536Z",
+    "updated_at": "2026-09-13T02:46:27.536Z",
+    "credibility_tier": "tier_2",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-QXJlIEFtZXJpY2EncyBB",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2025-04-30T17:00:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "The world teeters on multiple breaking points: Yemen braces for invasion, al-Shabaab tightens its grip on Somalia, Haiti descends into anarchy, and Nigeria’s silent war turns genocidal. Watch now."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "military"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL2992256390.mp3?updated=1746213865",
+    "podcast_duration": "49m 52s",
+    "is_podcast_analysis": true,
+    "synopsis": "The world teeters on multiple breaking points: Yemen braces for invasion, al-Shabaab tightens its grip on Somalia, Haiti descends into anarchy, and Nigeria’s silent war turns genocidal. Watch now."
+  },
+  {
+    "id": "live-U291dGggU3VkYW4gaXMg",
+    "title": "South Sudan is on Fire. Here's Why. (And More)",
+    "summary": "From South Sudan’s unraveling ceasefire to a looming Ethiopia-Eritrea war and U.S. airstrikes in Yemen, this week’s global crises could ignite something much bigger. Here’s what you need to know.",
+    "country": "Yemen",
+    "category": "strike",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2025-03-24T18:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.536Z",
+    "updated_at": "2026-09-13T02:46:27.536Z",
+    "credibility_tier": "tier_2",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-U291dGggU3VkYW4gaXMg",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2025-03-24T18:00:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "From South Sudan’s unraveling ceasefire to a looming Ethiopia-Eritrea war and U.S. airstrikes in Yemen, this week’s global crises could ignite something much bigger. Here’s what you need to know."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "strike"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL7708044522.mp3?updated=1742879586",
+    "podcast_duration": "46m 54s",
+    "is_podcast_analysis": true,
+    "synopsis": "From South Sudan’s unraveling ceasefire to a looming Ethiopia-Eritrea war and U.S. airstrikes in Yemen, this week’s global crises could ignite something much bigger. Here’s what you need to know."
+  },
+  {
+    "id": "live-SXNyYWVsIEJhdHRsZXMg",
+    "title": "Israel Battles the Houthis, and South Sudan Moves Towards Financial Collapse... And More",
+    "summary": "From the Houthis' maritime threat to South Sudan's fragile state, explore the critical conflicts reshaping 2025's geopolitical landscape and their profound ripple effects on global stability.",
+    "country": "Yemen",
+    "category": "military",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2025-01-06T18:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.536Z",
+    "updated_at": "2026-09-13T02:46:27.536Z",
+    "credibility_tier": "tier_2",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-SXNyYWVsIEJhdHRsZXMg",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2025-01-06T18:00:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "From the Houthis' maritime threat to South Sudan's fragile state, explore the critical conflicts reshaping 2025's geopolitical landscape and their profound ripple effects on global stability."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "military"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL3770805895.mp3?updated=1736258014",
+    "podcast_duration": "35m 41s",
+    "is_podcast_analysis": true,
+    "synopsis": "From the Houthis' maritime threat to South Sudan's fragile state, explore the critical conflicts reshaping 2025's geopolitical landscape and their profound ripple effects on global stability."
+  },
+  {
+    "id": "live-VGhlIEJhdHRsZXMgQWhl",
+    "title": "The Battles Ahead: The World at War in 2025",
+    "summary": "Discover the rise of Yemen's Houthi rebels: from marginalized roots to a dominant political-military force. Explore their history, revolutionary tactics, and impact on Yemen’s devastating civil war.",
+    "country": "Yemen",
+    "category": "military",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2025-01-03T19:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.536Z",
+    "updated_at": "2026-09-13T02:46:27.536Z",
+    "credibility_tier": "tier_2",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-VGhlIEJhdHRsZXMgQWhl",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2025-01-03T19:00:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "Discover the rise of Yemen's Houthi rebels: from marginalized roots to a dominant political-military force. Explore their history, revolutionary tactics, and impact on Yemen’s devastating civil war."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "military"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL8673218042.mp3?updated=1735926779",
+    "podcast_duration": "52m 49s",
+    "is_podcast_analysis": true,
+    "synopsis": "Discover the rise of Yemen's Houthi rebels: from marginalized roots to a dominant political-military force. Explore their history, revolutionary tactics, and impact on Yemen’s devastating civil war."
+  },
+  {
+    "id": "live-V2hvIEFyZSB0aGUgSG91",
+    "title": "Who Are the Houthis and What Do They Want?",
+    "summary": "Discover the rise of Yemen's Houthi rebels: from marginalized roots to a dominant political-military force. Explore their history, revolutionary tactics, and impact on Yemen’s devastating civil war.",
+    "country": "Yemen",
+    "category": "military",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2025-01-03T03:53:00.000Z",
+    "created_at": "2026-09-13T02:46:27.536Z",
+    "updated_at": "2026-09-13T02:46:27.536Z",
+    "credibility_tier": "tier_2",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-V2hvIEFyZSB0aGUgSG91",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2025-01-03T03:53:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "Discover the rise of Yemen's Houthi rebels: from marginalized roots to a dominant political-military force. Explore their history, revolutionary tactics, and impact on Yemen’s devastating civil war."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "military"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL3579519961.mp3?updated=1735926759",
+    "podcast_duration": "47m 31s",
+    "is_podcast_analysis": true,
+    "synopsis": "Discover the rise of Yemen's Houthi rebels: from marginalized roots to a dominant political-military force. Explore their history, revolutionary tactics, and impact on Yemen’s devastating civil war."
+  },
+  {
+    "id": "live-VGhlIElyYW4gTnVjbGVh",
+    "title": "The Iran Nuclear Timeline. In Full.",
+    "summary": "Iran's nuclear ambitions—from U.S.-backed origins to post-JCPOA tensions—reflect decades of shifting alliances, crises, and missed diplomacy. Can the world avoid catastrophe? A cautionary tale of power, politics, and nuclear proliferation. Sponsor: hellofresh.com/freewarfronts - for 10 free HelloFresh meals",
+    "country": "Iran",
+    "category": "military",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2024-12-17T18:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.536Z",
+    "updated_at": "2026-09-13T02:46:27.536Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-VGhlIElyYW4gTnVjbGVh",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2024-12-17T18:00:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "Iran's nuclear ambitions—from U.S.-backed origins to post-JCPOA tensions—reflect decades of shifting alliances, crises, and missed diplomacy. Can the world avoid catastrophe? A cautionary tale of power, politics, and nuclear proliferation. Sponsor: h"
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "military"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL3718390650.mp3?updated=1734557535",
+    "podcast_duration": "38m 47s",
+    "is_podcast_analysis": true,
+    "synopsis": "Iran's nuclear ambitions—from U.S.-backed origins to post-JCPOA tensions—reflect decades of shifting alliances, crises, and missed diplomacy. Can the world avoid catastrophe? A cautionary tale of power, politics, and nuclear proliferation. Sponsor: hellofresh.com/freewarfronts - for 10 free HelloFresh meals"
+  },
+  {
+    "id": "live-WWVtZW4ncyBEZWNhZGUg",
+    "title": "Yemen's Decade of Crisis",
+    "summary": "Uncover the untold story of Yemen’s turbulent history, from ancient civilizations to Cold War divisions. Discover how decades of conflict, ideology, and unification shaped this complex nation’s fate.",
+    "country": "Yemen",
+    "category": "military",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2024-11-15T16:49:00.000Z",
+    "created_at": "2026-09-13T02:46:27.536Z",
+    "updated_at": "2026-09-13T02:46:27.536Z",
+    "credibility_tier": "tier_2",
+    "lat": 15.3694,
+    "lng": 44.191,
+    "location_name": "Yemen (Regional Theater)",
+    "sources": [
+      {
+        "id": "src-live-WWVtZW4ncyBEZWNhZGUg",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2024-11-15T16:49:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "Uncover the untold story of Yemen’s turbulent history, from ancient civilizations to Cold War divisions. Discover how decades of conflict, ideology, and unification shaped this complex nation’s fate."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Yemen",
+      "military"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL9170088206.mp3?updated=1731972453",
+    "podcast_duration": "38m 44s",
+    "is_podcast_analysis": true,
+    "synopsis": "Uncover the untold story of Yemen’s turbulent history, from ancient civilizations to Cold War divisions. Discover how decades of conflict, ideology, and unification shaped this complex nation’s fate."
+  },
+  {
+    "id": "live-VW5kZXJzdGFuZGluZyBJ",
+    "title": "Understanding Israel’s Strike on Iran, and More: Shock and Awe in Lebanon, Part V",
+    "summary": "Explore the escalating conflict as Israel targets Iran in a high-stakes counterattack. Discover how stealth, precision, and strategy reshape the Middle East in our latest in-depth analysis.",
+    "country": "Iran",
+    "category": "strike",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2024-11-07T01:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.536Z",
+    "updated_at": "2026-09-13T02:46:27.536Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-VW5kZXJzdGFuZGluZyBJ",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2024-11-07T01:00:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "Explore the escalating conflict as Israel targets Iran in a high-stakes counterattack. Discover how stealth, precision, and strategy reshape the Middle East in our latest in-depth analysis."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "strike"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL9822677590.mp3?updated=1731000808",
+    "podcast_duration": "35m 06s",
+    "is_podcast_analysis": true,
+    "synopsis": "Explore the escalating conflict as Israel targets Iran in a high-stakes counterattack. Discover how stealth, precision, and strategy reshape the Middle East in our latest in-depth analysis."
+  },
+  {
+    "id": "live-VGhlIElyYW5pYW4gTWls",
+    "title": "The Iranian Military Is Better Than You Think, and Israel Shouldn’t Underestimate It",
+    "summary": "Listen in to find out why the Iranian military is better than you think - and why Israel shouldn’t underestimate it.",
+    "country": "Iran",
+    "category": "military",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2024-09-30T07:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.536Z",
+    "updated_at": "2026-09-13T02:46:27.536Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-VGhlIElyYW5pYW4gTWls",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2024-09-30T07:00:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "Listen in to find out why the Iranian military is better than you think - and why Israel shouldn’t underestimate it."
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "military"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL9489145321.mp3?updated=1729053164",
+    "podcast_duration": "26m 37s",
+    "is_podcast_analysis": true,
+    "synopsis": "Listen in to find out why the Iranian military is better than you think - and why Israel shouldn’t underestimate it."
+  },
+  {
+    "id": "live-SXJhbiBXYW50cyB0byBH",
+    "title": "Iran Wants to Go Nuclear. What Other States Might Get the Bomb?",
+    "summary": "Explore the secretive world of nuclear ambitions as we delve into nations on the brink of joining the nuclear club. From Iran to South Korea, who will be next to cross the threshold?",
+    "country": "Iran",
+    "category": "strike",
+    "primary_source": "Warfronts (Simon Whistler)",
+    "published_at": "2024-08-20T07:00:00.000Z",
+    "created_at": "2026-09-13T02:46:27.536Z",
+    "updated_at": "2026-09-13T02:46:27.536Z",
+    "credibility_tier": "tier_2",
+    "lat": 35.6892,
+    "lng": 51.389,
+    "location_name": "Iran (Regional Sector)",
+    "sources": [
+      {
+        "id": "src-live-SXJhbiBXYW50cyB0byBH",
+        "source_name": "Warfronts (Simon Whistler)",
+        "published_at": "2024-08-20T07:00:00.000Z",
+        "credibility_tier": "tier_2",
+        "snippet": "Explore the secretive world of nuclear ambitions as we delve into nations on the brink of joining the nuclear club. From Iran to South Korea, who will be next to cross the threshold?"
+      }
+    ],
+    "x_citations": [],
+    "is_verified": true,
+    "raw_keywords": [
+      "Iran",
+      "strike"
+    ],
+    "audio_url": "https://traffic.megaphone.fm/CTL4770693461.mp3?updated=1729125197",
+    "podcast_duration": "25m 19s",
+    "is_podcast_analysis": true,
+    "synopsis": "Explore the secretive world of nuclear ambitions as we delve into nations on the brink of joining the nuclear club. From Iran to South Korea, who will be next to cross the threshold?"
   }
 ]
