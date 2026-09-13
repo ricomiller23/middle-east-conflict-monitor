@@ -105,8 +105,8 @@ export async function GET(req: NextRequest) {
       category,
       credibility_tier,
       search,
-      limit,
-      offset,
+      limit: limitParam ? Math.max(limit * 4, 200) : 2500,
+      offset: 0,
     });
 
     // Check if newest event is stale (> 15 mins), if so sync fresh news
@@ -134,17 +134,20 @@ export async function GET(req: NextRequest) {
     const seenTitles = new Set<string>();
     const uniqueEvents: SecurityEvent[] = [];
     for (const ev of events) {
-      const norm = ev.title.toLowerCase().trim();
+      const norm = ev.title.toLowerCase().trim().replace(/[^a-z0-9]/g, '');
       if (!seenTitles.has(norm)) {
         seenTitles.add(norm);
         uniqueEvents.push(ev);
       }
     }
 
+    const pagedEvents = limitParam ? uniqueEvents.slice(0, limit) : uniqueEvents;
+
     return NextResponse.json({
       success: true,
-      count: uniqueEvents.length,
-      events: uniqueEvents,
+      count: pagedEvents.length,
+      total: uniqueEvents.length,
+      events: pagedEvents,
     });
   } catch (err: any) {
     console.error('[API /api/events] Error fetching events:', err);
