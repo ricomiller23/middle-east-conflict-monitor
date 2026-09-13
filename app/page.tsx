@@ -52,6 +52,11 @@ export default function DashboardPage() {
 
   useEffect(() => {
     fetchEvents();
+    // Auto-refresh every 2 minutes to stream breaking live wire updates
+    const interval = setInterval(() => {
+      fetchEvents();
+    }, 120000);
+    return () => clearInterval(interval);
   }, []);
 
   // Country and energy counts calculation
