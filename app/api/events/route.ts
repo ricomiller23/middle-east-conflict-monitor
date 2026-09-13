@@ -130,10 +130,21 @@ export async function GET(req: NextRequest) {
     // Ensure strict descending chronological order (most recent first)
     events.sort((a, b) => new Date(b.published_at || 0).getTime() - new Date(a.published_at || 0).getTime());
 
+    // Deduplicate by normalized title to prevent identical wire reprints
+    const seenTitles = new Set<string>();
+    const uniqueEvents: SecurityEvent[] = [];
+    for (const ev of events) {
+      const norm = ev.title.toLowerCase().trim();
+      if (!seenTitles.has(norm)) {
+        seenTitles.add(norm);
+        uniqueEvents.push(ev);
+      }
+    }
+
     return NextResponse.json({
       success: true,
-      count: events.length,
-      events,
+      count: uniqueEvents.length,
+      events: uniqueEvents,
     });
   } catch (err: any) {
     console.error('[API /api/events] Error fetching events:', err);
