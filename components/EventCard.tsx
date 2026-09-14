@@ -55,7 +55,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onSelect }) => {
       const diffMs = Date.now() - d.getTime();
       const diffHours = Math.floor(diffMs / 3600000);
       let rel = "";
-      if (diffMs < 0) {
+      if (diffMs < 45000) {
         rel = "just now";
       } else if (diffHours < 1) {
         const diffMins = Math.max(1, Math.floor(diffMs / 60000));

@@ -1,3 +1,4 @@
+import { LiveNewsConnector } from "../connectors/live-news";
 import { RSSConnector } from '../connectors/rss';
 import { GDELTConnector } from '../connectors/gdelt';
 import { XStubConnector } from '../connectors/x-stub';
@@ -45,6 +46,7 @@ export async function runIngestionPipeline(): Promise<{
   console.log('[Ingestion] Commencing 6-hour scheduled ingestion cycle...');
 
   const connectors: Connector[] = [
+    new LiveNewsConnector(),
     new RSSConnector(),
     new GDELTConnector(),
     new XStubConnector(),

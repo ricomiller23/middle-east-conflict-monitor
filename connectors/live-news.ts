@@ -8,6 +8,21 @@ const parser = new XMLParser({
   trimValues: true,
 });
 
+function decodeHtml(htmlStr: string): string {
+  if (!htmlStr) return '';
+  return htmlStr
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&apos;/g, "'")
+    .replace(/&nbsp;/g, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 export class LiveNewsConnector implements Connector {
   id = 'live-news-realtime';
   name = 'Real-Time Breaking News & Wire Aggregator';
@@ -20,6 +35,9 @@ export class LiveNewsConnector implements Connector {
     { q: 'Saudi+Arabia+oil+pipeline+Aramco', country: 'Saudi Arabia' },
     { q: 'tanker+attack+Red+Sea+Hormuz', country: 'Yemen' },
     { q: 'Pezeshkian+Iran+Gulf+Houthis', country: 'Iran' },
+    { q: 'US+Navy+Red+Sea+intercept+Houthi', country: 'Yemen' },
+    { q: 'Bab+al-Mandab+shipping+tanker', country: 'Yemen' },
+    { q: 'Yanbu+East+West+pipeline+Saudi', country: 'Saudi Arabia' },
   ];
 
   async fetchEvents(): Promise<RawEvent[]> {
@@ -29,7 +47,7 @@ export class LiveNewsConnector implements Connector {
       try {
         const url = `https://news.google.com/rss/search?q=${q}+when:1d&hl=en-US&gl=US&ceid=US:en`;
         const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 4000);
+        const timeout = setTimeout(() => controller.abort(), 6000);
 
         const res = await fetch(url, {
           signal: controller.signal,
@@ -50,7 +68,7 @@ export class LiveNewsConnector implements Connector {
           if (!item.title || !item.pubDate) continue;
 
           // Clean title and source
-          let title = item.title;
+          let title = decodeHtml(item.title);
           let sourceName = 'Google News Wire';
           if (title.includes(' - ')) {
             const parts = title.split(' - ');
@@ -61,9 +79,11 @@ export class LiveNewsConnector implements Connector {
           const rawDate = new Date(item.pubDate);
           if (isNaN(rawDate.getTime())) continue;
 
+          const summary = item.description ? decodeHtml(item.description) : title;
+
           rawEvents.push({
             title,
-            summary: item.description ? item.description.replace(/<[^>]+>/g, '').trim() : title,
+            summary: summary.length > 30 ? summary.slice(0, 350) : title,
             source_name: sourceName,
             source_url: item.link || item.guid || 'https://news.google.com',
             published_at: rawDate.toISOString(),

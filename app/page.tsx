@@ -25,11 +25,19 @@ export default function DashboardPage() {
   const [isEnergyOnly, setIsEnergyOnly] = useState(false);
   const [currentView, setCurrentView] = useState<'feed' | 'timeline' | 'map'>('feed');
   const [visibleCount, setVisibleCount] = useState(60);
+  const [nowTick, setNowTick] = useState<number>(Date.now());
 
-  const fetchEvents = async () => {
+  const fetchEvents = async (force = false) => {
     try {
       setRefreshing(true);
-      const res = await fetch('/api/events?limit=2500');
+      const url = `/api/events?limit=2500${force ? '&force=true' : ''}&t=${Date.now()}`;
+      const res = await fetch(url, {
+        cache: 'no-store',
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          Pragma: 'no-cache',
+        },
+      });
       const data = await res.json();
       if (data.success && Array.isArray(data.events)) {
         const sorted = data.events.sort(
@@ -37,6 +45,7 @@ export default function DashboardPage() {
             new Date(b.published_at || 0).getTime() - new Date(a.published_at || 0).getTime()
         );
         setEvents(sorted);
+        setNowTick(Date.now());
       }
     } catch (err) {
       console.error('Failed to load events:', err);
@@ -51,12 +60,21 @@ export default function DashboardPage() {
   }, [selectedCountry, selectedCategory, selectedTier, isEnergyOnly, search]);
 
   useEffect(() => {
-    fetchEvents();
-    // Auto-refresh every 2 minutes to stream breaking live wire updates
-    const interval = setInterval(() => {
-      fetchEvents();
-    }, 120000);
-    return () => clearInterval(interval);
+    fetchEvents(false);
+    // Auto-refresh every 60 seconds to stream breaking live wire updates
+    const fetchInterval = setInterval(() => {
+      fetchEvents(false);
+    }, 60000);
+
+    // Live clock ticker every 30 seconds so all relative times re-render live
+    const clockInterval = setInterval(() => {
+      setNowTick(Date.now());
+    }, 30000);
+
+    return () => {
+      clearInterval(fetchInterval);
+      clearInterval(clockInterval);
+    };
   }, []);
 
   // Country and energy counts calculation
@@ -122,7 +140,7 @@ export default function DashboardPage() {
         totalEvents={events.length}
         countryCounts={countryCounts}
         lastSyncAt={events[0]?.published_at || null}
-        onRefresh={fetchEvents}
+        onRefresh={() => fetchEvents(true)}
         isRefreshing={refreshing}
       />
 
