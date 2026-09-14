@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Search, SlidersHorizontal, LayoutGrid, Clock, MapPin, X } from 'lucide-react';
+import { Search, SlidersHorizontal, LayoutGrid, Clock, MapPin, X, Fuel } from 'lucide-react';
 import { Country, EventCategory, CredibilityTier } from '@/lib/types';
 
 interface FilterBarProps {
@@ -13,8 +13,8 @@ interface FilterBarProps {
   onCategoryChange: (val: string) => void;
   selectedTier: string;
   onTierChange: (val: string) => void;
-  currentView: 'feed' | 'timeline' | 'map';
-  onViewChange: (view: 'feed' | 'timeline' | 'map') => void;
+  currentView: 'feed' | 'timeline' | 'map' | 'energy';
+  onViewChange: (view: 'feed' | 'timeline' | 'map' | 'energy') => void;
   totalFiltered: number;
 }
 
@@ -77,7 +77,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           </div>
 
           {/* View Mode Segmented Controls */}
-          <div className="grid grid-cols-3 sm:flex items-center rounded-lg border border-slate-700/80 bg-[#0c1424] p-1 w-full sm:w-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-4 items-center rounded-lg border border-slate-700/80 bg-[#0c1424] p-1 w-full sm:w-auto gap-1 sm:gap-0">
             <button
               onClick={() => onViewChange('feed')}
               className={`flex min-h-[38px] items-center justify-center space-x-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition active:scale-95 ${
@@ -110,6 +110,17 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             >
               <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
               <span>Radar Map</span>
+            </button>
+            <button
+              onClick={() => onViewChange('energy')}
+              className={`flex min-h-[38px] items-center justify-center space-x-1.5 rounded-md px-3 py-1.5 text-xs font-semibold transition active:scale-95 ${
+                currentView === 'energy'
+                  ? 'bg-amber-500 text-slate-950 shadow-md font-bold'
+                  : 'text-amber-400/90 hover:text-amber-300 hover:bg-amber-950/20'
+              }`}
+            >
+              <Fuel className="h-3.5 w-3.5 flex-shrink-0" />
+              <span>Oil Markets (24M)</span>
             </button>
           </div>
         </div>

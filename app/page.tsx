@@ -7,6 +7,7 @@ import { FilterBar } from '@/components/FilterBar';
 import { EventCard } from '@/components/EventCard';
 import { TimelineView } from '@/components/TimelineView';
 import { TacticalMapView } from '@/components/TacticalMapView';
+import { OilMarketDashboard } from '@/components/OilMarketDashboard';
 import { EventDetailDrawer } from '@/components/EventDetailDrawer';
 import { SecurityEvent, Country } from '@/lib/types';
 import { Shield, AlertCircle, RefreshCw, Flame, Radio, ExternalLink, Anchor, Fuel } from 'lucide-react';
@@ -23,7 +24,8 @@ export default function DashboardPage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedTier, setSelectedTier] = useState('all');
   const [isEnergyOnly, setIsEnergyOnly] = useState(false);
-  const [currentView, setCurrentView] = useState<'feed' | 'timeline' | 'map'>('feed');
+  const [currentView, setCurrentView] = useState<'feed' | 'timeline' | 'map' | 'energy'>('feed');
+  const [selectedEnergyBenchmark, setSelectedEnergyBenchmark] = useState<string>('brent');
   const [visibleCount, setVisibleCount] = useState(60);
   const [nowTick, setNowTick] = useState<number>(Date.now());
 
@@ -148,6 +150,10 @@ export default function DashboardPage() {
       <EnergyMarketTicker
         onFilterEnergyOnly={() => setIsEnergyOnly(!isEnergyOnly)}
         isEnergyFiltered={isEnergyOnly}
+        onOpenEnergyTab={(bId) => {
+          if (bId) setSelectedEnergyBenchmark(bId);
+          setCurrentView('energy');
+        }}
       />
 
       {/* Filter and View Selection Bar */}
@@ -271,6 +277,14 @@ export default function DashboardPage() {
               </div>
             )}
           </div>
+        ) : currentView === 'energy' ? (
+          <OilMarketDashboard
+            initialBenchmark={selectedEnergyBenchmark}
+            onSelectEventTag={(tag) => {
+              setSearch(tag);
+              setCurrentView('feed');
+            }}
+          />
         ) : currentView === 'timeline' ? (
           <TimelineView events={filteredEvents} onSelect={setSelectedEvent} />
         ) : (
